@@ -20,7 +20,7 @@ export const Banner1 = () => {
     <div className='banner1'>
       <div className="heading">
         <h4>What we are aiming for</h4>
-        <h1>Donate on GoFundMe takes just a few minutes</h1>
+        <h1>Donate on BetterWorld takes just a few minutes</h1>
       </div>
       <video src={require ("../../../assets/video/introduction-video.mp4")} autoPlay={true} loop={true} playsInline="" tabIndex="-1" muted={muted} />
       <button className='volume-btn' onClick={() => setMuted(!muted)}>
