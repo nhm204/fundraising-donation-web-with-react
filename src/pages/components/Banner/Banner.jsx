@@ -5,7 +5,14 @@ import { HiVolumeOff, HiVolumeUp } from 'react-icons/hi';
 
 const MainBanner = () => {
   return (
-    <div className='main-banner' />
+    <div className='main-banner'>
+      <div className="desc">
+        <h1>Donation.</h1>
+        <h1>Make a difference.</h1>
+        <button className='donate-btn'>Donate now</button>
+        <button className='discover-btn'>Discover</button>
+      </div>
+    </div>
   );
 }
 
