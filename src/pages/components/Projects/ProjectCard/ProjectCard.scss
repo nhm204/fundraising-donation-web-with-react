@@ -1,0 +1,189 @@
+.project-wrapper {
+    display: block;
+    position: relative;
+    text-decoration: none;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 25px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.02);
+    transition: 0.2s ease;
+    color: var(--text-color);
+    width: 320px;
+    height: 450px;
+
+    &:hover {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+        transform: translateY(-4px);
+
+        & .add {
+            color: var(--text-color);
+            outline: 3px solid var(--primary-color);
+            border-color: transparent;
+            background-color: white;
+            font-weight: 500;
+        }
+
+        & .disable {
+            color: white;
+            background-color: rgb(174, 174, 174);
+            outline: none;
+            font-weight: 400;
+        }
+    }
+
+    .project {
+        color: var(--text-color);
+
+        .tag {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            padding: 0.4vh 0.7vw 0vh;
+            color: var(--primary-color);
+            background-color: white;
+            border-radius: 20px;
+            box-shadow: 0 0 10px #ccc;
+            user-select: none;
+        }
+
+        img {
+            width: 296px;
+            height: 296px;
+            object-fit: cover;
+            border-radius: 16px;
+            -webkit-user-drag: none;
+        }
+    
+        .info {
+            padding: 8px 0;
+    
+            .description {
+                font-weight: 300;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    
+            .name {
+                margin-top: 4px;
+                font-size: 1.8rem;
+                font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+    
+            .price {
+                padding-top: 5vh;
+                font-size: 3rem;
+                font-weight: 700;
+                color: var(--primary-color);
+            }
+        }
+    }
+
+    .add {
+        position: absolute;
+        line-height: 1.6rem;
+        bottom: 20px; 
+        right: 12px;
+        padding: 5px 9px 3px;
+        color: white;
+        background-color: var(--primary-color);
+        border-radius: 20px;
+        cursor: pointer;
+        border-color: var(--primary-color);
+        word-spacing: 1px;
+        user-select: none;
+    }
+
+    .disable {
+        cursor: default;
+        border-color: transparent;
+        background-color: rgb(174, 174, 174);
+        user-select: none;
+        outline: none;
+    }
+
+    .more {
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        cursor: pointer;
+        color: white;
+        border-radius: 25px;
+        outline: 1px solid rgba($color: #000000, $alpha: 0.5);
+        background-color: rgba($color: #000000, $alpha: 0.5);
+        z-index: 3;
+        display: none;
+
+        h4 {
+            font-size: 3.5rem;
+            line-height: 4.5rem;
+        }
+
+        .icon {
+            font-size: 1.6rem;
+            color: var(--primary-color);
+            animation: slideIn ease-in 0.4s;
+            margin-top: -4px;
+            display: none;
+        }
+        
+        &:hover .icon {
+            display: block;
+        }
+
+        &:hover h4 {
+            margin-right: 0.8vw;
+        }
+    }
+}
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    .project-wrapper {
+        &:hover {
+            box-shadow: none;
+            transform: translateY(0);
+
+            & .add {
+                color: white;
+                background-color: var(--primary-color);
+                outline: none;
+                border-color: var(--primary-color);
+                font-weight: 400;
+            }
+        }
+    }
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .project-wrapper {
+        .project {
+            .tag {
+                font-size: 1.4rem;
+                padding: 0.3vh 1.2vw 0vh;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .project-wrapper {
+        .project {
+            .tag {
+                padding: 0.6vh 2vw 0.2vh;
+            }
+        }
+    }
+}

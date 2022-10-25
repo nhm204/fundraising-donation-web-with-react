@@ -1,11 +1,20 @@
 :root {
-  --primary-color: #8B01BB;
-  --secondary-color: #D04BFF;
+  --primary-color: #FA7070; // 8B01BB, FA7070
+  --secondary-color: #FF9494; // D04BFF, FF9494
   --text-color: #333;
 
-  
+  --navbar-height: 80px;
 }
 
 .app {
   overflow: hidden;
+}
+
+@keyframes fadeIn {
+  from {
+      opacity: 0;
+  }
+  to {
+      opacity: 1;
+  }
 }

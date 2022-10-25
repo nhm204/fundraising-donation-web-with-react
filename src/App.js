@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import Discover from "./pages/components/Discover/Discover";
+import { ProjectList } from "./pages/components";
 import Home from "./pages/Home";
 
 
@@ -10,10 +10,10 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />} exact />
         <Route path="/discover">
-          <Route index element={<Discover />} /> 
+          <Route index element={<ProjectList />} /> 
           {/* <Route path=':name/:id' element={<ProductDetail />} /> */}
         </Route>
-        {/* <Route path="/owner" element={<Owner />} />
+        {/* <Route path="/create" element={<Owner />} />
         <Route path="/checkout/" element={<CheckOut />} /> */}
       </Routes>
     </BrowserRouter>

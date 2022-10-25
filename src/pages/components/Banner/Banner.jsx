@@ -1,16 +1,19 @@
 import React, { useState } from 'react';
 import './Banner.scss';
 import { HiVolumeOff, HiVolumeUp } from 'react-icons/hi';
+import { Link } from 'react-router-dom';
 
 
 const MainBanner = () => {
   return (
     <div className='main-banner'>
       <div className="desc">
-        <h1>Donation.</h1>
-        <h1>Make a difference.</h1>
+        <h1>Your donation</h1>
+        <h1>make a difference.</h1>
         <button className='donate-btn'>Donate now</button>
-        <button className='discover-btn'>Discover</button>
+        <Link to='/discover'>
+          <button className='discover-btn'>Discover</button>
+        </Link>
       </div>
     </div>
   );

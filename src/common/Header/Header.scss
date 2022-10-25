@@ -9,6 +9,7 @@
     transition: padding-top linear .2s, background-color linear 0ms;
 
     .navbar {
+        top: 0;
         width: 100vw;
         height: 8rem;
         padding: 0 100px;
@@ -25,23 +26,106 @@
         .left-side {
             display: flex;
             align-items: center;
-            
-            .nav-search {
-                display: flex;
-                align-items: center;
-                margin-right: 2.4rem;
 
-                .icon {
-                    font-size: 1.4rem;
-                    margin-right: 0.4rem;
+            .header-search-btn {
+                .nav-search {
+                    display: flex;
+                    align-items: center;
+                    margin-right: 2.4rem;
+    
+                    .icon {
+                        font-size: 1.4rem;
+                        margin-right: 0.4rem;
+                    }
+    
+                    &:hover {
+                        color: var(--primary-color);
+                        cursor: pointer;
+                    }
+                }
+            }
+
+            .header-overlay {
+                position: fixed;
+                right: 0;
+                top: 0;
+                left: 0;
+                bottom: 0;
+                background-color: rgba($color: black, $alpha: 0.5);
+                animation: fadeIn linear 0.3s;
+                z-index: 2;
+                display: none;
+            }
+
+            .header-searchbar-input {
+                display: none;
+
+                &:checked ~ .header-overlay {
+                    display: block;
+                }
+    
+                &:checked ~ .searchbar-wrapper {
+                    transform: translateY(0%);
+                }
+            }
+
+            .searchbar-wrapper {
+                position: fixed;
+                top: 0;
+                right: 0;
+                left: 0;
+                height: 60vh;
+                background-color: white;
+                z-index: 3;
+                display: flex;
+                justify-content: center;
+                transform: translateY(-100%);
+                transition: transform ease-in 0.3s;
+
+                .searchbar {
+                    position: relative;
+                    width: 60vw;
+                    height: fit-content;
+                    display: flex;
+                    align-items: center;
+                    margin-top: 4vh;
+                    
+                    .search-input {
+                        font-size: 1.6rem;
+                        line-height: 1.6rem;
+                        width: 60vw;
+                        height: 50px;
+                        padding: 12px 50px;
+                        border-radius: 30px;
+                        border: 2px solid black;
+                    }
+
+                    .icon {
+                        position: absolute;
+                        font-size: 1.8rem;
+                        left: 20px;
+                    }
+
+                    .erase-icon {
+                        position: absolute;
+                        font-size: 2.2rem;
+                        right: 16px;
+                    }
                 }
 
-                &:hover {
-                    color: var(--primary-color);
+                .cancel-btn {
+                    position: absolute;
+                    font-weight: 600;
+                    right: 3vw;
+                    top: calc(4vh + 15px);
                     cursor: pointer;
                 }
             }
 
+            .search-done {
+                transform: translateY(-100%);
+            }
+            
             .nav-link {
                 margin-right: 2.4rem;
                 color: var(--text-color);
@@ -68,9 +152,8 @@
             }
 
             span {
-                font-size: 2.2rem;
+                font-size: 2.8rem;
                 font-weight: 700;
-                margin-left: 0.8rem;
                 color: var(--primary-color);
             }
         }
