@@ -2,9 +2,6 @@
     display: block;
     position: relative;
     text-decoration: none;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 25px;
     cursor: pointer;
     box-shadow: 0 0 30px rgba(0, 0, 0, 0.02);
     transition: 0.2s ease;
@@ -13,8 +10,8 @@
     height: 450px;
 
     &:hover {
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
-        transform: translateY(-4px);
+        // box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
+        // transform: translateY(-4px);
 
         & .add {
             color: var(--text-color);
@@ -48,10 +45,9 @@
         }
 
         img {
-            width: 296px;
-            height: 296px;
+            width: 320px;
+            height: 320px;
             object-fit: cover;
-            border-radius: 16px;
             -webkit-user-drag: none;
         }
     

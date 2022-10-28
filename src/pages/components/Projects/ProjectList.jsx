@@ -38,7 +38,7 @@ const Projects = () => {
 
   filteredList = useMemo(() => {
     if (selectedCategory) {
-      return filteredList?.filter(project => project.categories.find(project => project === selectedCategory)); 
+      return filteredList?.filter(project => project.category === selectedCategory); 
     }
     return filteredList;
   }, [selectedCategory, filteredList]);
