@@ -11,7 +11,7 @@ const Project = ({ project }) => {
       <Link to={`/discover/${project.name}/${project.id}`} className='project'>
         <img src={project.image} alt={project.name} />
         <div className='info'>
-          { project.isFeatured && <div className='description'>Featured Project</div> }
+          <div className='description'>{project.category} Project</div>
           <h5 className='name'>{project.name}</h5>
           <div className='price'>Target of ${project.targetPrice}</div>
         </div>
