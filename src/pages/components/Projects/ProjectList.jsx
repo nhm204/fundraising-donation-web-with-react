@@ -20,7 +20,12 @@ const Projects = () => {
   useEffect(() => { document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform` }, []);
 
   const projectList = projects?.map((project) => project);
-  let filteredList = projectList?.reverse();
+
+  let filteredList = projectList;
+  if (sortProject === 'Newest' && selectedCategory === 'Newest') {
+    filteredList = projectList?.reverse();
+  }
+  
   let featuredList = filteredList?.filter(project => project.isFeatured === true);
 
 
@@ -37,7 +42,7 @@ const Projects = () => {
 
 
   filteredList = useMemo(() => {
-    if (selectedCategory) {
+    if (selectedCategory && selectedCategory !== 'Featured' && selectedCategory !== 'Newest') {
       return filteredList?.filter(project => project.category === selectedCategory); 
     }
     return filteredList;
@@ -56,7 +61,7 @@ const Projects = () => {
 
   featuredList = filteredList?.filter(project => project.isFeatured === true);
   filteredList = filteredList?.filter(project => !featuredList.includes(project));
-console.log(filteredList);
+
 
   filteredList = useMemo(() => {
     if (sortProject === 'ASC') {
@@ -74,12 +79,30 @@ console.log(filteredList);
     return filteredList;
   }, [sortProject, filteredList]);
 
-  console.log(filteredList)
-  
-  filteredList = featuredList?.concat(filteredList);
+
+  featuredList = useMemo(() => {
+    if (sortProject === 'ASC') {
+      return featuredList.sort((a, b) => a.targetPrice - b.targetPrice);
+    }
+    if (sortProject === 'DESC') {
+      return featuredList.sort((a, b) => b.targetPrice - a.targetPrice);
+    }
+    if (sortProject === 'A-Z') {
+      return featuredList.sort((a, b) => a.name > b.name ? 1 : -1);
+    }
+    if (sortProject === 'Z-A') {
+      return featuredList.sort((a, b) => a.name > b.name ? -1 : 1);
+    }
+    return featuredList;
+  }, [sortProject, featuredList]);
+
+  if (selectedCategory === 'Featured') {
+    filteredList = featuredList?.reverse();
+  } else {
+    filteredList = featuredList?.concat(filteredList);
+  }
 
 
- 
   return (
     <div className='discover'>
       <Header setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchQuery} link={'Discover'} setCurrentPage={setCurrentPage} />
@@ -94,8 +117,26 @@ console.log(filteredList);
             <div>Filter</div>
             <IoCloseOutline />       
           </label>
-          <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All Projects</div>
-          <span>Purpose</span>
+          <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All</div>
+          <div 
+            className={selectedCategory === 'Featured' ? 'option active' : 'option'} 
+            onClick={() => {
+              setSelectedCategory('Featured');
+              setSortProject('Featured');
+            }}
+          >
+            Featured
+          </div>
+          <div 
+            className={sortProject === 'Newest' ? 'option active' : 'option'} 
+            onClick={() => {
+              setSortProject('Newest');
+              setSelectedCategory('Newest');
+            }}
+          >
+              Newest
+          </div>
+          <span className='title'>Purpose</span>
           <div className='selection'>
             <div className={selectedCategory === 'Education' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Education')}>Education</div>
             <div className={selectedCategory === 'Poverty' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Poverty')}>Poverty</div>
@@ -103,7 +144,7 @@ console.log(filteredList);
             <div className={selectedCategory === 'Older People' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Older People')}>Older People</div>
             <div className={selectedCategory === 'Homelessness' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Homelessness')}>Homelessness</div>
             <div className={selectedCategory === 'Disability' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Disability')}>Disability</div>
-            <div className={selectedCategory === 'Health and Medical' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Health and Medical')}>Health &amp; Medical</div>
+            <div className={selectedCategory === 'Health & Medical' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Health & Medical')}>Health &amp; Medical</div>
             <div className={selectedCategory === 'Animals & Pets' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Animals & Pets')}>Animals &amp; Pets</div>
           </div>
 
@@ -113,14 +154,20 @@ console.log(filteredList);
           </div>
 
           <div className='sort-project'>
-            <span className='sort'>Sort by price</span>
-            <div className={sortProject === 'ASC' ? 'option active' : 'option'} onClick={() => setSortProject('ASC')}>Low to High</div>
-            <div className={sortProject === 'DESC' ? 'option active' : 'option'} onClick={() => setSortProject('DESC')}>High to Low</div>
-
-            <span className='sort'>Sort by name</span>
-            <div className={sortProject === 'A-Z' ? 'option active' : 'option'} onClick={() => setSortProject('A-Z')}>From A to Z</div>
-            <div className={sortProject === 'Z-A' ? 'option active' : 'option'} onClick={() => setSortProject('Z-A')}>From Z to A</div>
-            <div className='option default' onClick={() => setSortProject()}>Reset</div>
+            <span className='sort'>Sort by</span>
+            <div className={sortProject === 'ASC' ? 'option active' : 'option'} onClick={() => setSortProject('ASC')}>Price: Low - High</div>
+            <div className={sortProject === 'DESC' ? 'option active' : 'option'} onClick={() => setSortProject('DESC')}>Price: High - Low</div>
+            <div className={sortProject === 'A-Z' ? 'option active' : 'option'} onClick={() => setSortProject('A-Z')}>Name: A to Z</div>
+            <div className={sortProject === 'Z-A' ? 'option active' : 'option'} onClick={() => setSortProject('Z-A')}>Name: Z to A</div>
+            <div 
+              className='option default' 
+              onClick={() => {
+                setSortProject();
+                setSelectedCategory('');
+              }}
+            >
+              Reset
+            </div>
           </div>
         </div>
         <div className='projects-wrapper'>

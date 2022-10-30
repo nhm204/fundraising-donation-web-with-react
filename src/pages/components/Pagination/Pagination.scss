@@ -35,9 +35,9 @@
     }
 
     .active {
-        color: darkorange;
+        color: var(--primary-color);
         font-weight: 500;
-        border-color: darkorange;
+        border-color: var(--primary-color);
     }
 }
 
