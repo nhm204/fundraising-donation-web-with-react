@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import './DropdownSearch.scss';
 import { BsSearch } from "react-icons/bs";
 import { HiOutlineBackspace } from "react-icons/hi";
+import { projects } from '../Projects/projects';
+import Project from '../Projects/ProjectCard/ProjectCard';
 
 
 const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setCurrentPage, setIsSelected }) => {
@@ -47,15 +49,33 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
   };
 
 
+  let searchList = useMemo(() => {
+    if (inputValue) {
+      return projects?.filter(project => project.name.toLowerCase().includes(inputValue) || project.category.toLowerCase().includes(inputValue)).slice(0, 3); 
+    }
+    return projects?.slice(0, 3);
+  }, [inputValue]);
+
+
   return (
     <div className='dropdown-search'>
       <div className='searchbar-wrapper'>
-        <div className="searchbar">
-            <BsSearch className='icon' />
-            <input type='text' placeholder='Search a project...' className='search-input' value={inputValue || ''} onKeyPress={handleDirect} onChange={handleChange} />
-            { inputValue?.length > 0 && <HiOutlineBackspace onClick={handleClear} className='erase-icon' />}
+        <div className="searchbar-container">
+          <div className="searchbar">
+              <BsSearch className='icon' />
+              <input type='text' placeholder='Search a project...' className='search-input' value={inputValue || ''} onKeyPress={handleDirect} onChange={handleChange} />
+              { inputValue?.length > 0 && <HiOutlineBackspace onClick={handleClear} className='erase-icon' />}
+          </div>
+          <div className='cancel-btn' onClick={handleClear}>Cancel</div>
         </div>
-        <div className='cancel-btn' onClick={handleClear}>Cancel</div>
+        <ul className='search-projects'>
+          { searchList.map(project => (
+              <li key={project.id}>
+                <Project project={project} />   
+              </li> 
+            ))
+          }
+        </ul>
       </div>
       <div className="search-overlay" onClick={() => setIsSelected(false)} />
     </div>

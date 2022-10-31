@@ -17,7 +17,10 @@ const Projects = () => {
   const [ currentPage, setCurrentPage ] = useState(1);
 
   
-  useEffect(() => { document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform` }, []);
+  useEffect(() => { 
+    document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
+    window.scrollTo(0, 0); 
+  }, []);
 
   const projectList = projects?.map((project) => project);
 
@@ -35,7 +38,7 @@ const Projects = () => {
 
   filteredList = useMemo(() => {
     if (searchQuery) {
-      return projectList?.filter(project => project.name.toLowerCase().includes(searchQuery)); 
+      return projectList?.filter(project => project.name.toLowerCase().includes(searchQuery) || project.category.toLowerCase().includes(searchQuery)); 
     }
     return filteredList;
   }, [searchQuery, projectList, filteredList]);
@@ -47,8 +50,6 @@ const Projects = () => {
     }
     return filteredList;
   }, [selectedCategory, filteredList]);
-  // console.log(selectedCategory)
-  // console.log(filteredList)
 
 
   filteredList = useMemo(() => {
@@ -150,9 +151,14 @@ const Projects = () => {
 
           <span className='price'>Price: <span style={{ color: "var(--primary-color)" }}>${selectedPrice}</span></span>
           <div className='price-container'>
-            <input type="range" min='0' max='10000' className='slider' onChange={e => setSelectedPrice(e.target.value)} />
+            <input 
+              type="range" 
+              min='0' 
+              max='20000' 
+              className='slider' 
+              onChange={e => setSelectedPrice(e.target.value)}
+            />
           </div>
-
           <div className='sort-project'>
             <span className='sort'>Sort by</span>
             <div className={sortProject === 'ASC' ? 'option active' : 'option'} onClick={() => setSortProject('ASC')}>Price: Low - High</div>

@@ -1,10 +1,18 @@
 import './ProjectCard.scss';
-import { Link } from 'react-router-dom';
-import { FaGreaterThan } from 'react-icons/fa';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 const Project = ({ project }) => {
+  const navigate = useNavigate();
 
+  const handleDonate = () => {
+    if (project.currentPrice === project.targetPrice) {
+      navigate(`/discover/${project.name}/${project.id}`)
+    } 
+    else {
+      navigate(`/donate/${project.name}/${project.id}`)
+    }
+  }
 
   return (
     <div className='project-wrapper'>
@@ -17,12 +25,7 @@ const Project = ({ project }) => {
           <div className='target-price'>Target of ${project.targetPrice}</div>
         </div>
       </Link>
-      {/* { project.stock !== 0 ? <button className='add' onClick={handleAdd}>Add to Bag</button> : <button className='add disable'>Out of Stock</button> } */}
-      <Link to='/discover' className='more'>
-        <h4>See all</h4>
-        <FaGreaterThan className='icon' />
-        <FaGreaterThan className='icon' />
-      </Link>
+      <button className={`${project.currentPrice === project.targetPrice ? 'donate disable' : 'donate'}`} onClick={handleDonate}>Donate</button>
     </div>
   )
 }

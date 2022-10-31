@@ -5,12 +5,94 @@
         h4 {
             color: var(--secondary-color);
         }
-    
-        h1 {
-            margin: 12px 0 20px;
-            max-width: 40vw;
+
+        .see-all {
+            display: flex;
+            align-items: baseline;
+            justify-content: space-between;
+
+            h1 {
+                margin: 12px 0 20px;
+                max-width: 40vw;
+            }
+
+            .more {
+                display: flex;
+                align-items: center;
+                font-size: 2rem;
+                font-weight: 400;
+                color: var(--text-color);
+                width: 100px;
+                
+                .icon {
+                    color: var(--primary-color);
+                    margin-left: 0.4vw;
+                    animation: slideIn ease-in 0.4s;
+                    display: none;
+                }
+
+                &:hover .icon {
+                    display: block;
+                }
+            }
         }
     }
 
+    .featured-projects {
+        display: flex;
+        flex-wrap: wrap;
 
+        li {
+            margin: 2vh 0;
+            padding: 0 0.8vw;
+
+            &:first-child {
+                padding-left: 0;
+            }
+
+            &:nth-child(4) {
+                padding-right: 0;
+            }
+
+            .project-wrapper {
+                width: 270px;
+
+                .project {
+                    img {
+                        width: 270px;
+                        height: 270px;
+                    }
+
+                    .info {
+                        padding: 8px 0;
+
+                        .description, .current-price {
+                            font-size: 1.4rem;
+                        }
+                
+                        .name {
+                            margin: 6px 0;
+                            font-size: 1.6rem;
+                        }
+                
+                        .target-price {
+                            margin-top: 30px;
+                            font-size: 2rem;
+                        }
+                    }
+                }
+
+                .donate {
+                    font-size: 1.4rem;
+                    line-height: 1.3rem;
+                    bottom: 6px; 
+                    right: 0px;
+                    padding: 3px 8px;
+                    border: 3px solid var(--secondary-color);
+                }
+            }
+        }
+
+        
+    }
 }
