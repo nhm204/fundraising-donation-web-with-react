@@ -13,7 +13,7 @@
         // box-shadow: 0 0 30px rgba(0, 0, 0, 0.15);
         // transform: translateY(-4px);
 
-        & .donate {
+        & .donate-btn {
             color: var(--text-color);
             // border-color: transparent;
             background-color: white;
@@ -64,7 +64,7 @@
         }
     }
 
-    .donate {
+    .donate-btn {
         position: absolute;
         line-height: 1.6rem;
         bottom: 4px; 
@@ -96,7 +96,7 @@
             box-shadow: none;
             transform: translateY(0);
 
-            & .donate {
+            & .donate-btn {
                 color: white;
                 background-color: var(--primary-color);
                 outline: none;
