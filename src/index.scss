@@ -8,6 +8,7 @@ html {
   font-size: 62.5%; /* 100% = 16 px => 62.5% = 10px */
   font-family: 'Poppins', sans-serif;
   -webkit-tap-highlight-color: transparent;
+  overflow-x: hidden;
 }
 
 body {
@@ -16,7 +17,12 @@ body {
 }
 
 ::-webkit-scrollbar {
-  display: none;
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #808080; 
+  border-radius: 10px;
 }
 
 label {

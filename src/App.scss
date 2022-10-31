@@ -6,9 +6,6 @@
   --navbar-height: 80px;
 }
 
-.app {
-  overflow: hidden;
-}
 
 @keyframes fadeIn {
   from {
@@ -16,5 +13,16 @@
   }
   to {
       opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-1.2vw);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }

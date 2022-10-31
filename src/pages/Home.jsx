@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import Header from '../common/Header/Header';
 import { Banner1 } from './components/Banner/Banner';
 import { Banner, FeaturedProjects } from './components/index.jsx';
+import { projects } from './components/Projects/projects';
 
 
 const Home = () => {
@@ -12,7 +13,7 @@ const Home = () => {
     <div className='home'>
       <Header link={'Home'} />
       <Banner />
-      <FeaturedProjects />
+      <FeaturedProjects projects={projects} />
       <Banner1 />
     </div>
   )

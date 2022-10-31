@@ -76,4 +76,15 @@ export const projects = [
         "image": "https://images.unsplash.com/photo-1605289982774-9a6fef564df8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
         "isFeatured": false
     },
+    {
+        "id": "8",
+        "creatorId": "1",
+        "name": "Free Clean Water for African",
+        "currentPrice": 800,
+        "targetPrice": 7000,
+        "description": "This is a charity project with the aim of giving free water for African",
+        "category": "Food Banks",
+        "image": "https://images.unsplash.com/photo-1574482620826-40685ca5ebd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        "isFeatured": true
+    },
 ]
