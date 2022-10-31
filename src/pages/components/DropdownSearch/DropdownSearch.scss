@@ -4,51 +4,107 @@
         top: 0;
         right: 0;
         left: 0;
-        height: 60vh;
+        height: 70vh;
         background-color: white;
         z-index: 3;
         display: flex;
-        justify-content: center;
-        // transform: translateY(-100%);
+        flex-direction: column;
+        align-items: center;
         transition: fadeIn linear 0.3s;
     
-        .searchbar {
-            position: relative;
-            width: 60vw;
-            height: fit-content;
+        .searchbar-container {
+            display: flex;
+            justify-content: center;
+
+            .searchbar {
+                position: relative;
+                width: 60vw;
+                height: fit-content;
+                display: flex;
+                align-items: center;
+                margin-top: 4vh;
+                
+                .search-input {
+                    font-size: 1.6rem;
+                    line-height: 1.6rem;
+                    width: 60vw;
+                    height: 50px;
+                    padding: 12px 50px;
+                    border-radius: 30px;
+                    border: 2px solid black;
+                }
+        
+                .icon {
+                    position: absolute;
+                    font-size: 1.8rem;
+                    left: 20px;
+                }
+        
+                .erase-icon {
+                    position: absolute;
+                    font-size: 2.2rem;
+                    right: 16px;
+                }
+            }
+        
+            .cancel-btn {
+                position: absolute;
+                font-weight: 600;
+                right: 3vw;
+                top: calc(4vh + 15px);
+                cursor: pointer;
+            }
+        }
+
+        .search-projects {
             display: flex;
             align-items: center;
             margin-top: 4vh;
-            
-            .search-input {
-                font-size: 1.6rem;
-                line-height: 1.6rem;
-                width: 60vw;
-                height: 50px;
-                padding: 12px 50px;
-                border-radius: 30px;
-                border: 2px solid black;
-            }
+
+            li {
+                margin: 2vh 0;
+                padding: 0 1vw;
     
-            .icon {
-                position: absolute;
-                font-size: 1.8rem;
-                left: 20px;
-            }
+                &:first-child {
+                    padding-left: 0;
+                }
     
-            .erase-icon {
-                position: absolute;
-                font-size: 2.2rem;
-                right: 16px;
-            }
-        }
+                &:nth-child(3) {
+                    padding-right: 0;
+                }
     
-        .cancel-btn {
-            position: absolute;
-            font-weight: 600;
-            right: 3vw;
-            top: calc(4vh + 15px);
-            cursor: pointer;
+                .project-wrapper {
+                    width: 270px;
+    
+                    .project {
+                        img {
+                            width: 270px;
+                            height: 270px;
+                        }
+    
+                        .info {
+                            padding: 8px 0;
+    
+                            .description, .current-price {
+                                font-size: 1.4rem;
+                            }
+                    
+                            .name {
+                                margin: 6px 0;
+                                font-size: 1.6rem;
+                            }
+                    
+                            .target-price {
+                                display: none;
+                            }
+                        }
+                    }
+    
+                    .donate {
+                        display: none;
+                    }
+                }
+            }
         }
     }
     

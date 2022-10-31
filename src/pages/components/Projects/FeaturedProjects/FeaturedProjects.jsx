@@ -14,7 +14,7 @@ const FeaturedProjects = ({ projects }) => {
         <h4>Where you can help</h4>
         <div className='see-all'>
           <h1>Featured projects</h1>
-          <Link href='/discover' className='more'>
+          <Link to='/discover' className='more'>
             See all
             <HiChevronDoubleRight className='icon' />
           </Link> 

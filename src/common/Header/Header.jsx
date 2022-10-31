@@ -35,8 +35,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
           <Link to='/discover' className={navSelected === 'Discover' ? 'nav-link active' : 'nav-link'} onClick={() => setNavSelected('Discover')}>Discover</Link>
         </div>
         <Link to='/' className='logo'>
-          {/* <img src={require ("../../assets/img/logo.png")} alt="logo" className='logo-img' /> */}
-          <span>BetterWorld</span>
+          BetterWorld
         </Link>
         <div className="right-side">
           <div className='nav-link'>Sign in</div>

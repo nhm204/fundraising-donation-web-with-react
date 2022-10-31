@@ -80,11 +80,22 @@ export const projects = [
         "id": "8",
         "creatorId": "1",
         "name": "Free Clean Water for African",
-        "currentPrice": 800,
+        "currentPrice": 1300,
         "targetPrice": 7000,
         "description": "This is a charity project with the aim of giving free water for African",
         "category": "Food Banks",
         "image": "https://images.unsplash.com/photo-1574482620826-40685ca5ebd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
+        "isFeatured": true
+    },
+    {
+        "id": "9",
+        "creatorId": "1",
+        "name": "Free Face Mask through Pandemic",
+        "currentPrice": 10,
+        "targetPrice": 3000,
+        "description": "This is a charity project with the aim of giving free water for African",
+        "category": "Health & Medical",
+        "image": "https://images.unsplash.com/photo-1599493347474-7e864c18489e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         "isFeatured": true
     },
 ]

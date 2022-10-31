@@ -7,7 +7,10 @@ import { projects } from './components/Projects/projects';
 
 const Home = () => {
 
-  useEffect(() => { document.title = `Home. BetterWorld: #1 for Donation and Fundraising Platform` }, []);
+  useEffect(() => { 
+    document.title = `Home. BetterWorld: #1 for Donation and Fundraising Platform`;
+    window.scrollTo(0, 0); 
+  }, []);
 
   return (
     <div className='home'>
@@ -16,7 +19,7 @@ const Home = () => {
       <FeaturedProjects projects={projects} />
       <Banner1 />
     </div>
-  )
+  );
 }
 
-export default Home
+export default Home;
