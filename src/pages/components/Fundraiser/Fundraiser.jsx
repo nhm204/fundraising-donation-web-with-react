@@ -8,6 +8,7 @@ import Pagination from '../Pagination/Pagination';
 
 const Fundraiser = () => {
   const [ projectsPerPage, setProjectsPerPage ] = useState(4);
+  const [ isAllSelected, setIsAllSelected ] = useState(false);
   const paramValue = useParams();
   const fundraiserId = paramValue.id;
   const fundraiserName = paramValue.name;
@@ -16,7 +17,8 @@ const Fundraiser = () => {
   console.log(fundraiserId)
   console.log(fundraiserName)
   const fundraiser = users?.find(user => user.id === fundraiserId);
-  const projectsByFundraiser = projects?.filter(project => project.creatorId === fundraiserId);
+  const allProjects = projects.filter(project => project.creatorId === fundraiserId);
+  const currentProjects = allProjects?.filter(project => project.currentPrice < project.targetPrice);
     
   
   useEffect(() => { 
@@ -36,14 +38,18 @@ const Fundraiser = () => {
           <div className="id">Fundraiser #{fundraiserId}</div>
         </div>
         <i className="bio">{fundraiser.bio}</i>
+        
+        <div className='projects-wrapper'>
+          <div className="project-selection">
+            <div className={isAllSelected ? 'selection active' : 'selection'} onClick={() => setIsAllSelected(true)}>All</div>
+            <div className={!isAllSelected ? 'selection active' : 'selection'} onClick={() => setIsAllSelected(false)}>Projects ({currentProjects.length})</div>
+          </div>
+          <Pagination projects={isAllSelected ? allProjects : currentProjects} projectsPerPage={projectsPerPage} />
+        </div>
         <div className="contact">
           <h3>Contact Information</h3>
           <div>Facebook: <a href={fundraiser.facebook}>{fundraiser.facebook}</a></div>
           <div>Phone: <a href={`tel:${fundraiser.phone}`}>{fundraiser.phone}</a></div>
-        </div>
-        <div className='projects-wrapper'>
-          <h3>Projects ({projectsByFundraiser.length})</h3>
-          <Pagination projects={projectsByFundraiser} projectsPerPage={projectsPerPage} />
         </div>
       </div>
       <Outlet />
