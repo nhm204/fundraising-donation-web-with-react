@@ -15,7 +15,7 @@ const Projects = () => {
   const [ selectedPrice, setSelectedPrice ] = useState(0);
   const [ sortProject, setSortProject ] = useState();
   const [ currentPage, setCurrentPage ] = useState(1);
-
+console.log(searchQuery)
   
   useEffect(() => { 
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;

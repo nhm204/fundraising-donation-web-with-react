@@ -20,6 +20,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
       window.removeEventListener('scroll', handleScroll)
     }
   }, []);
+  console.log(link)
 
 
   return (
@@ -30,7 +31,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
             <BsSearch className='icon' />
             Search
           </div>
-          {isSelected && <DropdownSearch setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchValue} setCurrentPage={setCurrentPage} setIsSelected={setIsSelected} />}
+          {isSelected && <DropdownSearch setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchValue} setCurrentPage={setCurrentPage} setIsSelected={setIsSelected} link={'Discover'} />}
           <Link to='/' className={navSelected === 'Home' ? 'nav-link active' : 'nav-link'} onClick={() => setNavSelected('Home')}>Home</Link>
           <Link to='/discover' className={navSelected === 'Discover' ? 'nav-link active' : 'nav-link'} onClick={() => setNavSelected('Discover')}>Discover</Link>
         </div>
