@@ -142,7 +142,7 @@ console.log(searchQuery)
             <div className={selectedCategory === 'Education' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Education')}>Education</div>
             <div className={selectedCategory === 'Poverty' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Poverty')}>Poverty</div>
             <div className={selectedCategory === 'Food Banks' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Food Banks')}>Food Banks</div>
-            <div className={selectedCategory === 'Older People' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Older People')}>Older People</div>
+            <div className={selectedCategory === 'Disaster & Crisis' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Disaster & Crisis')}>Disaster & Crisis</div>
             <div className={selectedCategory === 'Homelessness' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Homelessness')}>Homelessness</div>
             <div className={selectedCategory === 'Disability' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Disability')}>Disability</div>
             <div className={selectedCategory === 'Health & Medical' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Health & Medical')}>Health &amp; Medical</div>
@@ -154,7 +154,7 @@ console.log(searchQuery)
             <input 
               type="range" 
               min='0' 
-              max='20000' 
+              max='100000' 
               className='slider' 
               onChange={e => setSelectedPrice(e.target.value)}
             />

@@ -39,7 +39,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
           BetterWorld
         </Link>
         <div className="right-side">
-          <div className='nav-link'>Sign in</div>
+          <Link to='/signin' className='nav-link'>Sign in</Link>
           <button className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>
             Start a Fundraising
           </button>

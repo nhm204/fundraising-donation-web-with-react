@@ -93,3 +93,38 @@
     }
 }
 
+
+.banner2 {
+    padding: 12vh 12vw;
+    background-color: rgba($color: #febebe, $alpha: 0.5);
+
+    h2 {
+        margin-bottom: 8vh;
+    }
+
+    ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        li {
+            display: flex;
+            align-items: center;
+
+            .content {
+                margin-left: 20px;
+                min-width: 200px;
+                max-width: 270px;
+
+                h4 {
+                    font-size: 1.8rem;
+                    margin-bottom: 4px;
+                }
+
+                span {
+                    font-weight: 300;
+                }
+            }
+        }
+    }
+}
