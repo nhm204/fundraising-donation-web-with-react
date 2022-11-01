@@ -7,7 +7,7 @@ $bg-color: rgba($color: #febebe, $alpha: 0.5);
     // height: 100vh;
 
     .container {
-        margin: calc(var(--navbar-height) + 3vh) 0 6vh;
+        margin: calc(var(--navbar-height) + 3vh) 0 4vh;
         background-color: white;
         border-radius: 12px;
         padding: 2vh 1vw;
@@ -48,6 +48,7 @@ $bg-color: rgba($color: #febebe, $alpha: 0.5);
             .id {
                 font-size: 1.5rem;
                 font-weight: 400;
+                color: var(--secondary-color);
             }
         }
 
@@ -55,6 +56,31 @@ $bg-color: rgba($color: #febebe, $alpha: 0.5);
             font-size: 1.8rem;
             margin-top: 30px;
             border-bottom: 1px solid #000;
+        }
+
+        .contact {
+            width: 100%;
+            padding: 3vh 3vw;
+            border-radius: 15px;
+            margin-top: 100px;
+            background-color: var(--secondary-color);
+            
+            h3 {
+                color: black;
+                font-size: 2.5rem;
+                line-height: 3rem;
+                margin-bottom: 12px;
+            }
+
+            div {
+                color: black;
+                margin-top: 8px;
+
+                a {
+                    color: black;
+                    text-decoration: underline;
+                }
+            }
         }
 
         .projects-wrapper {
@@ -73,19 +99,23 @@ $bg-color: rgba($color: #febebe, $alpha: 0.5);
 
                 li {
                     margin: 4vh 0;
-                    padding: 0 1vw;
+                    padding: 0 1.2vw;
 
                     // &:nth-child(odd) {
                     //     padding-left: 7vw;
                     // }
 
                     .project-wrapper {
-                        
+                        width: 320px;
 
                         .project {
                             .info {
                                 margin-top: 0;
                                 align-items: flex-start;
+
+                                .name {
+                                    width: 320px;
+                                }
                             }
                         }
                     }

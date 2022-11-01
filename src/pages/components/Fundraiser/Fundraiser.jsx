@@ -36,6 +36,11 @@ const Fundraiser = () => {
           <div className="id">Fundraiser #{fundraiserId}</div>
         </div>
         <i className="bio">{fundraiser.bio}</i>
+        <div className="contact">
+          <h3>Contact Information</h3>
+          <div>Facebook: <a href={fundraiser.facebook}>{fundraiser.facebook}</a></div>
+          <div>Phone: <a href={`tel:${fundraiser.phone}`}>{fundraiser.phone}</a></div>
+        </div>
         <div className='projects-wrapper'>
           <h3>Projects ({projectsByFundraiser.length})</h3>
           <Pagination projects={projectsByFundraiser} projectsPerPage={projectsPerPage} />

@@ -25,7 +25,7 @@ const Project = ({ project }) => {
           <div className='target-price'>Target of ${project.targetPrice}</div>
         </div>
       </Link>
-      <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>Donate</button>
+      <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>{project.currentPrice === project.targetPrice ? 'Funded' : 'Donate'}</button>
     </div>
   )
 }

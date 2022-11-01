@@ -69,7 +69,7 @@ const ProjectDetails = () => {
               <div className="donations"><b>{project.donations}</b> donations</div>
               <div className="to-go"><b>${project.targetPrice - project.currentPrice}</b> to go</div>
             </div>
-            <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>Donate</button>
+            <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>{project.currentPrice === project.targetPrice ? 'Funded' : 'Donate'}</button>
           </div>
           { relatedProjects.length !== 0 && <div className="related">
             <h3>Related Projects</h3>
