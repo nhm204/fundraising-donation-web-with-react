@@ -48,7 +48,7 @@
                 color: var(--text-color);
 
                 &:hover {
-                    color: var(--primary-color);
+                    color: var(--secondary-color);
                 }
             }
 
@@ -69,10 +69,11 @@
             align-items: center;
 
             .nav-link {
+                color: var(--text-color);
                 margin-right: 2.4rem;
 
                 &:hover {
-                    color: var(--primary-color);
+                    color: var(--secondary-color);
                 }
             }
 

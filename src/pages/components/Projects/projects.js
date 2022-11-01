@@ -42,7 +42,7 @@ export const projects = [
         "currentPrice": 5000,
         "targetPrice": 5000,
         "donations": 345,
-        "description": "This is a charity project with the aim of building a community library for children in African countries",
+        "description": "One million people in the Netherlands live below the poverty line. Will you help us hand out food surpluses and by doing so prevent food waste.\n“An eye for food, a heart for people”\nNearly one million people in the Netherlands live below the poverty line. Did you know that this dire situation can be solved simply by giving food surpluses? A solution both good for people and the environment.\nEvery week our food bank volunteers hand out food to those who need it most. Companies, institutions, governments and individuals offer their support through funds, food, and services.\nThroughout the Netherlands, our volunteers show up with passion and dedication for their work in the food banks. Though we are tremendously grateful for the support and care of our sponsors, helping people in the food banks is very expensive. The funds are used for logistics, transportation and gasoline, and storage rent. For as little as $5 you can help a family eat for seven days.\nYour donation is solely for the people who need it most. No one in the food bank receives a salary. We only work with volunteers. Support the food bank with your donation.\nWill you join us too?",
         "category": "Food Banks",
         "image": "https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         "isFeatured": true
@@ -74,11 +74,11 @@ export const projects = [
     {
         "id": "7",
         "creatorId": "1",
-        "name": "Vaccine for poor people in Covid-19",
+        "name": "Vaccine in Covid-19",
         "currentPrice": 8000,
         "targetPrice": 15000,
         "donations": 590,
-        "description": "This is a charity project with the aim of helping homeless people in the UK",
+        "description": "This is a charity project with the aim of helping people vaccinated through pandemic",
         "category": "Health & Medical",
         "image": "https://images.unsplash.com/photo-1605289982774-9a6fef564df8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=464&q=80",
         "isFeatured": false
@@ -105,6 +105,18 @@ export const projects = [
         "description": "Wearing a mask is a critical way to prevent the spread of COVID-19. Masks and respirators, when worn consistently and correctly, are effective at reducing the transmission of SARS-CoV-2, the virus that causes COVID-19. Free N95 masks are available to pick up at local pharmacies and community health center sites across the country. Every person is allowed up to 3 free masks pending availability.",
         "category": "Health & Medical",
         "image": "https://images.unsplash.com/photo-1599493347474-7e864c18489e?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
+        "isFeatured": true
+    },
+    {
+        "id": "10",
+        "creatorId": "1",
+        "name": "Building schools for ethnic minorities in Vietnam",
+        "currentPrice": 17864,
+        "targetPrice": 30000,
+        "donations": 3642,
+        "description": "Wearing a mask is a critical way to prevent the spread of COVID-19. Masks and respirators, when worn consistently and correctly, are effective at reducing the transmission of SARS-CoV-2, the virus that causes COVID-19. Free N95 masks are available to pick up at local pharmacies and community health center sites across the country. Every person is allowed up to 3 free masks pending availability.",
+        "category": "Education",
+        "image": "https://images.unsplash.com/photo-1598690419800-8100e015ff2c?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
         "isFeatured": true
     },
 ]

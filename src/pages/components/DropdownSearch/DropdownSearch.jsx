@@ -7,7 +7,7 @@ import { projects } from '../Projects/projects';
 import Project from '../Projects/ProjectCard/ProjectCard';
 
 
-const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setCurrentPage, setIsSelected }) => {
+const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setCurrentPage, setIsSelected, link }) => {
   const [ inputValue, setInputValue ] = useState('');
   const [ searchParams, setSearchParams ] = useSearchParams();
   const navigate = useNavigate();
@@ -42,12 +42,20 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
       setSearchParams(searchParams);
     }
     localStorage.removeItem('searchValue');
-    setSearchQuery();
+    if (searchValue) {
+      setSearchQuery();
+      setSelectedCategory('');
+    }
     setInputValue('');
-    setSelectedCategory('');
     setIsSelected(false);
   };
 
+
+  const handleCancel = () => {
+    setInputValue('');
+    setIsSelected(false);
+    console.log('handleCancel')
+  };
 
   let searchList = useMemo(() => {
     if (inputValue) {
@@ -55,7 +63,7 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
     }
     return projects?.slice(0, 3);
   }, [inputValue]);
-
+console.log(link)
 
   return (
     <div className='dropdown-search'>
@@ -66,7 +74,7 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
               <input type='text' placeholder='Search a project...' className='search-input' value={inputValue || ''} onKeyPress={handleDirect} onChange={handleChange} />
               { inputValue?.length > 0 && <HiOutlineBackspace onClick={handleClear} className='erase-icon' />}
           </div>
-          <div className='cancel-btn' onClick={handleClear}>Cancel</div>
+          <div className='cancel-btn' onClick={() => {link !== 'Discover' ? handleCancel() : handleClear()}}>Cancel</div>
         </div>
         <ul className='search-projects'>
           { searchList.map(project => (
