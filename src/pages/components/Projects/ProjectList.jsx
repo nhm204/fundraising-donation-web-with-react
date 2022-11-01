@@ -3,9 +3,9 @@ import Header from '../../../common/Header/Header';
 import { projects } from './projects';
 import { Outlet } from 'react-router-dom';
 import './ProjectList.scss';
-import Pagination from '../Pagination/Pagination';
 import { BsSliders } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
+import Pagination from '../Pagination/Pagination';
 
 
 
@@ -14,8 +14,9 @@ const Projects = () => {
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
   const [ sortProject, setSortProject ] = useState();
+  const [ projectsPerPage, setProjectsPerPage ] = useState(9);
   const [ currentPage, setCurrentPage ] = useState(1);
-console.log(searchQuery)
+
   
   useEffect(() => { 
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
@@ -177,12 +178,12 @@ console.log(searchQuery)
           </div>
         </div>
         <div className='projects-wrapper'>
-          <Pagination projects={filteredList} currentPage={currentPage} setCurrentPage={setCurrentPage} />
+          <Pagination projects={filteredList} projectsPerPage={projectsPerPage} />
         </div>
       </div>
       <Outlet />
     </div>
-  )
+  );
 }
 
 export default Projects;

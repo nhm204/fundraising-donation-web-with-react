@@ -15,12 +15,12 @@ const renderProjects = (projects) => {
   );
 };
 
-const Pagination = ({ projects, currentPage, setCurrentPage }) => {
-  // const [currentPage, setCurrentPage] = useState(1);
-  const [projectsPerPage, setProjectsPerPage] = useState(6);
-  const [pageNumberLimit, setPageNumberLimit] = useState(5);
-  const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(5);
-  const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
+const Pagination = ({ projects, projectsPerPage }) => {
+  const [ currentPage, setCurrentPage ] = useState(1);
+  // const [ projectsPerPage, setProjectsPerPage ] = useState(9);
+  const [ pageNumberLimit, setPageNumberLimit ] = useState(5);
+  const [ maxPageNumberLimit, setMaxPageNumberLimit ] = useState(5);
+  const [ minPageNumberLimit, setMinPageNumberLimit ] = useState(0);
 
   const handleClick = (event) => {
     setCurrentPage(Number(event.target.id));

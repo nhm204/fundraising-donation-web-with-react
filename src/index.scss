@@ -25,6 +25,11 @@ body {
   border-radius: 10px;
 }
 
+::selection {
+  color: white;
+  background: var(--primary-color);
+}
+
 label {
   margin: 0;
 }
