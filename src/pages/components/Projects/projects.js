@@ -25,7 +25,7 @@ export const projects = [
     },
     {
         "id": "3",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Donate for Homeless People",
         "currentPrice": 80,
         "targetPrice": 3000,
@@ -37,7 +37,7 @@ export const projects = [
     },
     {
         "id": "4",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Food Donation",
         "currentPrice": 5000,
         "targetPrice": 5000,
@@ -61,7 +61,7 @@ export const projects = [
     },
     {
         "id": "6",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Homeless People in the UK",
         "currentPrice": 800,
         "targetPrice": 7500,
@@ -73,7 +73,7 @@ export const projects = [
     },
     {
         "id": "7",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Vaccine in Covid-19",
         "currentPrice": 8000,
         "targetPrice": 15000,
@@ -97,7 +97,7 @@ export const projects = [
     },
     {
         "id": "9",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Free Face Mask through Pandemic",
         "currentPrice": 2000,
         "targetPrice": 3000,
@@ -109,7 +109,7 @@ export const projects = [
     },
     {
         "id": "10",
-        "creatorId": "1",
+        "creatorId": "2",
         "name": "Building schools for ethnic minorities in Vietnam",
         "currentPrice": 17864,
         "targetPrice": 30000,
@@ -125,7 +125,19 @@ export const users = [
     {
         "id": "1",
         "name": "Hoang My Nguyen",
-        "avatar": "https://i.pinimg.com/originals/b1/a0/a5/b1a0a59261b607cd0ccd78a8428ca295.jpg",
+        "avatar": "https://i.pinimg.com/originals/83/95/aa/8395aa28f2c034d4b944187ea973aecd.jpg",
+        "coverBackground": "https://i.pinimg.com/originals/b0/c8/35/b0c8353d633f719a6cf45d21bc938b95.jpg",
         "bio": "4th year student at the University of Information Technology",
+        "facebook": "https://www.facebook.com/",
+        "phone": "0123456789",
+    },
+    {
+        "id": "2",
+        "name": "iammy",
+        "avatar": "https://i.pinimg.com/originals/b1/a0/a5/b1a0a59261b607cd0ccd78a8428ca295.jpg",
+        "coverBackground": "https://i.pinimg.com/originals/ae/44/01/ae4401dc31a173fe879260d111341a1c.jpg",
+        "bio": "Love pink and hate lies",
+        "facebook": "https://www.facebook.com/iammy204",
+        "phone": "0123456789",
     },
 ]

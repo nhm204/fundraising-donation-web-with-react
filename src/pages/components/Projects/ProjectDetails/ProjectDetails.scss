@@ -81,7 +81,6 @@
                 align-items: center;
                 background-color: var(--secondary-color);
                 border-radius: 20px;
-                color: black;
                 border: 5px solid #febebe;
                 user-select: none;
 
@@ -116,6 +115,7 @@
 
                 .bio {
                     margin-bottom: 70px;
+                    color: black;
                 }
             }
         }
