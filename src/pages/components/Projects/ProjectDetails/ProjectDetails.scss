@@ -88,6 +88,8 @@
                     display: flex;
                     flex-direction: column;
                     align-items: center;
+                    width: 80%;
+                    text-align: center;
 
                     &:hover h4 {
                         text-decoration: underline;
@@ -109,6 +111,10 @@
                         font-size: 2.3rem;
                         line-height: 2.5rem;
                         margin: 24px 0 20px;
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
                     }
                 }
 
@@ -295,6 +301,5 @@
                 }
             }
         }
-
     }
 }

@@ -55,7 +55,7 @@ const ProjectDetails = () => {
               <img src={fundraiser.avatar} alt={fundraiser.name} />
               <h4>{fundraiser.name}</h4>
             </Link>
-            <div className='bio'>{fundraiser.bio}</div>
+            <div className='bio'>{fundraiser.description}</div>
           </div>
         </div>
         <div className="sidebar">
@@ -66,7 +66,7 @@ const ProjectDetails = () => {
             </div>
             <progress max={100} value={progressValue} />
             <div className="count">
-              <div className="donations"><b>{project.donations}</b> donations</div>
+              <div className="donations"><b>{project.donationCount}</b> donations</div>
               <div className="to-go"><b>${project.targetPrice - project.currentPrice}</b> to go</div>
             </div>
             <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>{project.currentPrice === project.targetPrice ? 'Funded' : 'Donate'}</button>
