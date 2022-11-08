@@ -8,7 +8,7 @@ import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild } from "react-icons/
 
 
 const Fundraiser = () => {
-  const [ projectsPerPage, setProjectsPerPage ] = useState(4);
+  const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ isAllSelected, setIsAllSelected ] = useState(false);
   const paramValue = useParams();
   const fundraiserId = paramValue.id;

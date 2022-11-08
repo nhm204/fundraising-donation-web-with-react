@@ -68,7 +68,7 @@ const Pagination = ({ projects, projectsPerPage }) => {
   }
       
   return (
-    <>
+    <div className='pagination-wrapper'>
       {renderProjects(currentProjects)}
       <ul className='pagination'>
         <li>
@@ -81,7 +81,7 @@ const Pagination = ({ projects, projectsPerPage }) => {
           <button onClick={handleNextBtn} disabled={currentPage === pages[pages.length - 1] ? true : false}>Next</button>
         </li>
       </ul>
-    </>
+    </div>
   );
 }
 
