@@ -10,30 +10,81 @@ $bg-color: rgba($color: #febebe, $alpha: 1);
         width: 100vw;
         padding: 0 8vw 4vh;
 
-        .cover-bg {
-            margin: calc(var(--navbar-height) + 3vh) 0 0;
-            width: 100%;
-            height: 60vh;
-            border-radius: 10px;
-            object-fit: cover;
-            -webkit-user-drag: none;
+        .cover-bg-wrapper {
+            position: relative;
+
+            .cover-bg {
+                margin: calc(var(--navbar-height) + 3vh) 0 0;
+                width: 100%;
+                height: 60vh;
+                border-radius: 10px;
+                object-fit: cover;
+                -webkit-user-drag: none;
+            }
+
+            .edit-cover-bg-btn {
+                position: absolute;
+                right: 16px;
+                bottom: 22px;
+                display: flex;
+                align-items: center;
+                padding: 6px 12px;
+                background-color: white;
+                border-radius: 5px;
+                font-size: 1.4rem;
+                border: none;
+                font-weight: 500;
+                cursor: pointer;
+
+                .icon {
+                    margin-right: 8px;
+                    font-size: 1.6rem;
+                }
+            }
         }
-        
+
         .info-container {
+            position: relative;
             display: flex;
             justify-content: flex-start;
             margin-top: -60px;
             width: 80vw;
             padding: 0 4vw;
-    
-            .avatar {
-                width: 200px;
-                height: 200px;
-                border-radius: 50%;
-                object-fit: cover;
-                -webkit-user-drag: none;
-                outline: 6px solid var(--secondary-color);
+
+            .avatar-wrapper {
+                position: relative;
+
+                .avatar {
+                    width: 200px;
+                    height: 200px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    -webkit-user-drag: none;
+                    outline: 6px solid var(--secondary-color);
+                }
+
+                .edit-ava-btn {
+                    position: absolute;
+                    width: 36px;
+                    height: 36px;
+                    bottom: 24px;
+                    right: 4px;
+                    background-color: black;
+                    border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    cursor: pointer;
+
+                    .icon {
+                        font-size: 2.1rem;
+                        color: white;
+                        margin-right: -0.5px;
+                        margin-top: -1px;
+                    }
+                }
             }
+    
     
             .info {
                 display: flex;
@@ -46,8 +97,8 @@ $bg-color: rgba($color: #febebe, $alpha: 1);
                 div {
                     h1 {
                         color: black;
-                        font-size: 3.3rem;
-                        line-height: 3.7rem;
+                        font-size: 3.2rem;
+                        line-height: 4rem;
                         display: -webkit-box;
                         -webkit-line-clamp: 2;
                         -webkit-box-orient: vertical;
@@ -57,7 +108,7 @@ $bg-color: rgba($color: #febebe, $alpha: 1);
                     }
 
                     .id {
-                        font-size: 1.5rem;
+                        font-size: 1.4rem;
                         font-weight: 400;
                         color: black;
                         margin-bottom: 16px;
@@ -67,11 +118,28 @@ $bg-color: rgba($color: #febebe, $alpha: 1);
 
                 .bio {
                     color: black;
-                    font-size: 1.8rem;
-                    // border-bottom: 1px solid #000;
                 }
             }
     
+            .edit-profile-btn {
+                position: absolute;
+                bottom: 8px;
+                right: 0;
+                display: flex;
+                align-items: center;
+                padding: 6px 14px;
+                background-color: #febebe;
+                border-radius: 5px;
+                font-size: 1.4rem;
+                border: none;
+                font-weight: 500;
+                cursor: pointer;
+
+                .icon {
+                    margin-right: 8px;
+                    font-size: 1.6rem;
+                }
+            }
         }
     }
 
@@ -253,10 +321,6 @@ $bg-color: rgba($color: #febebe, $alpha: 1);
                     li {
                         margin: 4vh 0;
                         padding: 0 1.5vw;
-        
-                        // &:nth-child(odd) {
-                        //     padding-left: 7vw;
-                        // }
         
                         .project-wrapper {
                             width: 320px;
