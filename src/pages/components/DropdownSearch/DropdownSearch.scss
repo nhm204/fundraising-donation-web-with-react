@@ -4,7 +4,7 @@
         top: 0;
         right: 0;
         left: 0;
-        height: 70vh;
+        height: 72vh;
         background-color: white;
         z-index: 3;
         display: flex;
@@ -44,6 +44,7 @@
                     position: absolute;
                     font-size: 2.2rem;
                     right: 16px;
+                    cursor: pointer;
                 }
             }
         
@@ -56,10 +57,30 @@
             }
         }
 
+        .recent-search {
+            position: absolute;
+            top: 24%;
+            left: 4%;
+
+            h4 {
+                font-size: 1.8rem;
+                line-height: 2rem;
+                margin-bottom: 16px;
+            }
+
+            .search-keyword {
+                padding: 4px 14px;
+                background-color: #ccc;
+                border-radius: 20px;
+                margin-top: 12px;
+                width: fit-content;
+            }
+        }
+
         .search-projects {
             display: flex;
             align-items: center;
-            margin-top: 4vh;
+            margin-top: 5vh;
 
             li {
                 margin: 2vh 0;

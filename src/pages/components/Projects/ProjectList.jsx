@@ -39,7 +39,7 @@ const Projects = () => {
 
   filteredList = useMemo(() => {
     if (searchQuery) {
-      return projectList?.filter(project => project.name.toLowerCase().includes(searchQuery) || project.category.toLowerCase().includes(searchQuery)); 
+      return projectList?.filter(project => project.name.toLowerCase().includes(searchQuery.toLowerCase()) || project.category.toLowerCase().includes(searchQuery.toLowerCase())); 
     }
     return filteredList;
   }, [searchQuery, projectList, filteredList]);
