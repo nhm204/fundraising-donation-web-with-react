@@ -4,7 +4,8 @@ import { Outlet, useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../common/Header/Header';
 import { projects, users } from '../Projects/projects';
 import Pagination from '../Pagination/Pagination';
-import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild } from "react-icons/fa";
+import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild, FaCamera } from "react-icons/fa";
+import { MdEdit } from "react-icons/md";
 
 
 const Fundraiser = () => {
@@ -33,9 +34,20 @@ const Fundraiser = () => {
     <div id={fundraiserId} className='fundraiser-section'>
       <Header link={'Discover'} />
       <div className="heading-container">
-        <img src={fundraiser.coverBackground} alt="" className="cover-bg" />
+        <div className="cover-bg-wrapper">
+          <img src={fundraiser.coverBackground} alt="" className="cover-bg" />
+          <button className='edit-cover-bg-btn'>
+            <FaCamera className='icon' />
+            Edit cover image
+          </button>
+        </div>
         <div className="info-container">
-          <img src={fundraiser.avatar} alt="" className="avatar" />
+          <div className="avatar-wrapper">
+            <img src={fundraiser.avatar} alt="" className="avatar" />
+            <button className="edit-ava-btn">
+              <FaCamera className='icon' />
+            </button>
+          </div>
           <div className="info">
             <div>
             <h1>{fundraiserName}</h1>
@@ -43,6 +55,10 @@ const Fundraiser = () => {
             </div>
               <i className="bio">{fundraiser.description}</i>
           </div>
+          <button className="edit-profile-btn">
+            <MdEdit className='icon' />
+            Edit profile
+          </button>
         </div>
       </div>
       <div className="body-container">
