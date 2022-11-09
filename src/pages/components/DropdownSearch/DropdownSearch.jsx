@@ -9,6 +9,7 @@ import Project from '../Projects/ProjectCard/ProjectCard';
 
 const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setCurrentPage, setIsSelected, link }) => {
   const [ inputValue, setInputValue ] = useState('');
+  const [ recentSearch, setRecentSearch ] = useState([]);
   const [ searchParams, setSearchParams ] = useSearchParams();
   const navigate = useNavigate();
 
@@ -24,7 +25,15 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
     }
   }
 
+  // useEffect(() => {
+  //   const data = window.localStorage.getItem('history');
+  //   if ( data !== null ) setRecentSearch(JSON.parse(data));
+  // }, [])
   useEffect(() => setInputValue(searchValue), [searchValue]);
+  // useEffect(() => {
+  //   recentSearch.push(inputValue);
+  //   localStorage.setItem('history', JSON.stringify(recentSearch));
+  // }, [inputValue, recentSearch])
 
   const handleChange = (e) => {
     setInputValue(e.target.value);
@@ -47,15 +56,8 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
       setSelectedCategory('');
     }
     setInputValue('');
-    setIsSelected(false);
   };
 
-
-  const handleCancel = () => {
-    setInputValue('');
-    setIsSelected(false);
-    console.log('handleCancel')
-  };
 
   let searchList = useMemo(() => {
     if (inputValue) {
@@ -63,8 +65,8 @@ const DropdownSearch = ({ setSearchQuery, searchValue, setSelectedCategory, setC
     }
     return projects?.slice(0, 3);
   }, [inputValue]);
-console.log(link)
 
+  
   return (
     <div className='dropdown-search'>
       <div className='searchbar-wrapper'>
@@ -74,7 +76,15 @@ console.log(link)
               <input type='text' placeholder='Search a project...' className='search-input' value={inputValue || ''} onKeyPress={handleDirect} onChange={handleChange} />
               { inputValue?.length > 0 && <HiOutlineBackspace onClick={handleClear} className='erase-icon' />}
           </div>
-          <div className='cancel-btn' onClick={() => {link !== 'Discover' ? handleCancel() : handleClear()}}>Cancel</div>
+          <div 
+            className='cancel-btn' 
+            onClick={() => {
+              handleClear();
+              setIsSelected(false);
+            }}
+          >
+            Cancel
+          </div>
         </div>
         <ul className='search-projects'>
           { searchList.map(project => (

@@ -20,7 +20,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
       window.removeEventListener('scroll', handleScroll)
     }
   }, []);
-  console.log(link)
+  console.log(isSelected)
 
 
   return (
