@@ -5,7 +5,7 @@ import { BsSearch } from "react-icons/bs";
 import { DropdownSearch } from '../../pages/components';
 
 
-const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCurrentPage }) => {
+const Header = ({ link, searchQuery, changeData }) => {
   const [ navSelected, setNavSelected ] = useState(link);
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [ isSelected, setIsSelected ] = useState(false);
@@ -30,7 +30,7 @@ const Header = ({ link, setSearchQuery, searchValue, setSelectedCategory, setCur
             <BsSearch className='icon' />
             Search
           </div>
-          {isSelected && <DropdownSearch setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchValue} setCurrentPage={setCurrentPage} setIsSelected={setIsSelected} link={'Discover'} />}
+          {isSelected && <DropdownSearch searchQuery={searchQuery} changeData={changeData} setIsSelected={setIsSelected} link={link} />}
           <Link to='/' className={navSelected === 'Home' ? 'nav-link active' : 'nav-link'} onClick={() => setNavSelected('Home')}>Home</Link>
           <Link to='/discover' className={navSelected === 'Discover' ? 'nav-link active' : 'nav-link'} onClick={() => setNavSelected('Discover')}>Discover</Link>
         </div>

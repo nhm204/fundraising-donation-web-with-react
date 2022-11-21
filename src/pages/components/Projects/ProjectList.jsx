@@ -105,9 +105,16 @@ const Projects = () => {
   }
 
 
+  const changeData = (childSearchQuery, childSeletedCategory, childCurrentPage) => {
+    setSearchQuery(childSearchQuery);
+    setSelectedCategory(childSeletedCategory);
+    setCurrentPage(childCurrentPage);
+  }
+
+
   return (
     <div className='discover'>
-      <Header setSearchQuery={setSearchQuery} setSelectedCategory={setSelectedCategory} searchValue={searchQuery} link={'Discover'} setCurrentPage={setCurrentPage} />
+      <Header searchQuery={searchQuery} link={'Discover'} changeData={changeData} />
       <div className='filter-projects'>
         <label htmlFor='mobile-filter' className='mobile-filter-btn'>
           <span>Filter</span>
