@@ -6,10 +6,11 @@ import './ProjectList.scss';
 import { BsSliders } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
-
+import axios from 'axios';
 
 
 const Projects = () => {
+  // const [ projectList, setProjectList ] = useState([]);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
@@ -21,6 +22,16 @@ const Projects = () => {
   useEffect(() => { 
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
     window.scrollTo(0, 0); 
+
+    // const fetchData = async () => {
+    //   const res = await axios(
+    //     `https://betterworld-doan.herokuapp.com/api/projects`,
+    //   );
+
+    //   setProjectList(res.data);
+    // };
+
+    // fetchData();
   }, []);
 
   const projectList = projects?.map((project) => project);
