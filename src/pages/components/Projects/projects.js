@@ -135,7 +135,6 @@ export const users = [
     {
         "id": "1",
         "email": "19521862@gm.uit.edu.vn",
-        "password": "",
         "name": "The Team 01 Charity - Vietnam 1st Charity site for helping the community for the better world",
         "avatar": "https://i.pinimg.com/originals/83/95/aa/8395aa28f2c034d4b944187ea973aecd.jpg",
         "coverBackground": "https://i.pinimg.com/originals/b0/c8/35/b0c8353d633f719a6cf45d21bc938b95.jpg",
@@ -148,7 +147,6 @@ export const users = [
     {
         "id": "2",
         "email": "19521862@gm.uit.edu.vn",
-        "password": "",
         "name": "iammy",
         "avatar": "https://i.pinimg.com/originals/b1/a0/a5/b1a0a59261b607cd0ccd78a8428ca295.jpg",
         "coverBackground": "https://i.pinimg.com/originals/ae/44/01/ae4401dc31a173fe879260d111341a1c.jpg",

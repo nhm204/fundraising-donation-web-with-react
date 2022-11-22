@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
-import SignIn from "./common/SignIn/SignIn";
+import { SignIn, SignUp } from "./common";
 import { Fundraiser, ProjectDetails, ProjectList } from "./pages/components";
 import Home from "./pages/Home";
 
@@ -18,6 +18,7 @@ function App() {
           <Route path=':name/:id' element={<Fundraiser />} />
         </Route>
         <Route path='/signin' element={<SignIn />} />
+        <Route path='/signup' element={<SignUp />} />
 
         {/* <Route path="/create" element={<Owner />} />
         <Route path="/checkout/" element={<CheckOut />} /> */}

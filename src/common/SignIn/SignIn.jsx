@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import './SignIn.scss';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -13,7 +13,7 @@ const SignIn = () => {
   const [ passwordValue, setPasswordValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate();
+
 
   const onSubmit = async (data) => {
     if (login) {
@@ -21,7 +21,12 @@ const SignIn = () => {
     } 
   }
 
-  console.log(emailValue)
+
+  useEffect(() => { 
+    document.title = `Sign In | BetterWorld: #1 for Donation and Fundraising Platform`;
+    window.scrollTo(0, 0); 
+  }, []);
+
 
   return (
     <div className='signin'>
