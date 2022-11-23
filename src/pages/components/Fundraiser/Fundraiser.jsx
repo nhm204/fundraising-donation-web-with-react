@@ -36,7 +36,7 @@ const Fundraiser = () => {
       <div className="heading-container">
         <div className="cover-bg-wrapper">
           <img src={fundraiser.coverBackground} alt="" className="cover-bg" />
-          <button className='edit-cover-bg-btn'>
+          <button onClick={() => navigate(`${fundraiserName}/${fundraiserId}/edit`)} className='edit-cover-bg-btn'>
             <FaCamera className='icon' />
             Edit cover image
           </button>
@@ -44,7 +44,7 @@ const Fundraiser = () => {
         <div className="info-container">
           <div className="avatar-wrapper">
             <img src={fundraiser.avatar} alt="" className="avatar" />
-            <button className="edit-ava-btn">
+            <button onClick={() => navigate(`${fundraiserName}/${fundraiserId}/edit`)} className="edit-ava-btn">
               <FaCamera className='icon' />
             </button>
           </div>
@@ -55,7 +55,7 @@ const Fundraiser = () => {
             </div>
               <i className="bio">{fundraiser.description}</i>
           </div>
-          <button className="edit-profile-btn">
+          <button onClick={() => navigate(`${fundraiserName}/${fundraiserId}/edit`)} className="edit-profile-btn">
             <MdEdit className='icon' />
             Edit profile
           </button>

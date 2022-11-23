@@ -10,7 +10,7 @@ const Project = ({ project }) => {
       navigate(`/discover/${project.name}/${project.id}`)
     } 
     else {
-      navigate(`/donate/${project.name}/${project.id}`)
+      navigate(`/discover/${project.name}/${project.id}/donate`)
     }
   }
 

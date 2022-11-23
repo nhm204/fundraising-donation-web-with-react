@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import Header from '../common/Header/Header';
+import { Header } from '../common';
 import { Banner1 } from './components/Banner/Banner';
 import { Banner, FeaturedProjects } from './components/index.jsx';
 import { projects } from './components/Projects/projects';

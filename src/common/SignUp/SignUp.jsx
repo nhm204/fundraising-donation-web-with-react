@@ -54,18 +54,18 @@ const SignUp = () => {
         <div className='input-group'>
           <div className="info">
             <label className=''>
-                <input
+              <input
                 required
                 type='text'
                 className='name'
                 onChange={e => setNameValue(e.target.value)}
                 onFocus={() => setIsNameFocus(true)}
                 onBlur={() => setIsNameFocus(false)}
-                />
-                <span className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder' : 'active' }`}>Name</span>
+              />
+              <span className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder' : 'active' }`}>Name</span>
             </label>
             <label className=''>
-                <input
+              <input
                 type='tel'
                 className='phone'
                 {...register('phone number', { 
@@ -81,8 +81,8 @@ const SignUp = () => {
                 onChange={e => setPhoneValue(e.target.value)}
                 onFocus={() => setIsPhoneFocus(true)}
                 onBlur={() => setIsPhoneFocus(false)}
-                />
-                <span className={`${(!isPhoneFocus && phoneValue?.length === 0) ? 'placeholder' : 'active' }`}>Phone number</span>
+              />
+              <span className={`${(!isPhoneFocus && phoneValue?.length === 0) ? 'placeholder' : 'active' }`}>Phone number</span>
             </label>
           </div>
           <label className=''>

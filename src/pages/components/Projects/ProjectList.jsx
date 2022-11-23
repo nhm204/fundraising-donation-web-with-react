@@ -1,12 +1,11 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import Header from '../../../common/Header/Header';
 import { projects } from './projects';
 import { Outlet } from 'react-router-dom';
 import './ProjectList.scss';
 import { BsSliders } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
-import axios from 'axios';
+import { Header } from '../../../common';
 
 
 const Projects = () => {
@@ -23,17 +22,17 @@ const Projects = () => {
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
     window.scrollTo(0, 0); 
 
-    // const fetchData = async () => {
-    //   const res = await axios(
-    //     `https://betterworld-doan.herokuapp.com/api/projects`,
-    //   );
-
-    //   setProjectList(res.data);
-    // };
-
-    // fetchData();
+    // fetch(`https://betterworld-doan.herokuapp.com/api/projects`)
+    //   .then(res => res.json())
+    //   .then((res) => {
+    //     setProjectList(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }, []);
 
+  // console.log(projectList)
   const projectList = projects?.map((project) => project);
 
   let filteredList = projectList;
