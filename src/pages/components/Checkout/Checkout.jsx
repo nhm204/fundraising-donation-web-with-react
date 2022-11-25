@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './Checkout.scss';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { projects, users } from '../Projects/projects';
 import { BsChevronLeft } from 'react-icons/bs';
 import { FaDollarSign } from 'react-icons/fa';
@@ -47,7 +47,7 @@ const Checkout = () => {
     //   .catch((err) => {
     //     console.log(err.message);
     //   });
-  }, [project?.name]);
+  }, [project?.name, projectId]);
 
 console.log(donationAmount)
 

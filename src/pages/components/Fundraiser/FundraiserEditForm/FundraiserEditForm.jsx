@@ -31,7 +31,6 @@ const FundraiserEditForm = ({ fundraiser, setIsEdit }) => {
   }
 
 
-
   return (
     <div className='fundraiser-edit'>
       <form onSubmit={handleSubmit(onSubmit)} className='edit-form'>
