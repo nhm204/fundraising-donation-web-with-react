@@ -15,7 +15,7 @@ const Home = () => {
   return (
     <div className='home'>
       <Header link={'Home'} />
-      <Banner />
+      <Banner projects={projects} />
       <FeaturedProjects projects={projects} />
       <Banner1 />
     </div>

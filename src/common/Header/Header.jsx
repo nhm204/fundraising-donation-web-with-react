@@ -39,9 +39,9 @@ const Header = ({ link, searchQuery, changeData }) => {
         </Link>
         <div className="right-side">
           <Link to='/signin' className='nav-link'>Sign in</Link>
-          <button className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>
+          <Link to='/create/fundraiser/regform' className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>
             Start a Fundraising
-          </button>
+          </Link>
         </div>
       </nav>
     </header>

@@ -8,3 +8,5 @@ export { default as ProjectDetails } from './Projects/ProjectDetails/ProjectDeta
 export { default as Fundraiser } from './Fundraiser/Fundraiser';
 export { default as FundraiserEditForm } from './Fundraiser/FundraiserEditForm/FundraiserEditForm';
 export { default as Checkout } from './Checkout/Checkout';
+export { default as StartFundraising } from './CreateProject/StartFundraising/StartFundraising';
+// export { default as CreateProject } from './CreateProject/CreateProject';
