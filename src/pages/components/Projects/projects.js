@@ -139,7 +139,7 @@ export const users = [
         "avatar": "https://i.pinimg.com/originals/83/95/aa/8395aa28f2c034d4b944187ea973aecd.jpg",
         "coverBackground": "https://i.pinimg.com/originals/b0/c8/35/b0c8353d633f719a6cf45d21bc938b95.jpg",
         "description": "4th year student at the University of Information Technology",
-        "phone": "0123456789",
+        "phoneNumber": "0123456789",
         "facebook": "https://www.facebook.com/",
         "twitter": "https://twitter.com/",
         "createAt": "2022-10-30"
@@ -147,11 +147,11 @@ export const users = [
     {
         "id": "2",
         "email": "19521862@gm.uit.edu.vn",
-        "name": "iammy",
+        "name": "iammy 🐰",
         "avatar": "https://i.pinimg.com/originals/b1/a0/a5/b1a0a59261b607cd0ccd78a8428ca295.jpg",
         "coverBackground": "https://i.pinimg.com/originals/ae/44/01/ae4401dc31a173fe879260d111341a1c.jpg",
         "description": "Love pink and hate lies",
-        "phone": "0123456789",
+        "phoneNumber": "0123456789",
         "facebook": "https://www.facebook.com/iammy204",
         "twitter": "",
         "createAt": "2022-11-03"

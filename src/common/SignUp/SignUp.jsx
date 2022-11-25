@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import './SignUp.scss';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { BsCircleFill, BsCheck2 } from "react-icons/bs";
+import PasswordGuidance from '../PasswordGuidance/PasswordGuidance';
 
 
 const SignUp = () => {
@@ -32,14 +32,6 @@ const SignUp = () => {
   }, []);
 
 
-  const isValidLength = /^.{6,60}$/;
-  const isWhitespace = /^(?=.*\s)/;
-  const isContainsUppercase = /^(?=.*[A-Z])/;
-  const isContainsLowercase = /^(?=.*[a-z])/;
-  const isContainsNumber = /^(?=.*[0-9])/;
-  const isContainsSymbol = /^(?=.*[~`!@#$%^&*()--+={}\[\]|\\:;"'<>,.?/_₹])/;
-
-
   return (
     <div className='signup'>
       <header>
@@ -58,31 +50,56 @@ const SignUp = () => {
                 required
                 type='text'
                 className='name'
+                {...register('name', { 
+                  required: {
+                    value: true, 
+                    message: 'Name is required!'
+                  }, 
+                  minLength: {
+                    value: 1,
+                    message: 'Your name must contain between 1 and 100 characters.'
+                  },
+                  maxLength: {
+                    value: 100,
+                    message: 'Your name must contain between 1 and 100 characters.'
+                  }
+                })}
                 onChange={e => setNameValue(e.target.value)}
                 onFocus={() => setIsNameFocus(true)}
                 onBlur={() => setIsNameFocus(false)}
               />
               <span className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder' : 'active' }`}>Name</span>
+              { errors.name?.message && (
+                <p className='error-msg'>
+                  {errors.name?.message}
+                </p>
+              )}
             </label>
             <label className=''>
               <input
+                required
                 type='tel'
                 className='phone'
-                {...register('phone number', { 
-                    required: {
+                {...register('phonenumber', { 
+                  required: {
                     value: true, 
                     message: 'Phone number is required!'
-                    }, 
-                    length: {
+                  }, 
+                  length: {
                     value: 10,
                     message: 'Your phone number must contain 10 characters.'
-                    },
+                  },
                 })}
                 onChange={e => setPhoneValue(e.target.value)}
                 onFocus={() => setIsPhoneFocus(true)}
                 onBlur={() => setIsPhoneFocus(false)}
               />
               <span className={`${(!isPhoneFocus && phoneValue?.length === 0) ? 'placeholder' : 'active' }`}>Phone number</span>
+              { errors.phonenumber?.message && (
+              <p className='error-msg'>
+                {errors.phonenumber?.message}
+              </p>
+            )}
             </label>
           </div>
           <label className=''>
@@ -140,34 +157,7 @@ const SignUp = () => {
               </p>
             )}
           </label>
-          { isPasswordFocus && (<div className="guidance">
-            <h5>Your password must have:</h5>
-            <div className={`${(passwordValue.length > 0 && isValidLength.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && isValidLength.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>Between 6 and 60 characters</span>
-            </div>
-            <div className={`${(passwordValue.length > 0 && !isWhitespace.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && !isWhitespace.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>No whitespaces</span>
-            </div>
-            <div className={`${(passwordValue.length > 0 && isContainsUppercase.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && isContainsUppercase.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>1 uppercase letter</span>
-            </div>
-            <div className={`${(passwordValue.length > 0 && isContainsLowercase.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && isContainsLowercase.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>1 lowercase letter</span>
-            </div>
-            <div className={`${(passwordValue.length > 0 && isContainsNumber.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && isContainsNumber.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>1 number</span>
-            </div>
-            <div className={`${(passwordValue.length > 0 && isContainsSymbol.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
-              { (passwordValue.length > 0 && isContainsSymbol.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-              <span>1 symbol</span>
-            </div>
-          </div>
-          )}
+          { (isPasswordFocus || passwordValue.length > 0) && <PasswordGuidance passwordValue={passwordValue} />}
         </div>
         <button 
           className='signup-btn' 

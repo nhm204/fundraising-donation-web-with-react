@@ -1,4 +1,5 @@
 .fundraiser-section {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,6 +19,7 @@
                 border-radius: 10px;
                 object-fit: cover;
                 -webkit-user-drag: none;
+                background-color: black;
             }
 
             .edit-cover-bg-btn {
@@ -32,6 +34,7 @@
                 font-size: 1.4rem;
                 border: none;
                 font-weight: 500;
+                z-index: 2;
                 cursor: pointer;
 
                 .icon {
@@ -58,6 +61,7 @@
                     border-radius: 50%;
                     object-fit: cover;
                     -webkit-user-drag: none;
+                    background-color: black;
                     outline: 6px solid var(--secondary-color);
                 }
 
@@ -264,7 +268,7 @@
                     cursor: pointer;
                     color: black;
                     padding: 16px 24px;
-                    border: 4px solid #ccc;
+                    border: 4px solid black;
                     border-radius: 20px;
                     border-bottom-left-radius: 0;
                     border-bottom-right-radius: 0;
@@ -306,7 +310,7 @@
             // }
 
             .pagination-wrapper {
-                border: 4px solid #ccc;
+                border: 4px solid black;
                 border-radius: 20px;
                 border-top-left-radius: 0;
 
@@ -346,9 +350,19 @@
         }
     }
 
+    .edit-overlay {
+        position: fixed;
+        right: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba($color: black, $alpha: 0.5);
+        // animation: fadeIn linear 0.3s;
+        z-index: 100;
+    }
+}
 
-
-
-    
-
+.is-fundraiser-edit {
+    height: 100vh;
+    overflow: hidden;
 }

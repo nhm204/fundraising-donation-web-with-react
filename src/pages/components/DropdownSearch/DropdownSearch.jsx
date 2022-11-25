@@ -101,11 +101,7 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
                 <button 
                   className='search-keyword'
                   onClick={() => {
-                    // link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
-                    if (link !== 'Discover') {
-                      
-                    }
-                    setSearchParams({search: search})
+                    link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
                     changeData(search);
                     setInputValue(search);
                     console.log(inputValue)
