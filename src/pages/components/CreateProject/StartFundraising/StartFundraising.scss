@@ -1,0 +1,140 @@
+.start-fundraising {
+    display: flex;
+    align-items: center;
+    background-color: rgba($color: #febebe, $alpha: 0.25);
+
+    .left {
+        height: 100vh;
+        width: 34vw;
+        padding: 8vh 3vw;
+
+        .logo-wrapper {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            .logo {
+                margin-top: 2px;
+                width: 24px;
+                height: 22px;
+            }
+        }
+
+        h1 {
+            font-size: 2.9rem;
+            line-height: 3.9rem;
+            font-weight: 400;
+            margin: 18vh 0 4vh;
+        }
+
+        .desc {
+            font-weight: 300;
+            font-size: 1.5rem;
+            line-height: 2.3rem;
+        }
+    }
+
+    .right {
+        height: 100vh;
+        width: 66vw;
+        background-color: white;
+        border-top-left-radius: 60px;
+        box-shadow: 1.8rem 0.25rem 3.5rem var(--primary-color);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 8vh 12vw 4vh;
+
+        .sign-in-btn {
+            color: var(--text-color);
+            align-self: flex-end;
+            margin-right: -4vw;
+        }
+
+        .create-form {
+            width: 100%;
+            margin-top: 8vh;
+
+            label {
+                position: relative;
+                margin-top: 28px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+
+                .placeholder-container {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    position: absolute;
+                    left: 4px;
+                    right: 4px;
+                    color: #ccc;
+
+                    .placeholder {
+                        padding: 0 4px;
+                        background-color: white;
+                        transition: top ease-out 0.2s;
+                    }
+    
+                    .is-focus {
+                        color: var(--primary-color);
+                    }
+
+                    .quantity {
+                        font-size: 1.2rem;
+                        line-height: 1.2rem;
+                        color: #ccc;
+                        font-weight: 300;
+                    }
+                }
+
+                .active {
+                    color: black;
+                    font-size: 1.2rem;
+                    line-height: 1.2rem;
+                    top: 6px;
+                }
+
+                input {
+                    height: 56px;
+                }
+
+                .edit-input {
+                    font-size: 1.6rem;
+                    width: 100%;
+                    padding: 0 8px;
+                    color: var(--text-color);
+                    border-radius: 5px;
+                    border: none;
+                    outline: 1px solid #ccc;
+                    background-color: transparent;
+                    font-family: inherit;
+
+                    &:focus {
+                        outline: 3px solid var(--primary-color);
+                    }
+                }
+
+                .input-has-value {
+                    padding: 24px 8px 0;
+                }
+
+                .error-msg {
+                    color: red;
+                    font-size: 1.2rem;
+                }
+
+                textarea {
+                    font-family: inherit;
+                    font-weight: 300;
+                    height: unset;
+                }
+            }
+        }
+    }
+}

@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './Banner.scss';
 import { HiVolumeOff, HiVolumeUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 
-const MainBanner = () => {
+const MainBanner = ({ projects }) => {
+  const [ project, setProject ] = useState();
+
+  let featuredList = projects?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
+
+  
+  useEffect(() => {
+    setProject(featuredList[Math.floor(Math.random() * featuredList.length)]);
+  }, []);
+  
+  console.log(project)
+
   return (
     <div className='main-banner'>
       <div className="desc">
         <h1>Your donation</h1>
         <h1>make a difference.</h1>
-        <button className='donate-btn'>Donate now</button>
+        <Link to={`/discover/${project?.name}/${project?.id}`}>
+          <button className='donate-btn'>Donate now</button>
+        </Link>
         <Link to='/discover'>
           <button className='discover-btn'>Discover</button>
         </Link>

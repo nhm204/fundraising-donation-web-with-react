@@ -6,6 +6,7 @@ import { BsSliders } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
 import { Header } from '../../../common';
+import { categories } from '../../../constants/categories';
 
 
 const Projects = () => {
@@ -157,16 +158,10 @@ const Projects = () => {
           </div>
           <span className='title'>Purpose</span>
           <div className='selection'>
-            <div className={selectedCategory === 'Education' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Education')}>Education</div>
-            <div className={selectedCategory === 'Poverty' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Poverty')}>Poverty</div>
-            <div className={selectedCategory === 'Food Banks' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Food Banks')}>Food Banks</div>
-            <div className={selectedCategory === 'Disaster & Crisis' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Disaster & Crisis')}>Disaster & Crisis</div>
-            <div className={selectedCategory === 'Homelessness' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Homelessness')}>Homelessness</div>
-            <div className={selectedCategory === 'Disability' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Disability')}>Disability</div>
-            <div className={selectedCategory === 'Health & Medical' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Health & Medical')}>Health &amp; Medical</div>
-            <div className={selectedCategory === 'Animals & Pets' ? 'option active' : 'option'} onClick={() => setSelectedCategory('Animals & Pets')}>Animals &amp; Pets</div>
+            { categories.map(category => (
+              <div className={selectedCategory === category ? 'option active' : 'option'} onClick={() => setSelectedCategory(category)}>{category}</div>
+            ))}
           </div>
-
           <span className='price'>Price: <span style={{ color: "var(--primary-color)" }}>${selectedPrice}</span></span>
           <div className='price-container'>
             <input 

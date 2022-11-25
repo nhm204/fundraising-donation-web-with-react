@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.scss";
 import { SignIn, SignUp } from "./common";
-import { Checkout, Fundraiser, FundraiserEditForm, ProjectDetails, ProjectList } from "./pages/components";
+import { Checkout, Fundraiser, ProjectDetails, ProjectList, StartFundraising } from "./pages/components";
 import Home from "./pages/Home";
 import { PayPalScriptProvider } from '@paypal/react-paypal-js';
 
@@ -22,6 +22,7 @@ function App() {
           </Route>
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/create/fundraiser/regform' element={<StartFundraising />} />
         </Routes>
       </BrowserRouter>
     </PayPalScriptProvider>
