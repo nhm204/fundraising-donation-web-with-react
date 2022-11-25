@@ -1,0 +1,214 @@
+.checkout {
+    background-color: #febebe;
+    height: 100vh;
+
+    header {
+        position: fixed;
+        top: 0;
+        right: 0;
+        left: 0;
+        z-index: 99;
+        background-color: white;
+        height: var(--navbar-height);
+        display: flex;
+        padding: 0 12vw;
+        align-items: center;
+        justify-content: space-between;
+        user-select: none;
+        border-bottom: 1px solid #ccc;
+
+        .logo {
+            font-size: 2.8rem;
+            font-weight: 700;
+            color: var(--primary-color);
+        }
+
+        .text {
+            font-size: 1.5rem;
+            font-weight: 300;
+
+            .nav-link {
+                margin-left: 6px;
+                color: var(--primary-color);
+                text-decoration: underline;
+            }
+        }
+    }
+
+    .checkout-body {
+        padding: calc(var(--navbar-height) + 8vh) 16vw 6vh;
+        display: flex;
+        justify-content: space-between;
+
+        .left {
+            width: 48vw;
+            padding: 40px 3vw;
+            border-radius: 10px;
+            background-color: white;
+            box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+
+            .back-btn {
+                background-color: white;
+                padding: 4px 16px;
+                border-radius: 5px;
+                display: flex;
+                align-items: center;
+                border: none;
+                outline: 1px solid#ccc;
+                cursor: pointer;
+    
+                .icon {
+                    font-size: 1.6rem;
+                    margin-right: 8px;
+                }
+
+                &:hover {
+                    background-color: #f9f9f9;
+                }
+            }
+
+            .project-info {
+                display: flex;
+                align-items: center;
+                margin-top: 30px;
+
+                img {
+                    height: 14vh;
+                    width: 10vw;
+                    object-fit: cover;
+                    background-color: #ccc;
+                    margin-right: 20px;
+                }
+
+                .content {
+                    .title {
+                        font-weight: 300;
+
+                        span {
+                            font-weight: 600;
+                        }
+                    }
+
+                    .fundraiser {
+                        font-size: 1.4rem;
+                        font-weight: 300;
+                        color: #767676;
+                        margin-top: 4px;
+
+                        span {
+                            font-weight: 600;
+                        }
+                    }
+                }
+            }
+
+            .donation-section {
+                display: flex;
+                flex-direction: column;
+                margin-top: 40px;
+
+                label {
+                    font-weight: 600;
+                    margin-bottom: 8px;
+                }
+
+                .input-field {
+                    display: flex;
+                    align-items: center;
+                    height: 80px;
+                    outline: 1px solid #ccc;
+                    border-radius: 12px;
+                    padding: 0 16px;
+
+                    .currency {
+                        display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        font-weight: 600;
+                        margin-right: 8px;
+
+                        .icon {
+                            font-size: 2.4rem;
+                            margin-bottom: 12px;
+                        }
+
+                        div {
+                            line-height: 1.6rem;
+                        }
+                    }
+
+                    .amount-input {
+                        font-size: 4rem;
+                        font-weight: 600;
+                        height: 50px;
+                        width: 100%;
+                        text-align: end;
+                        color: var(--text-color);
+                        border: none;
+                        outline: none;
+    
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
+
+                    .text {
+                        font-size: 4rem;
+                        font-weight: 600;
+                    }
+                }
+
+                .focus {
+                    outline: 2px solid black;
+                }
+            }
+
+            .payment-title {
+                margin: 40px 0;
+                font-weight: 600;
+                padding-top: 20px;
+                border-top: 1px solid #ccc;
+            }
+
+            .payment-section {
+                padding: 0 8vw;
+            }
+        }
+        
+        .right {
+            width: 18vw;
+            border-radius: 10px;
+            box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            height: fit-content;
+            background-color: white;
+
+            h3 {
+                font-size: 1.8rem;
+                margin-bottom: 20px;
+                color: var(--primary-color);
+            }
+
+            .donate-price, .total-price {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+
+                div {
+                    padding: 6px 0;
+                    color: #767676;
+                }
+            }
+
+            .total-price {
+                padding-top: 20px;
+                margin-top: 12px;
+                border-top: 1px solid #ccc;
+            }
+        }
+    }
+}

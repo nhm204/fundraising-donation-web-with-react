@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Router, useNavigate, useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import './DropdownSearch.scss';
 import { BsSearch } from 'react-icons/bs';
 import { HiOutlineBackspace } from 'react-icons/hi';
@@ -101,11 +101,7 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
                 <button 
                   className='search-keyword'
                   onClick={() => {
-                    // link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
-                    if (link !== 'Discover') {
-                      
-                    }
-                    setSearchParams({search: search})
+                    link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
                     changeData(search);
                     setInputValue(search);
                     console.log(inputValue)
