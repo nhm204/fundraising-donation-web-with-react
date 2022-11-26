@@ -48,16 +48,34 @@
         flex-direction: column;
         align-items: center;
         padding: 8vh 12vw 4vh;
+        overflow: scroll;
 
-        .sign-in-btn {
-            color: var(--text-color);
-            align-self: flex-end;
-            margin-right: -4vw;
+        nav {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+
+            .sign-in-btn {
+                color: var(--text-color);
+                align-self: flex-end;
+                margin-right: -4vw;
+                padding: 12px 18px;
+                border: none;
+                border-radius: 10px;
+                background-color: white;
+                font-weight: 300;
+                cursor: pointer;
+
+                &:hover {
+                    background-color: #f8f8f8;
+                }
+            }
         }
+
 
         .create-form {
             width: 100%;
-            margin-top: 8vh;
+            padding-top: 8vh;
 
             label {
                 position: relative;
@@ -66,17 +84,29 @@
                 display: flex;
                 align-items: center;
 
+                .tag {
+                    position: absolute;
+                    top: 15px;
+                    right: 12px;
+                    font-weight: 600;
+                    padding: 4px 8px;
+                    background-color: #f1f1f1;
+                    border-radius: 20px;
+                    line-height: 1.8rem;
+                    width: 48px;
+                }
+
                 .placeholder-container {
                     display: flex;
                     align-items: center;
                     justify-content: space-between;
                     position: absolute;
                     left: 4px;
-                    right: 4px;
+                    right: 8px;
                     color: #ccc;
 
                     .placeholder {
-                        padding: 0 4px;
+                        padding: 0 8px;
                         background-color: white;
                         transition: top ease-out 0.2s;
                     }
@@ -88,7 +118,7 @@
                     .quantity {
                         font-size: 1.2rem;
                         line-height: 1.2rem;
-                        color: #ccc;
+                        color: var(--primary-color);
                         font-weight: 300;
                     }
                 }
@@ -99,29 +129,39 @@
                     line-height: 1.2rem;
                     top: 6px;
                 }
-
-                input {
-                    height: 56px;
-                }
-
+                
                 .edit-input {
+                    height: 56px;
                     font-size: 1.6rem;
                     width: 100%;
-                    padding: 0 8px;
+                    padding: 0 12px;
                     color: var(--text-color);
-                    border-radius: 5px;
+                    border-radius: 10px;
                     border: none;
                     outline: 1px solid #ccc;
                     background-color: transparent;
                     font-family: inherit;
 
                     &:focus {
-                        outline: 3px solid var(--primary-color);
+                        outline: 1px solid var(--primary-color);
+                    }
+                }
+
+                .amount-input {
+
+                    &::-webkit-outer-spin-button,
+                    &::-webkit-inner-spin-button {
+                        -webkit-appearance: none;
+                        margin: 0;
                     }
                 }
 
                 .input-has-value {
-                    padding: 24px 8px 0;
+                    padding: 24px 12px 0;
+                }
+
+                .amount-has-value {
+                    padding: 24px 60px 0 12px;
                 }
 
                 .error-msg {
@@ -129,11 +169,104 @@
                     font-size: 1.2rem;
                 }
 
-                textarea {
+                textarea.edit-input {
                     font-family: inherit;
                     font-weight: 300;
                     height: unset;
                 }
+
+
+            }
+
+            .category-label {
+                flex-direction: column;
+                margin-top: 60px;
+                align-items: flex-start;
+
+                .selection {
+                    display: flex;
+                    align-items: center;
+                    flex-wrap: wrap;
+                    margin-top: 16px;
+
+                    .option {
+                        padding: 8px 12px;
+                        border: 1px solid #ccc;
+                        border-radius: 20px;
+                        margin-right: 8px;
+                        font-weight: 300;
+                        line-height: 2rem;
+
+                        &:hover {
+                            margin-left: 0;
+                        }
+                    }
+
+                    .active {
+                        font-size: 1.6rem;
+                        border-color: var(--primary-color);
+                        background-color: rgba($color: #febebe, $alpha: 0.25);
+                    }
+                }
+            }
+
+            .target-amount {
+                margin-top: 60px;
+            }
+
+            .checkbox-container {
+                cursor: pointer;
+
+                input {
+                    position: absolute;
+                    opacity: 0;
+                    cursor: pointer;
+                    height: 0;
+                    width: 0;
+                }
+
+                .checkmark {
+                    position: absolute;
+                    top: 3px;
+                    left: 0;
+                    height: 14px;
+                    width: 14px;
+                    border-radius: 3px;
+                    border: 1px solid black;
+                    background-color: white;
+
+                    .icon {
+                        position: absolute;
+                        top: -3px;
+                        left: -4px;
+                        color: black;
+                        font-size: 1.9rem;
+                    }
+                }
+
+                input:checked ~ .checkmark {
+                    background-color: var(--primary-color);
+                }
+
+                .title {
+                    margin-left: 24px;
+                }
+            }
+
+            .tips {
+                font-size: 1.3rem;
+                line-height: 1.6rem;
+                color: #767676;
+                margin-top: 4px;
+            }
+
+            .payment-section {
+                margin-top: 60px;
+            }
+
+            .is-paid {
+                margin-top: 40px;
+                font-weight: 500;
             }
         }
     }
