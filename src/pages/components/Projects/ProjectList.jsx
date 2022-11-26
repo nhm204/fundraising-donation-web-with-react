@@ -158,8 +158,8 @@ const Projects = () => {
           </div>
           <span className='title'>Purpose</span>
           <div className='selection'>
-            { categories.map(category => (
-              <div className={selectedCategory === category ? 'option active' : 'option'} onClick={() => setSelectedCategory(category)}>{category}</div>
+            { categories.map((category, index) => (
+              <div key={index} className={selectedCategory === category ? 'option active' : 'option'} onClick={() => setSelectedCategory(category)}>{category}</div>
             ))}
           </div>
           <span className='price'>Price: <span style={{ color: "var(--primary-color)" }}>${selectedPrice}</span></span>
