@@ -10,7 +10,7 @@ import { categories } from '../../../constants/categories';
 
 
 const Projects = () => {
-  // const [ projectList, setProjectList ] = useState([]);
+  const [ projectList, setProjectList ] = useState([]);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
@@ -23,18 +23,19 @@ const Projects = () => {
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
     window.scrollTo(0, 0); 
 
-    // fetch(`https://betterworld-doan.herokuapp.com/api/projects`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setProjectList(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
 
-  // console.log(projectList)
-  const projectList = projects?.map((project) => project);
+  console.log(process.env.REACT_APP_BASE_URL)
+  console.log(projectList)
+  // const projectList = projects?.map((project) => project);
 
   let filteredList = projectList;
   if (sortProject === 'Newest' && selectedCategory === 'Newest') {

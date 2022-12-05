@@ -14,12 +14,24 @@ const SignIn = () => {
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-
+  console.log(login)
   const onSubmit = async (data) => {
     if (login) {
-    //   await signIn(data.email, data.password);
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        console.log(res);
+      } 
+      catch (e) {
+        return e;
+      } 
     } 
   }
+
+
 
 
   useEffect(() => { 
@@ -44,15 +56,15 @@ const SignIn = () => {
             <input
               type='text'
               className=''
-              {...register('email', { 
+              {...register('username', { 
                 required: {
                   value: true,
-                  message: 'Email is required!'
+                  message: 'Username is required!'
                 }, 
-                pattern: {
-                  value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                  message: 'Please enter a valid email.'
-                }
+                // pattern: {
+                //   value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                //   message: 'Please enter a valid email.'
+                // }
               })}
               onChange={e => setEmailValue(e.target.value)}
               onFocus={() => setIsEmailFocus(true)}
@@ -70,18 +82,18 @@ const SignIn = () => {
               type={isShow ? 'text' : 'password'}
               className=''
               {...register('password', { 
-                required: {
-                  value: true, 
-                  message: 'Password is required!'
-                }, 
-                minLength: {
-                  value: 6,
-                  message: 'Your password must contain between 6 and 60 characters.'
-                },
-                maxLength: {
-                  value: 60,
-                  message: 'Your password must contain between 6 and 60 characters.'
-                }
+                // required: {
+                //   value: true, 
+                //   message: 'Password is required!'
+                // }, 
+                // minLength: {
+                //   value: 6,
+                //   message: 'Your password must contain between 6 and 60 characters.'
+                // },
+                // maxLength: {
+                //   value: 60,
+                //   message: 'Your password must contain between 6 and 60 characters.'
+                // }
               })}
               onChange={e => setPasswordValue(e.target.value)}
               onFocus={() => setIsPasswordFocus(true)}

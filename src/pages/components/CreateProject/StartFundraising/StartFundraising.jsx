@@ -4,10 +4,11 @@ import { useForm, SubmitHandler } from 'react-hook-form';
 import './StartFundraising.scss';
 import { categories } from '../../../../constants/categories';
 import { BsCheck } from "react-icons/bs";
-import PaymentMethods from '../../PaymentMethods/PaymentMethods';
+import PaymentMethods from '../PaymentMethods/PaymentMethods';
 
 
 const StartFundraising = () => {
+  const [ isCreated, setIsCreated ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
   const [ isTargetPriceFocus, setIsTargetPriceFocus ] = useState(false);
   const [ isDescriptionFocus, setIsDescriptionFocus ] = useState(false);
@@ -27,10 +28,22 @@ const StartFundraising = () => {
 
 
   const onSubmit = async (data) => {
-    
+    if (isCreated) {
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        console.log(res);
+      } 
+      catch (e) {
+        return e;
+      } 
+    }
   }
 
-  console.log(isFeatured)
+  console.log(isCreated)
   
   return (
     <div className='start-fundraising'>
@@ -55,10 +68,6 @@ const StartFundraising = () => {
               type='text'
               className={`edit-input ${(nameValue.length > 0 || isNameFocus) && 'input-has-value'}`}
               {...register('name', { 
-                required: {
-                  value: true, 
-                  message: 'Name is required!'
-                }, 
                 minLength: {
                   value: 1,
                   message: 'Your name must contain between 1 and 100 characters.'
@@ -112,6 +121,7 @@ const StartFundraising = () => {
           </label>
           <label htmlFor="">
             <textarea 
+              value={descriptionValue}
               name="" 
               id="" 
               cols="30" 
@@ -121,9 +131,7 @@ const StartFundraising = () => {
               onChange={(e) => setDescriptionValue(e.target.value)}
               onFocus={() => setIsDescriptionFocus(true)}
               onBlur={() => setIsDescriptionFocus(false)}
-            >
-              {descriptionValue}
-            </textarea>
+            />
             <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
               <span className={`placeholder ${setIsDescriptionFocus && 'is-focus'}`}>Description</span>
               { isDescriptionFocus && <span className="quantity">{descriptionValue?.length}/500</span> }
@@ -140,16 +148,25 @@ const StartFundraising = () => {
                     e.target.checked === true ? setIsFeatured(true) : setIsFeatured(false)
                   }}
                 />
-                <span class="checkmark">
+                <span className="checkmark">
                   { isFeatured && <BsCheck className='icon' /> }
                 </span>
                 <div className='title'>Featured this product</div>
               </label>
               <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser</div>
-              { isFeatured && <PaymentMethods isFeatured={isFeatured} isPaid={isPaid} setIsPaid={setIsPaid} />}
+              { isFeatured && <PaymentMethods isFeatured={isFeatured} isPaid={isPaid} setIsPaid={setIsPaid} /> }
             </>
           )}
-          { isPaid && <div className='is-paid'>You have featured this project!</div>}
+          { isPaid && <div className='is-paid'>You have featured this project!</div> }
+          <div className='btn-container'>
+            <button 
+              className='create-btn' 
+              onClick={() => setIsCreated(true)} 
+              type='submit'
+            >
+              Submit
+            </button>
+          </div>
         </form>
       </div>
     </div>
