@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import './StartFundraising.scss';
 import { categories } from '../../../../constants/categories';
 import { BsCheck } from "react-icons/bs";
@@ -28,22 +28,22 @@ const StartFundraising = () => {
 
 
   const onSubmit = async (data) => {
-    if (isCreated) {
-      try {
-        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        const res = await fetchResponse.json();
-        console.log(res);
-      } 
-      catch (e) {
-        return e;
-      } 
-    }
+    // if (isCreated) {
+    //   try {
+    //     const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
+    //       method: 'POST',
+    //       body: JSON.stringify(data)
+    //     })
+    //     const res = await fetchResponse.json();
+    //     console.log(res);
+    //   } 
+    //   catch (e) {
+    //     return e;
+    //   } 
+    // }
+    console.log(data)
   }
 
-  console.log(isCreated)
   
   return (
     <div className='start-fundraising'>
@@ -61,25 +61,21 @@ const StartFundraising = () => {
           </Link>
         </nav>
         <form onSubmit={handleSubmit(onSubmit)} className='create-form'>
-          <label className=''>
+          <label onFocus={() => setIsNameFocus(true)} onBlur={() => setIsNameFocus(false)}>
             <input
-              required
-              value={nameValue}
               type='text'
               className={`edit-input ${(nameValue.length > 0 || isNameFocus) && 'input-has-value'}`}
               {...register('name', { 
-                minLength: {
-                  value: 1,
-                  message: 'Your name must contain between 1 and 100 characters.'
+                required: {
+                  value: true,
+                  message: 'Project name is required!'
                 },
                 maxLength: {
                   value: 100,
-                  message: 'Your name must contain between 1 and 100 characters.'
+                  message: 'Your project name must be less than 100 characters'
                 }
               })}
-              onChange={e => setNameValue(e.target.value)}
-              onFocus={() => setIsNameFocus(true)}
-              onBlur={() => setIsNameFocus(false)}
+              onChange={e => setNameValue((e.target.value).charAt(0).toUpperCase() + (e.target.value).slice(1))}
             />
             <div className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
               <span className={`placeholder ${isNameFocus && 'is-focus'}`}>Project name</span>
@@ -99,9 +95,8 @@ const StartFundraising = () => {
               ))}
             </div>
           </label>
-          <label className='target-amount'>
+          <label className='target-amount' onFocus={() => setIsTargetPriceFocus(true)} onBlur={() => setIsTargetPriceFocus(false)}>
             <input
-              required
               type='number'
               className={`edit-input amount-input ${(targetPriceValue > 0 || isTargetPriceFocus) && 'amount-has-value'}`}
               {...register('targetPrice', { 
@@ -111,15 +106,18 @@ const StartFundraising = () => {
                 }
               })}
               onChange={e => setTargetPriceValue(Number(e.target.value))}
-              onFocus={() => setIsTargetPriceFocus(true)}
-              onBlur={() => setIsTargetPriceFocus(false)}
             />
             <div className="tag">USD</div>
             <div className={`${(!isTargetPriceFocus && targetPriceValue === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
               <span className={`placeholder ${isTargetPriceFocus && 'is-focus'}`}>Your target goal</span>
             </div>
+            { errors.targetPrice?.message && (
+              <p className='error-msg'>
+                {errors.targetPrice?.message}
+              </p>
+            )}
           </label>
-          <label htmlFor="">
+          <label onFocus={() => setIsDescriptionFocus(true)} onBlur={() => setIsDescriptionFocus(false)}>
             <textarea 
               value={descriptionValue}
               name="" 
@@ -128,9 +126,17 @@ const StartFundraising = () => {
               rows="10"
               maxLength='500'
               className={`edit-input ${(descriptionValue?.length > 0 || isDescriptionFocus) && 'input-has-value'}`}
+              {...register("description", {
+                required: {
+                  value: true,
+                  message: 'Project description is required!'
+                },
+                maxLength: {
+                  value: 100,
+                  message: 'Your project description must be less than 500 characters'
+                }
+              })}
               onChange={(e) => setDescriptionValue(e.target.value)}
-              onFocus={() => setIsDescriptionFocus(true)}
-              onBlur={() => setIsDescriptionFocus(false)}
             />
             <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
               <span className={`placeholder ${setIsDescriptionFocus && 'is-focus'}`}>Description</span>
@@ -142,11 +148,9 @@ const StartFundraising = () => {
               <label htmlFor="isFeatured" className='checkbox-container'>
                 <input 
                   type="checkbox" 
-                  name="" 
                   id="isFeatured" 
-                  onChange={(e) => {
-                    e.target.checked === true ? setIsFeatured(true) : setIsFeatured(false)
-                  }}
+                  {...register('isFeatured')}
+                  onChange={(e) => e.target.checked === true ? setIsFeatured(true) : setIsFeatured(false)}
                 />
                 <span className="checkmark">
                   { isFeatured && <BsCheck className='icon' /> }
