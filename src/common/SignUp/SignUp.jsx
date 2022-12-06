@@ -19,10 +19,20 @@ const SignUp = () => {
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
  
-
+  console.log(signup)
   const onSubmit = async (data) => {
     if (signup) {
-    //   await signUp(data.email, data.password);
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/register`, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        console.log(res);
+      } 
+      catch (e) {
+        return e;
+      } 
     } 
   }
 
@@ -50,18 +60,18 @@ const SignUp = () => {
                 required
                 type='text'
                 className='name'
-                {...register('name', { 
+                {...register('username', { 
                   required: {
                     value: true, 
-                    message: 'Name is required!'
+                    message: 'Username is required!'
                   }, 
                   minLength: {
                     value: 1,
-                    message: 'Your name must contain between 1 and 100 characters.'
+                    message: 'Your username must contain between 1 and 100 characters.'
                   },
                   maxLength: {
                     value: 100,
-                    message: 'Your name must contain between 1 and 100 characters.'
+                    message: 'Your username must contain between 1 and 100 characters.'
                   }
                 })}
                 onChange={e => setNameValue(e.target.value)}
@@ -77,14 +87,14 @@ const SignUp = () => {
             </label>
             <label className=''>
               <input
-                required
+                // required
                 type='tel'
                 className='phone'
                 {...register('phonenumber', { 
-                  required: {
-                    value: true, 
-                    message: 'Phone number is required!'
-                  }, 
+                  // required: {
+                  //   value: true, 
+                  //   message: 'Phone number is required!'
+                  // }, 
                   length: {
                     value: 10,
                     message: 'Your phone number must contain 10 characters.'
@@ -107,10 +117,10 @@ const SignUp = () => {
               type='text'
               className=''
               {...register('email', { 
-                required: {
-                  value: true,
-                  message: 'Email is required!'
-                }, 
+                // required: {
+                //   value: true,
+                //   message: 'Email is required!'
+                // }, 
                 pattern: {
                   value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Please enter a valid email.'
@@ -132,10 +142,10 @@ const SignUp = () => {
               type={isShow ? 'text' : 'password'}
               className=''
               {...register('password', { 
-                required: {
-                  value: true, 
-                  message: 'Password is required!'
-                }, 
+                // required: {
+                //   value: true, 
+                //   message: 'Password is required!'
+                // }, 
                 minLength: {
                   value: 6,
                   message: 'Your password must contain between 6 and 60 characters.'

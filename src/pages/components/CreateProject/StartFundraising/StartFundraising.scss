@@ -75,14 +75,15 @@
 
         .create-form {
             width: 100%;
-            padding-top: 8vh;
+            padding-top: 6vh;
 
             label {
                 position: relative;
                 margin-top: 28px;
                 width: 100%;
                 display: flex;
-                align-items: center;
+                justify-content: center;
+                flex-direction: column;
 
                 .tag {
                     position: absolute;
@@ -167,6 +168,7 @@
                 .error-msg {
                     color: red;
                     font-size: 1.2rem;
+                    margin-top: 4px;
                 }
 
                 textarea.edit-input {
@@ -268,6 +270,28 @@
                 margin-top: 40px;
                 font-weight: 500;
             }
+
+            .btn-container {
+                width: 100%;
+                display: flex;
+                justify-content: flex-end;
+                margin-top: 60px;
+
+                .create-btn {
+                    border: none;
+                    background-color: var(--primary-color);
+                    padding: 6px 20px;
+                    border-radius: 30px;
+                    font-weight: 600;
+                    cursor: pointer;
+                    border: 3px solid var(--primary-color);
+    
+                    &:hover {
+                        background-color: white;
+                    }
+                }
+            }
+
         }
     }
 }
