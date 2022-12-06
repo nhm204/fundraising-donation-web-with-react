@@ -1,20 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignIn.scss';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 
 
 const SignIn = () => {
   const [ login, setLogin ] = useState(false);
-  const [ isEmailFocus, setIsEmailFocus ] = useState(false);
+  const [ isUsernameFocus, setIsUsernameFocus ] = useState(false);
   const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
-  const [ emailValue, setEmailValue ] = useState('');
+  const [ usernameValue, setUsernameValue ] = useState('');
   const [ passwordValue, setPasswordValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
 
-  console.log(login)
+
   const onSubmit = async (data) => {
     if (login) {
       try {
@@ -29,9 +29,8 @@ const SignIn = () => {
         return e;
       } 
     } 
+    // console.log(data)
   }
-
-
 
 
   useEffect(() => { 
@@ -52,54 +51,47 @@ const SignIn = () => {
       <form onSubmit={handleSubmit(onSubmit)} className='form'>
         <h1 className='heading'>Sign In</h1>
         <div className='input-group'>
-          <label className=''>
+          <label onFocus={() => setIsUsernameFocus(true)} onBlur={() => setIsUsernameFocus(false)}>
             <input
               type='text'
-              className=''
+              placeholder={!isUsernameFocus ? 'Username' : null}
               {...register('username', { 
                 required: {
                   value: true,
                   message: 'Username is required!'
-                }, 
-                // pattern: {
-                //   value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                //   message: 'Please enter a valid email.'
-                // }
+                }
               })}
-              onChange={e => setEmailValue(e.target.value)}
-              onFocus={() => setIsEmailFocus(true)}
-              onBlur={() => setIsEmailFocus(false)}
+              onChange={e => setUsernameValue(e.target.value)}
             />
-            <span className={`${(!isEmailFocus && emailValue.length === 0) ? 'placeholder' : 'active' }`}>Email address</span>
-            { errors.email?.message && (
+            <span className={`${(isUsernameFocus || usernameValue.length > 0) ? 'active' : 'hidden' }`}>Username</span>
+            { errors.username?.message && (
               <p className='error-msg'>
-                {errors.email?.message}
+                {errors.username?.message}
               </p>
             )}
           </label>
-          <label className='password-field'>
+          <label className='password-field' onFocus={() => setIsPasswordFocus(true)} onBlur={() => setIsPasswordFocus(false)}>
             <input
               type={isShow ? 'text' : 'password'}
+              placeholder={!isPasswordFocus ? 'Password' : null}
               className=''
               {...register('password', { 
-                // required: {
-                //   value: true, 
-                //   message: 'Password is required!'
-                // }, 
-                // minLength: {
-                //   value: 6,
-                //   message: 'Your password must contain between 6 and 60 characters.'
-                // },
-                // maxLength: {
-                //   value: 60,
-                //   message: 'Your password must contain between 6 and 60 characters.'
-                // }
+                required: {
+                  value: true, 
+                  message: 'Password is required!'
+                }, 
+                minLength: {
+                  value: 6,
+                  message: 'Your password must contain between 6 and 60 characters.'
+                },
+                maxLength: {
+                  value: 60,
+                  message: 'Your password must contain between 6 and 60 characters.'
+                }
               })}
               onChange={e => setPasswordValue(e.target.value)}
-              onFocus={() => setIsPasswordFocus(true)}
-              onBlur={() => setIsPasswordFocus(false)}
             />
-            <span className={`${(!isPasswordFocus && passwordValue.length === 0) ? 'placeholder' : 'active' }`}>Password</span>
+            <span className={`${(isPasswordFocus || passwordValue.length > 0) ? 'active' : 'hidden' }`}>Password</span>
             { passwordValue.length > 0 && (isShow ? <FaEye className='icon' onClick={() => setIsShow(!isShow)} /> : <FaEyeSlash className='icon' onClick={() => setIsShow(!isShow)} />) }
             { errors.password?.message && (
               <p className='error-msg'>

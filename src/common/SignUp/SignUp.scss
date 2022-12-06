@@ -51,7 +51,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            margin-top: 4vh;
+            margin-top: 6vh;
 
             .info {
                 display: flex;
@@ -59,6 +59,7 @@
 
                 label {
                     position: relative;
+                    margin-top: 0;
                    
                     .name {
                         width: 20vw;
@@ -69,6 +70,12 @@
                         min-width: 10vw;
                     }
                 }
+
+                .h-68 {
+                    position: relative;
+                    margin-top: 0;
+                    height: 68px;
+                }
             }
 
             label {
@@ -76,25 +83,20 @@
                 margin-top: 28px;
                 width: 100%;
 
-                .placeholder {
-                    position: absolute;
-                    top: 14px;
-                    left: 16px;
-                    color: gray;
-                    background-color: white;
-                    padding: 0 4px;
-                    transition: top ease-out 0.2s;
-                }
-
                 .active {
                     position: absolute;
-                    top: -10px;
+                    top: -11px;
                     left: 16px;
-                    color: var(--text-color);
+                    color: var(--primary-color);
                     background-color: white;
                     border-radius: 5px;
                     padding: 0 4px;
                     transition: top ease-out 0.2s;
+                    font-size: 1.2rem;
+                }
+
+                .hidden {
+                    display: none;
                 }
 
                 input {

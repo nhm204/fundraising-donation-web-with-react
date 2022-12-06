@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import './SignUp.scss';
-import { useForm, SubmitHandler } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import PasswordGuidance from '../PasswordGuidance/PasswordGuidance';
 
@@ -9,17 +9,19 @@ import PasswordGuidance from '../PasswordGuidance/PasswordGuidance';
 const SignUp = () => {
   const [ signup, setSignup ] = useState(false);
   const [ isEmailFocus, setIsEmailFocus ] = useState(false);
-  const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
-  const [ isNameFocus, setIsNameFocus ] = useState(false);
+  const [ isPasswordFocus1, setIsPasswordFocus1 ] = useState(false);
+  const [ isPasswordFocus2, setIsPasswordFocus2 ] = useState(false);
+  const [ isUsernameFocus, setIsUsernameFocus ] = useState(false);
   const [ isPhoneFocus, setIsPhoneFocus ] = useState(false);
   const [ emailValue, setEmailValue ] = useState('');
-  const [ passwordValue, setPasswordValue ] = useState('');
-  const [ nameValue, setNameValue ] = useState('');
+  const [ passwordValue1, setPasswordValue1 ] = useState('');
+  const [ passwordValue2, setPasswordValue2 ] = useState('');
+  const [ usernameValue, setUsernameValue ] = useState('');
   const [ phoneValue, setPhoneValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, watch, formState: { errors } } = useForm();
  
-  console.log(signup)
+
   const onSubmit = async (data) => {
     if (signup) {
       try {
@@ -34,7 +36,9 @@ const SignUp = () => {
         return e;
       } 
     } 
+    // console.log(data)
   }
+
 
   useEffect(() => { 
     document.title = `Sign Up | BetterWorld: #1 for Donation and Fundraising Platform`;
@@ -55,10 +59,10 @@ const SignUp = () => {
         <h1 className='heading'>Sign Up</h1>
         <div className='input-group'>
           <div className="info">
-            <label className=''>
+            <label className={`${(errors.username || errors.phonenumber) && 'h-68'}`} onFocus={() => setIsUsernameFocus(true)} onBlur={() => setIsUsernameFocus(false)}>
               <input
-                required
                 type='text'
+                placeholder={!isUsernameFocus ? 'Username' : null}
                 className='name'
                 {...register('username', { 
                   required: {
@@ -74,78 +78,74 @@ const SignUp = () => {
                     message: 'Your username must contain between 1 and 100 characters.'
                   }
                 })}
-                onChange={e => setNameValue(e.target.value)}
-                onFocus={() => setIsNameFocus(true)}
-                onBlur={() => setIsNameFocus(false)}
+                onChange={e => setUsernameValue(e.target.value)}
               />
-              <span className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder' : 'active' }`}>Name</span>
-              { errors.name?.message && (
+              <span className={`${(isUsernameFocus || usernameValue?.length > 0) ? 'active' : 'hidden' }`}>Username</span>
+              { errors.username?.message && (
                 <p className='error-msg'>
-                  {errors.name?.message}
+                  {errors.username?.message}
                 </p>
               )}
             </label>
-            <label className=''>
+            <label className={`${(errors.username || errors.phonenumber) && 'h-68'}`} onFocus={() => setIsPhoneFocus(true)} onBlur={() => setIsPhoneFocus(false)}>
               <input
-                // required
                 type='tel'
+                placeholder={!isPhoneFocus ? 'Phone number' : null}
                 className='phone'
-                {...register('phonenumber', { 
-                  // required: {
-                  //   value: true, 
-                  //   message: 'Phone number is required!'
-                  // }, 
+                {...register('phone', { 
+                  required: {
+                    value: true, 
+                    message: 'Phone number is required!'
+                  }, 
                   length: {
                     value: 10,
                     message: 'Your phone number must contain 10 characters.'
                   },
                 })}
                 onChange={e => setPhoneValue(e.target.value)}
-                onFocus={() => setIsPhoneFocus(true)}
-                onBlur={() => setIsPhoneFocus(false)}
               />
-              <span className={`${(!isPhoneFocus && phoneValue?.length === 0) ? 'placeholder' : 'active' }`}>Phone number</span>
-              { errors.phonenumber?.message && (
+              <span className={`${(isPhoneFocus || phoneValue?.length > 0) ? 'active' : 'hidden' }`}>Phone number</span>
+              { errors.phone?.message && (
               <p className='error-msg'>
-                {errors.phonenumber?.message}
+                {errors.phone?.message}
               </p>
             )}
             </label>
           </div>
-          <label className=''>
+          <label onFocus={() => setIsEmailFocus(true)} onBlur={() => setIsEmailFocus(false)}>
             <input
               type='text'
+              placeholder={!isEmailFocus ? 'Email address' : null}
               className=''
               {...register('email', { 
-                // required: {
-                //   value: true,
-                //   message: 'Email is required!'
-                // }, 
+                required: {
+                  value: true,
+                  message: 'Email is required!'
+                }, 
                 pattern: {
                   value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
                   message: 'Please enter a valid email.'
                 }
               })}
               onChange={e => setEmailValue(e.target.value)}
-              onFocus={() => setIsEmailFocus(true)}
-              onBlur={() => setIsEmailFocus(false)}
             />
-            <span className={`${(!isEmailFocus && emailValue.length === 0) ? 'placeholder' : 'active' }`}>Email address</span>
+            <span className={`${(isEmailFocus || emailValue.length > 0) ? 'active' : 'hidden' }`}>Email address</span>
             { errors.email?.message && (
               <p className='error-msg'>
                 {errors.email?.message}
               </p>
             )}
           </label>
-          <label className='password-field'>
+          <label className='password-field' onFocus={() => setIsPasswordFocus1(true)} onBlur={() => setIsPasswordFocus1(false)}>
             <input
               type={isShow ? 'text' : 'password'}
+              placeholder={!isPasswordFocus1 ? 'Add a password' : null}
               className=''
-              {...register('password', { 
-                // required: {
-                //   value: true, 
-                //   message: 'Password is required!'
-                // }, 
+              {...register('password1', { 
+                required: {
+                  value: true, 
+                  message: 'Password is required!'
+                }, 
                 minLength: {
                   value: 6,
                   message: 'Your password must contain between 6 and 60 characters.'
@@ -155,19 +155,42 @@ const SignUp = () => {
                   message: 'Your password must contain between 6 and 60 characters.'
                 }
               })}
-              onChange={e => setPasswordValue(e.target.value)}
-              onFocus={() => setIsPasswordFocus(true)}
-              onBlur={() => setIsPasswordFocus(false)}
+              onChange={e => setPasswordValue1(e.target.value)}
             />
-            <span className={`${(!isPasswordFocus && passwordValue.length === 0) ? 'placeholder' : 'active' }`}>Add a password</span>
-            { passwordValue.length > 0 && (isShow ? <FaEye className='icon' onClick={() => setIsShow(!isShow)} /> : <FaEyeSlash className='icon' onClick={() => setIsShow(!isShow)} />) }
-            { errors.password?.message && (
+            <span className={`${(isPasswordFocus1 || passwordValue1.length > 0) ? 'active' : 'hidden' }`}>Add a password</span>
+            { passwordValue1.length > 0 && (isShow ? <FaEye className='icon' onClick={() => setIsShow(!isShow)} /> : <FaEyeSlash className='icon' onClick={() => setIsShow(!isShow)} />) }
+            { errors.password1?.message && (
               <p className='error-msg'>
-                {errors.password?.message}
+                {errors.password1?.message}
               </p>
             )}
           </label>
-          { (isPasswordFocus || passwordValue.length > 0) && <PasswordGuidance passwordValue={passwordValue} />}
+          { (isPasswordFocus1 || passwordValue1.length > 0) && <PasswordGuidance passwordValue={passwordValue1} />}
+          <label className='password-field' onFocus={() => setIsPasswordFocus2(true)} onBlur={() => setIsPasswordFocus2(false)}>
+            <input
+              type={isShow ? 'text' : 'password'}
+              placeholder={!isPasswordFocus2 ? 'Confirm password' : null}
+              className=''
+              {...register('password2', { 
+                required: {
+                  value: true, 
+                  message: 'Password confirm is required!'
+                },
+                validate: (val) => {
+                  if (watch('password1') !== val) {
+                    return "Your confirmation password does not match the original password";
+                  }
+                }
+              })}
+              onChange={e => setPasswordValue2(e.target.value)}
+            />
+            <span className={`${(isPasswordFocus2 || passwordValue2.length > 0) ? 'active' : 'hidden' }`}>Confirm password</span>
+            { errors.password2?.message && (
+              <p className='error-msg'>
+                {errors.password2?.message}
+              </p>
+            )}
+          </label>
         </div>
         <button 
           className='signup-btn' 
