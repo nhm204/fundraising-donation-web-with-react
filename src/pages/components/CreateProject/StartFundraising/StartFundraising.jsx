@@ -18,7 +18,7 @@ const StartFundraising = () => {
   const [ descriptionValue, setDescriptionValue ] = useState('');
   const [ isFeatured, setIsFeatured ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
-  const { register, handleSubmit, formState: { errors } } = useForm();
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
 
   useEffect(() => { 
@@ -28,7 +28,7 @@ const StartFundraising = () => {
 
 
   const onSubmit = async (data) => {
-    // if (isCreated) {
+    if (isCreated) {
     //   try {
     //     const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
     //       method: 'POST',
@@ -40,10 +40,11 @@ const StartFundraising = () => {
     //   catch (e) {
     //     return e;
     //   } 
-    // }
     console.log(data)
+    }
   }
 
+  console.log(selectedCategory)
   
   return (
     <div className='start-fundraising'>
@@ -75,7 +76,7 @@ const StartFundraising = () => {
                   message: 'Your project name must be less than 100 characters'
                 }
               })}
-              onChange={e => setNameValue((e.target.value).charAt(0).toUpperCase() + (e.target.value).slice(1))}
+              onChange={e => setNameValue(e.target.value)}
             />
             <div className={`${(!isNameFocus && nameValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
               <span className={`placeholder ${isNameFocus && 'is-focus'}`}>Project name</span>
@@ -91,7 +92,13 @@ const StartFundraising = () => {
             What best describes why you're fundraising?
             <div className="selection">
               { categories.map((category, index) => (
-                <div key={index} className={selectedCategory === category ? 'option active' : 'option'} onClick={() => setSelectedCategory(category)}>{category}</div>
+                <div 
+                  key={index} 
+                  className={selectedCategory === category ? 'option active' : 'option'} 
+                  onClick={() => setSelectedCategory(category)}
+                >
+                  {category}
+                </div>
               ))}
             </div>
           </label>
@@ -163,13 +170,26 @@ const StartFundraising = () => {
           )}
           { isPaid && <div className='is-paid'>You have featured this project!</div> }
           <div className='btn-container'>
-            <button 
-              className='create-btn' 
-              onClick={() => setIsCreated(true)} 
-              type='submit'
-            >
-              Submit
-            </button>
+            { (isFeatured && !isPaid) ? (
+              <button 
+                type=''
+                className='create-btn disabled'
+                onClick={() => alert('Please pay to featured this project before submitting')}
+              >
+                Submit
+              </button>
+            ) : (
+              <button 
+                className='create-btn' 
+                onClick={() => {
+                  setValue('category', selectedCategory);
+                  setIsCreated(true);
+                }} 
+                type='submit'
+              >
+                Submit
+              </button>
+            )}
           </div>
         </form>
       </div>

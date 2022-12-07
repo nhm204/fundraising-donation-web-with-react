@@ -275,7 +275,7 @@
                 width: 100%;
                 display: flex;
                 justify-content: flex-end;
-                margin-top: 60px;
+                margin: 100px 0 20px;
 
                 .create-btn {
                     border: none;
@@ -288,6 +288,16 @@
     
                     &:hover {
                         background-color: white;
+                    }
+                }
+
+                .disabled {
+                    background-color: #ccc;
+                    border-color: #ccc;
+                    cursor: default;
+
+                    &:hover {
+                        background-color: #ccc;
                     }
                 }
             }

@@ -62,7 +62,7 @@ const ProjectDetails = () => {
           <div className="category">{project?.category}</div>
           <div className="id">Project #{projectId}</div>
         </div>
-        <h1 className='name'>{projectName}</h1>
+        <h1 className='name'>{projectName.charAt(0).toUpperCase() + projectName.slice(1)}</h1>
         <div className="fundraiser">by <Link to={`/fundraiser/${fundraiser?.name}/${fundraiser?.id}`}>{fundraiser?.name}</Link></div>
       </div>
       <div className='project-container'>
