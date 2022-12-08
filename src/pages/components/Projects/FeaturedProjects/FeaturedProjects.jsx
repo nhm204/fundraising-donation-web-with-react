@@ -5,9 +5,7 @@ import { HiChevronDoubleRight } from "react-icons/hi";
 import { Link } from 'react-router-dom';
 
 
-const FeaturedProjects = ({ projects }) => {
-  let featuredList = projects?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
-
+const FeaturedProjects = ({ featuredList }) => {
   return (
     <section className='featured'>
       <div className="heading">

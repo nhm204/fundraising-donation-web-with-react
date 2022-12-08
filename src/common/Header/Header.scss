@@ -68,9 +68,21 @@
             display: flex;
             align-items: center;
 
+            .avatar-wrapper {
+                margin-right: 12px;
+
+                .user-avatar {
+                    background-color: black;
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+            }
+
             .nav-link {
                 color: var(--text-color);
-                margin-right: 2.4rem;
+                margin-right: 24px;
 
                 &:hover {
                     color: var(--secondary-color);

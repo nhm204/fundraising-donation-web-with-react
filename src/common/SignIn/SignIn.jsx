@@ -1,35 +1,45 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.scss';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { setGlobalState, useGlobalState } from '../../hooks/useGlobalState';
 
 
 const SignIn = () => {
   const [ login, setLogin ] = useState(false);
+  // const [ username, setUsername ] = useGlobalState('username');
   const [ isUsernameFocus, setIsUsernameFocus ] = useState(false);
   const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
   const [ usernameValue, setUsernameValue ] = useState('');
   const [ passwordValue, setPasswordValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
+  const navigate = useNavigate();
+  const formData = new FormData();
 
-
+  
   const onSubmit = async (data) => {
     if (login) {
+      formData.append('username', data.username);
+      formData.append('password', data.password);
+
       try {
         const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
           method: 'POST',
-          body: JSON.stringify(data)
+          body: formData
         })
         const res = await fetchResponse.json();
-        console.log(res);
+        alert(res);
+        if (res === 'login successfully') {
+          window.history.back();
+        }
       } 
       catch (e) {
         return e;
       } 
     } 
-    // console.log(data)
+    console.log(data)
   }
 
 
@@ -61,7 +71,10 @@ const SignIn = () => {
                   message: 'Username is required!'
                 }
               })}
-              onChange={e => setUsernameValue(e.target.value)}
+              onChange={e => {
+                setUsernameValue(e.target.value);
+                setGlobalState('username', e.target.value);
+              }}
             />
             <span className={`${(isUsernameFocus || usernameValue.length > 0) ? 'active' : 'hidden' }`}>Username</span>
             { errors.username?.message && (

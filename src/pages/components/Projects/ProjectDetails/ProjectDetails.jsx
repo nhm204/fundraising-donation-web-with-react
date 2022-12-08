@@ -1,45 +1,50 @@
 import React, { useEffect, useState } from 'react';
 import { Link, Outlet, useNavigate, useParams } from 'react-router-dom';
 import Header from '../../../../common/Header/Header';
-import { projects, users } from '../projects';
 import './ProjectDetails.scss';
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { Banner2 } from '../../Banner/Banner';
 
 
 const ProjectDetails = () => {
-  // const [ projects, setProjects ] = useState([]);
-  // const [ users, setUsers ] = useState([]);
+  const [ projectList, setProjectList ] = useState([]);
+  const [ userList, setUserList ] = useState([]);
   const paramValue = useParams();
   const projectId = paramValue.id;
   const projectName = paramValue.name;
   const navigate = useNavigate();
 
-  const project = projects?.find(element => element.id === paramValue.id);
-  const fundraiser = users?.find(user => user.id === project.creatorId);
   
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+
+  const project = projectList?.find(element => element.id === +projectId);
+  const fundraiser = userList?.find(user => user.id === project?.creatorId);
+  console.log(project)
+  console.log(fundraiser)
+
 
   useEffect(() => { 
     document.title = `${project?.name}. ${project?.category} on BetterWorld`;
     window.scrollTo(0, 0); 
-
-    // fetch(`https://betterworld-doan.herokuapp.com/api/projects`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setProjects(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-
-    // fetch(`https://betterworld-doan.herokuapp.com/api/users`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setUsers(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
   }, [project?.name, project?.category]);
 
 
@@ -51,7 +56,7 @@ const ProjectDetails = () => {
 
   const progressValue = (project?.currentPrice / project?.targetPrice) * 100;
 
-  let relatedProjects = projects?.reverse().filter(element => element.category === project?.category && element.id !== project.id).slice(0, 4);
+  let relatedProjects = projectList?.reverse().filter(element => element.category === project?.category && element.id !== project.id).slice(0, 4);
 
   
   return (

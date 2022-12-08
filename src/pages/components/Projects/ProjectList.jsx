@@ -1,5 +1,4 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { projects } from './projects';
 import { Outlet } from 'react-router-dom';
 import './ProjectList.scss';
 import { BsSliders } from "react-icons/bs";

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignUp.scss';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -20,23 +20,34 @@ const SignUp = () => {
   const [ phoneValue, setPhoneValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, watch, formState: { errors } } = useForm();
- 
+  const formData = new FormData();
+  const navigate = useNavigate();
+
 
   const onSubmit = async (data) => {
     if (signup) {
+      formData.append('username', data.username);
+      formData.append('phone', data.phone);
+      formData.append('email', data.email);
+      formData.append('password1', data.password1);
+      formData.append('password2', data.password2);
+
       try {
         const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/register`, {
           method: 'POST',
-          body: JSON.stringify(data)
+          body: formData
         })
         const res = await fetchResponse.json();
-        console.log(res);
+        alert(res);
+        if (res === 'Create successfully') {
+          navigate('/signin')
+        }
       } 
       catch (e) {
         return e;
       } 
     } 
-    // console.log(data)
+    console.log(data)
   }
 
 

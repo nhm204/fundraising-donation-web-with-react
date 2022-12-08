@@ -49,7 +49,6 @@ const Checkout = () => {
     //   });
   }, [project?.name, projectId]);
 
-console.log(donationAmount)
 
   return (
     <div className='checkout'>
@@ -130,11 +129,11 @@ console.log(donationAmount)
           <h3>Your donation</h3>
           <div className="donate-price">
             <div>Your donation</div>
-            <div>${donationAmount}.00</div>
+            <div>${donationAmount || 0}.00</div>
           </div>
           <div className="total-price">
             <div>Total amount</div>
-            <div>${donationAmount}.00</div>
+            <div>${donationAmount || 0}.00</div>
           </div>
         </div>
       </div>

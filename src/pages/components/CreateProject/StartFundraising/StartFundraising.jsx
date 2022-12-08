@@ -5,9 +5,12 @@ import './StartFundraising.scss';
 import { categories } from '../../../../constants/categories';
 import { BsCheck } from "react-icons/bs";
 import PaymentMethods from '../PaymentMethods/PaymentMethods';
+import { useGlobalState } from '../../../../hooks/useGlobalState';
 
 
 const StartFundraising = () => {
+  const [ username, setUsername ] = useGlobalState('username');
+  const [ userList, setUserList ] = useState([]);
   const [ isCreated, setIsCreated ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
   const [ isTargetPriceFocus, setIsTargetPriceFocus ] = useState(false);
@@ -24,27 +27,38 @@ const StartFundraising = () => {
   useEffect(() => { 
     document.title = `Create a BetterWorld`;
     window.scrollTo(0, 0); 
+
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+        // alert('Added successfully');
+        
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
+
+  const user = userList?.filter(user => user.name === username);
 
 
   const onSubmit = async (data) => {
     if (isCreated) {
-    //   try {
-    //     const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
-    //       method: 'POST',
-    //       body: JSON.stringify(data)
-    //     })
-    //     const res = await fetchResponse.json();
-    //     console.log(res);
-    //   } 
-    //   catch (e) {
-    //     return e;
-    //   } 
-    console.log(data)
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        console.log(res);
+      } 
+      catch (e) {
+        return e;
+      } 
+      console.log(data)
     }
   }
-
-  console.log(selectedCategory)
   
   return (
     <div className='start-fundraising'>
@@ -57,7 +71,7 @@ const StartFundraising = () => {
       </div>
       <div className="right">
         <nav>
-          <Link to='/create/fundraiser/signin'>
+          <Link to='/signin'>
             <button className='sign-in-btn'>Sign In</button>
           </Link>
         </nav>
@@ -182,7 +196,11 @@ const StartFundraising = () => {
               <button 
                 className='create-btn' 
                 onClick={() => {
+                  setValue('creatorId', user[0].id);
                   setValue('category', selectedCategory);
+                  setValue('image', 'https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+                  setValue('donationCount', 0);
+                  setValue('currentPrice', 0);
                   setIsCreated(true);
                 }} 
                 type='submit'
