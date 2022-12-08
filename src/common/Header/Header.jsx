@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import './Header.scss';
 import { BsSearch } from "react-icons/bs";
 import { DropdownSearch } from '../../pages/components';
+import { setGlobalState, useGlobalState } from '../../hooks/useGlobalState';
 
 
 const Header = ({ link, searchQuery, changeData }) => {
+  const [ username, setUsername ] = useGlobalState('username');
+  const [ userList, setUserList ] = useState([]);
   const [ navSelected, setNavSelected ] = useState(link);
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [ isSelected, setIsSelected ] = useState(false);
@@ -16,10 +19,25 @@ const Header = ({ link, searchQuery, changeData }) => {
       window.scrollY > 0 ? setIsScrolled(true) : setIsScrolled(false)
     }
     window.addEventListener('scroll', handleScroll)
+
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
   }, []);
+
+
+  const user = userList?.filter(user => user.name === username);
+  console.log(username)
+  console.log(user)
 
 
   return (
@@ -38,7 +56,14 @@ const Header = ({ link, searchQuery, changeData }) => {
           BetterWorld
         </Link>
         <div className="right-side">
-          <Link to='/signin' className='nav-link'>Sign in</Link>
+          { username === null ? (
+            <Link to='/signin' className='nav-link'>Sign in</Link>
+            ) : (
+              <div className="avatar-wrapper">
+                <img src={user?.avatar} alt="" className='user-avatar' onClick={() => setGlobalState('username', null)}/>
+              </div>
+            )
+          }
           <Link to='/create/fundraiser/regform' className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>
             Start a Fundraising
           </Link>
