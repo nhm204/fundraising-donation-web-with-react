@@ -23,7 +23,7 @@
         .edit-header {
             position: sticky;
             top: 0;
-            width: 44vw;
+            width: 42vw;
             height: 72px;
             display: flex;
             align-items: center;
@@ -54,9 +54,15 @@
                     color: white;
     
                     .icon {
-                        font-size: 2.2rem;
+                        font-size: 3.5rem;
                         margin-right: 20px;
                         cursor: pointer;
+                        padding: 6px;
+                        border-radius: 20px;
+
+                        &:hover {
+                            background-color: rgba(239, 243, 244, 0.1);
+                        }
                     }
     
                     h3 {
@@ -76,7 +82,6 @@
                     cursor: pointer;
                 }
             }
-
         }
 
         .cover-bg-container {
@@ -131,7 +136,7 @@
                     border-radius: 50%;
                     object-fit: cover;
                     -webkit-user-drag: none;
-                    background-color: black;
+                    background-color: var(--primary-color);
                     outline: 4px solid black;
                 }
     
@@ -262,6 +267,19 @@
             }
         }
 
+        .avatar-edit-section {
+            width: 44vw;
+            height: 44vw;
+            display: flex;
+            margin-top: 2vh;
+            justify-content: center;
+
+            .cropper {
+                width: 30vw;
+                height: fit-content;
+                padding-bottom: 6vh;
+            }
+        }
     }
 }
 

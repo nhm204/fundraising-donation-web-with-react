@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './Header.scss';
 import { BsSearch } from "react-icons/bs";
 import { DropdownSearch } from '../../pages/components';
-import { setGlobalState, useGlobalState } from '../../hooks/useGlobalState';
+import { useGlobalState } from '../../hooks/useGlobalState';
 
 
 const Header = ({ link, searchQuery, changeData }) => {
@@ -12,6 +12,7 @@ const Header = ({ link, searchQuery, changeData }) => {
   const [ navSelected, setNavSelected ] = useState(link);
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [ isSelected, setIsSelected ] = useState(false);
+  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -37,7 +38,7 @@ const Header = ({ link, searchQuery, changeData }) => {
 
   const user = userList?.filter(user => user.name === username);
   console.log(username)
-  console.log(user)
+  console.log(user[0]?.avatar)
 
 
   return (
@@ -59,9 +60,9 @@ const Header = ({ link, searchQuery, changeData }) => {
           { username === null ? (
             <Link to='/signin' className='nav-link'>Sign in</Link>
             ) : (
-              <div className="avatar-wrapper">
-                <img src={user?.avatar} alt="" className='user-avatar' onClick={() => setGlobalState('username', null)}/>
-              </div>
+              <Link to={`/fundraiser/iammy/2`} className="avatar-wrapper">
+                <img src={user[0]?.avatar} alt="" className='user-avatar' />
+              </Link>
             )
           }
           <Link to='/create/fundraiser/regform' className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>

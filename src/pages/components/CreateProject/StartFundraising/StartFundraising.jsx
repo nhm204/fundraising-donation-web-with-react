@@ -87,7 +87,7 @@ const StartFundraising = () => {
                 },
                 maxLength: {
                   value: 100,
-                  message: 'Your project name must be less than 100 characters'
+                  message: 'Your project name must be less than 100 characters.'
                 }
               })}
               onChange={e => setNameValue(e.target.value)}
@@ -178,7 +178,7 @@ const StartFundraising = () => {
                 </span>
                 <div className='title'>Featured this product</div>
               </label>
-              <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser</div>
+              <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser.</div>
               { isFeatured && <PaymentMethods isFeatured={isFeatured} isPaid={isPaid} setIsPaid={setIsPaid} /> }
             </>
           )}
@@ -188,7 +188,7 @@ const StartFundraising = () => {
               <button 
                 type=''
                 className='create-btn disabled'
-                onClick={() => alert('Please pay to featured this project before submitting')}
+                onClick={() => alert('Please pay to featured this project before submitting!')}
               >
                 Submit
               </button>

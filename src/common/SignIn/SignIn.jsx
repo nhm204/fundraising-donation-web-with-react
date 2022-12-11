@@ -94,12 +94,12 @@ const SignIn = () => {
                   message: 'Password is required!'
                 }, 
                 minLength: {
-                  value: 6,
-                  message: 'Your password must contain between 6 and 60 characters.'
+                  value: 8,
+                  message: 'Your password must contain between 8 and 60 characters.'
                 },
                 maxLength: {
                   value: 60,
-                  message: 'Your password must contain between 6 and 60 characters.'
+                  message: 'Your password must contain between 8 and 60 characters.'
                 }
               })}
               onChange={e => setPasswordValue(e.target.value)}

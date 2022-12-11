@@ -158,12 +158,12 @@ const SignUp = () => {
                   message: 'Password is required!'
                 }, 
                 minLength: {
-                  value: 6,
-                  message: 'Your password must contain between 6 and 60 characters.'
+                  value: 8,
+                  message: 'Your password must contain between 8 and 60 characters.'
                 },
                 maxLength: {
                   value: 60,
-                  message: 'Your password must contain between 6 and 60 characters.'
+                  message: 'Your password must contain between 8 and 60 characters.'
                 }
               })}
               onChange={e => setPasswordValue1(e.target.value)}
@@ -189,7 +189,7 @@ const SignUp = () => {
                 },
                 validate: (val) => {
                   if (watch('password1') !== val) {
-                    return "Your confirmation password does not match the original password";
+                    return "Your confirmation password does not match the original password.";
                   }
                 }
               })}
