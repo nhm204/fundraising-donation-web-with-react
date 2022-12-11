@@ -6,6 +6,6 @@ export { default as Pagination } from './Pagination/Pagination';
 export { default as DropdownSearch } from './DropdownSearch/DropdownSearch';
 export { default as ProjectDetails } from './Projects/ProjectDetails/ProjectDetails';
 export { default as Fundraiser } from './Fundraiser/Fundraiser';
-export { default as FundraiserEditForm } from './Fundraiser/FundraiserEditForm/FundraiserEditForm';
+export { default as FundraiserEditForm } from './Fundraiser/FundraiserEditModal/FundraiserEditModal';
 export { default as Checkout } from './Checkout/Checkout';
 export { default as StartFundraising } from './CreateProject/StartFundraising/StartFundraising';

@@ -1,17 +1,14 @@
 import React, { useState } from 'react';
-import './FundraiserEditForm.scss';
+import './FundraiserEditModal.scss';
 import { useForm } from 'react-hook-form';
 import { IoCloseOutline, IoArrowBackOutline } from "react-icons/io5";
-import { Cropper } from 'react-cropper';
-import "cropperjs/dist/cropper.css";
+import AvatarEditModal from '../AvatarEditModal/AvatarEditModal';
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import { PasswordGuidance } from '../../../../common';
 
 
-const FundraiserEditForm = ({ fundraiser, setIsEdit }) => {
+const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarEdit, avatarSrc, handleChangeAvatar }) => {
   const [ profileEdit, setProfileEdit ] = useState(false);
-  const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
-  const [ avatarSrc, setAvatarSrc ] = useState(fundraiser.avatar);
   const [ cropper, setCropper ] = useState();
   const [ cropAvatar, setCropAvatar ] = useState(null);
   // const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
@@ -36,18 +33,7 @@ const FundraiserEditForm = ({ fundraiser, setIsEdit }) => {
       console.log(data.avatar)
       console.log(data)
     } 
-  }
-
-
-  const handleChangeAvatar = e => {
-    const reader = new FileReader();
-    reader.onload = () => {
-      if (reader.readyState === 2) {
-        setAvatarSrc(reader.result);
-      }
-    }
-    reader.readAsDataURL(e.target.files[0]);
-    setIsAvatarEdit(true);
+    setIsEdit(false);
   }
 
   
@@ -270,28 +256,10 @@ const FundraiserEditForm = ({ fundraiser, setIsEdit }) => {
             </div>
           </>
         )}
-        { isAvatarEdit && (
-          <div className='avatar-edit-section'>
-            <Cropper 
-              src={avatarSrc}
-              autoCropArea={1}
-              aspectRatio={1}
-              viewMode={3}
-              background={false}
-              highlight={false}
-              responsive={true}
-              guides={false}
-              cropBoxResizable={false}
-              onInitialized={instance => {
-                setCropper(instance);
-              }}
-              className='cropper'
-            />
-          </div>
-        )}
+        { isAvatarEdit && <AvatarEditModal avatarSrc={avatarSrc} setCropper={setCropper} />}
       </form>
     </div>
   );
 }
 
-export default FundraiserEditForm;
+export default FundraiserEditModal;

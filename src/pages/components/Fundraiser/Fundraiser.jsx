@@ -5,7 +5,7 @@ import Header from '../../../common/Header/Header';
 import Pagination from '../Pagination/Pagination';
 import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild, FaCamera } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
-import FundraiserEditForm from './FundraiserEditForm/FundraiserEditForm';
+import FundraiserEditModal from './FundraiserEditModal/FundraiserEditModal';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import { users } from '../Projects/projects';
 
@@ -14,6 +14,8 @@ const Fundraiser = () => {
   const [ projectList, setProjectList ] = useState([]);
   const [ userList, setUserList ] = useState([]);
   const [ projectsPerPage, setProjectsPerPage ] = useState(6);
+  const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
+  const [ avatarSrc, setAvatarSrc ] = useState();
   const [ isAllSelected, setIsAllSelected ] = useState(false);
   const [ isEdit, setIsEdit ] = useState(false);
   const [ username, setUsername ] = useGlobalState('username');
@@ -53,7 +55,18 @@ const Fundraiser = () => {
     window.scrollTo(0, 0);
   }, [fundraiser?.name]);
 
-  console.log(username);
+
+  const handleChangeAvatar = e => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setAvatarSrc(reader.result);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
+    setIsAvatarEdit(true);
+    setIsEdit(true);
+  }
 
 
   return (
@@ -73,9 +86,12 @@ const Fundraiser = () => {
           <div className="avatar-wrapper">
             <img src={fundraiser?.avatar} alt="" className="avatar" />
             { username === fundraiserName ? (
-              <button onClick={() => setIsEdit(true)} className="edit-ava-btn">
-                <FaCamera className='icon' />
-              </button>
+              <>
+                <label htmlFor='image-file-chosen' className="edit-ava-btn">
+                  <FaCamera className='icon' />
+                </label>
+                <input type="file" accept='image/*' id='image-file-chosen' onChange={handleChangeAvatar} hidden />
+              </>
             ) : null }
           </div>
           <div className="info">
@@ -125,8 +141,17 @@ const Fundraiser = () => {
           <Pagination projects={isAllSelected ? allProjects : currentProjects} projectsPerPage={projectsPerPage} />
         </div>
       </div>
-      { isEdit && <div onClick={() => setIsEdit(false)} className='edit-overlay' /> }
-      { isEdit && <FundraiserEditForm fundraiser={fundraiser} setIsEdit={setIsEdit} /> }
+      { (isEdit || isAvatarEdit) && <div onClick={() => setIsEdit(false)} className='edit-overlay' /> }
+      { (isEdit || isAvatarEdit) && 
+        <FundraiserEditModal 
+          fundraiser={fundraiser} 
+          setIsEdit={setIsEdit} 
+          isAvatarEdit={isAvatarEdit} 
+          setIsAvatarEdit={setIsAvatarEdit} 
+          avatarSrc={avatarSrc}
+          handleChangeAvatar={handleChangeAvatar}
+        /> 
+      }
       <Outlet />
     </div>
   );
