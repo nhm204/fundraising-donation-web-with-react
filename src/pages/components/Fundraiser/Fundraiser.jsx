@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import './Fundraiser.scss';
 import { Outlet, useParams } from 'react-router-dom';
 import Header from '../../../common/Header/Header';
-import { projects } from '../Projects/projects';
 import Pagination from '../Pagination/Pagination';
 import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild, FaCamera } from "react-icons/fa";
 import { MdEdit } from "react-icons/md";
 import FundraiserEditForm from './FundraiserEditForm/FundraiserEditForm';
 import { useGlobalState } from '../../../hooks/useGlobalState';
+import { users } from '../Projects/projects';
 
 
 const Fundraiser = () => {
@@ -43,7 +43,7 @@ const Fundraiser = () => {
   }, []);
 
 
-  const fundraiser = userList?.find(user => user.id === +fundraiserId);
+  const fundraiser = users?.find(user => user.id === +fundraiserId);
   const allProjects = projectList?.filter(project => project.creatorId === +fundraiserId);
   const currentProjects = allProjects?.filter(project => project.currentPrice < project.targetPrice);
 

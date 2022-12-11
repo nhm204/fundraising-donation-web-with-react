@@ -37,7 +37,7 @@ const Header = ({ link, searchQuery, changeData }) => {
 
   const user = userList?.filter(user => user.name === username);
   console.log(username)
-  console.log(user)
+  console.log(user[0]?.avatar)
 
 
   return (
@@ -60,7 +60,7 @@ const Header = ({ link, searchQuery, changeData }) => {
             <Link to='/signin' className='nav-link'>Sign in</Link>
             ) : (
               <div className="avatar-wrapper">
-                <img src={user?.avatar} alt="" className='user-avatar' onClick={() => setGlobalState('username', null)}/>
+                <img src={user[0]?.avatar} alt="" className='user-avatar' onClick={() => setGlobalState('username', null)}/>
               </div>
             )
           }

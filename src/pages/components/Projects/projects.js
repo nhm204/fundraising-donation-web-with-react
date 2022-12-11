@@ -133,7 +133,7 @@ export const projects = [
 
 export const users = [
     {
-        "id": "1",
+        "id": 1,
         "email": "19521862@gm.uit.edu.vn",
         "name": "The Team 01 Charity - Vietnam 1st Charity site for helping the community for the better world",
         "avatar": "https://i.pinimg.com/originals/83/95/aa/8395aa28f2c034d4b944187ea973aecd.jpg",
@@ -145,9 +145,9 @@ export const users = [
         "createAt": "2022-10-30"
     },
     {
-        "id": "2",
+        "id": 2,
         "email": "19521862@gm.uit.edu.vn",
-        "name": "iammy 🐰",
+        "name": "iammy",
         "avatar": "https://i.pinimg.com/originals/b1/a0/a5/b1a0a59261b607cd0ccd78a8428ca295.jpg",
         "coverBackground": "https://i.pinimg.com/originals/ae/44/01/ae4401dc31a173fe879260d111341a1c.jpg",
         "description": "Love pink and hate lies",
