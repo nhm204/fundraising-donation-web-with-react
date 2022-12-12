@@ -1,15 +1,14 @@
-import React, { useState } from 'react';
 import { Cropper } from 'react-cropper';
 import "cropperjs/dist/cropper.css";
 
 
-const AvatarEditModal = ({ avatarSrc, setCropper }) => {
+const BackgroundEditModal = ({ backgroundSrc, setCropper }) => {
   return (
-    <div className='avatar-edit-section'>
+    <div className='background-edit-section'>
       <Cropper 
-        src={avatarSrc}
+        src={backgroundSrc}
         autoCropArea={1}
-        aspectRatio={1}
+        aspectRatio={16 / 9}
         viewMode={3}
         background={false}
         highlight={false}
@@ -25,4 +24,4 @@ const AvatarEditModal = ({ avatarSrc, setCropper }) => {
   );
 }
 
-export default AvatarEditModal;
+export default BackgroundEditModal;

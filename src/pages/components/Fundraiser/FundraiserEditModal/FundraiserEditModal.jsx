@@ -2,15 +2,28 @@ import React, { useState } from 'react';
 import './FundraiserEditModal.scss';
 import { useForm } from 'react-hook-form';
 import { IoCloseOutline, IoArrowBackOutline } from "react-icons/io5";
-import AvatarEditModal from '../AvatarEditModal/AvatarEditModal';
+import AvatarEditModal from './AvatarEditModal';
+import BackgroundEditModal from './BackgroundEditModal';
 // import { FaEye, FaEyeSlash } from "react-icons/fa";
 // import { PasswordGuidance } from '../../../../common';
 
 
-const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarEdit, avatarSrc, handleChangeAvatar }) => {
+const FundraiserEditModal = ({ 
+    fundraiser,
+    setIsEdit,
+    isAvatarEdit,
+    setIsAvatarEdit,
+    isBackgroundEdit,
+    setIsBackgroundEdit,
+    avatarSrc,
+    backgroundSrc,
+    handleChangeAvatar,
+    handleChangeBackground
+  }) => {
   const [ profileEdit, setProfileEdit ] = useState(false);
   const [ cropper, setCropper ] = useState();
   const [ cropAvatar, setCropAvatar ] = useState(null);
+  const [ cropBackground, setCropBackground ] = useState(null);
   // const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
   const [ isPhoneFocus, setIsPhoneFocus ] = useState(false);
@@ -29,20 +42,29 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
 
   const onSubmit = async (data) => {
     if (profileEdit) {
-      console.log(typeof data.avatar)
-      console.log(data.avatar)
+      console.log(data.coverBackground)
       console.log(data)
     } 
-    setIsEdit(false);
+    // setIsEdit(false);
   }
 
-  
+
   const handleCropAvatar = () => {
+    setIsEdit(true);
     if (typeof cropper !== "undefined") {
       setCropAvatar(cropper.getCroppedCanvas().toDataURL());
     }
     setIsAvatarEdit(false);
-  };
+  }
+
+
+  const handleCropBackground = () => {
+    setIsEdit(true);
+    if (typeof cropper !== "undefined") {
+      setCropBackground(cropper.getCroppedCanvas().toDataURL());
+    }
+    setIsBackgroundEdit(false);
+  }
   
 
   return (
@@ -52,34 +74,41 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
           <div className='blur-bg' />
           <div className='header-content'>
             <div className='header-heading'>
-              { !isAvatarEdit ? (
+              { (!isAvatarEdit && !isBackgroundEdit) ? (
                 <IoCloseOutline onClick={() => setIsEdit(false)} className='icon' />
               ) : (
-                <IoArrowBackOutline onClick={() => setIsAvatarEdit(false)} className='icon' />
+                <IoArrowBackOutline 
+                  onClick={() => {
+                    setIsAvatarEdit(false);
+                    setIsBackgroundEdit(false);
+                  }} 
+                  className='icon' 
+                />
               )}
-              <h3>{!isAvatarEdit ? 'Edit profile' : 'Edit avatar'}</h3>
+              <h3>{(!isAvatarEdit && !isBackgroundEdit) ? 'Edit profile' : 'Edit media'}</h3>
             </div>
-            { !isAvatarEdit ? (
+            { (!isAvatarEdit && !isBackgroundEdit) && (
               <button 
                 type='submit' 
                 onClick={() => {
                   setValue('avatar', String(cropAvatar || fundraiser.avatar));
+                  setValue('coverBackground', String(cropBackground || fundraiser.coverBackground));
                   setProfileEdit(true);
                 }} 
                 className='save-btn'
               >
                 Save
               </button>
-            ) : (
-              <button onClick={handleCropAvatar} className='save-btn'>Apply</button>
-            )}
+            )} 
+            { isAvatarEdit ? (<button onClick={handleCropAvatar} className='save-btn'>Apply</button>) : null }
+            { isBackgroundEdit ? (<button onClick={handleCropBackground} className='save-btn'>Apply</button>) : null }
           </div>
         </header>
-        { !isAvatarEdit && (
+        { (!isAvatarEdit && !isBackgroundEdit) ? (
           <>
             <div className="cover-bg-container">
-              <img src={fundraiser.coverBackground} alt="" className='cover-bg' />
-              <button className='edit-cover-bg-btn'>
+              <img src={cropBackground || fundraiser.coverBackground} alt="" className='cover-bg' />
+              <label htmlFor='background-file-chosen' className='edit-cover-bg-btn'>
                 <svg viewBox="0 0 24 24" aria-hidden="true">
                   <g>
                     <path
@@ -87,12 +116,13 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
                     ></path>
                   </g>
                 </svg>
-              </button>
+              </label>
+              <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeAvatar} hidden />
             </div>
             <div className="info-container">
               <div className="avatar-container">
                 <img src={cropAvatar || fundraiser.avatar} alt="" className="avatar" />
-                <label htmlFor='image-file-chosen' className="edit-ava-btn">
+                <label htmlFor='avatar-file-chosen' className="edit-ava-btn">
                   <svg viewBox="0 0 24 24" aria-hidden="true">
                     <g>
                       <path
@@ -101,7 +131,7 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
                     </g>
                   </svg>
                 </label>
-                <input type="file" accept='image/*' id='image-file-chosen' onChange={handleChangeAvatar} hidden />
+                <input type="file" accept='image/*' id='avatar-file-chosen' onChange={handleChangeAvatar} hidden />
               </div>
               <div className='input-group'>
                 <label className='' onFocus={() => setIsNameFocus(true)} onBlur={() => setIsNameFocus(false)}>
@@ -176,7 +206,7 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
                     onChange={(e) => setDescriptionValue(e.target.value)}
                   />
                   <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
-                    <span className={`placeholder ${setIsDescriptionFocus && 'is-focus'}`}>Bio</span>
+                    <span className={`placeholder ${isDescriptionFocus && 'is-focus'}`}>Bio</span>
                     { isDescriptionFocus && <span className="quantity">{descriptionValue?.length}/160</span> }
                   </div>
                 </label>
@@ -255,8 +285,9 @@ const FundraiserEditModal = ({ fundraiser, setIsEdit, isAvatarEdit, setIsAvatarE
               </div>
             </div>
           </>
-        )}
-        { isAvatarEdit && <AvatarEditModal avatarSrc={avatarSrc} setCropper={setCropper} />}
+        ) : null }
+        { isAvatarEdit ? (<AvatarEditModal avatarSrc={avatarSrc} setCropper={setCropper} />) : null }
+        { isBackgroundEdit ? (<BackgroundEditModal backgroundSrc={backgroundSrc} setCropper={setCropper} />) : null }
       </form>
     </div>
   );
