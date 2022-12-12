@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import './Fundraiser.scss';
 import { Outlet, useParams } from 'react-router-dom';
 import Header from '../../../common/Header/Header';
@@ -16,6 +16,8 @@ const Fundraiser = () => {
   const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
   const [ avatarSrc, setAvatarSrc ] = useState();
+  const [ isBackgroundEdit, setIsBackgroundEdit ] = useState(false);
+  const [ backgroundSrc, setBackgroundSrc ] = useState();
   const [ isAllSelected, setIsAllSelected ] = useState(false);
   const [ isEdit, setIsEdit ] = useState(false);
   const [ username, setUsername ] = useGlobalState('username');
@@ -56,17 +58,35 @@ const Fundraiser = () => {
   }, [fundraiser?.name]);
 
 
-  const handleChangeAvatar = e => {
+  const handleChangeAvatar = useCallback((e) => {
     const reader = new FileReader();
     reader.onload = () => {
       if (reader.readyState === 2) {
         setAvatarSrc(reader.result);
       }
     }
+    console.log('read')
     reader.readAsDataURL(e.target.files[0]);
     setIsAvatarEdit(true);
-    setIsEdit(true);
-  }
+  }, [setIsAvatarEdit])
+
+
+  const handleChangeBackground = useCallback((e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setBackgroundSrc(reader.result);
+      }
+    }
+    console.log('read')
+    reader.readAsDataURL(e.target.files[0]);
+    setIsBackgroundEdit(true);
+  }, [setIsBackgroundEdit])
+
+
+  console.log('isEdit', isEdit)
+  console.log('isBackgroundEdit', isBackgroundEdit)
+  
 
 
   return (
@@ -76,10 +96,13 @@ const Fundraiser = () => {
         <div className="cover-bg-wrapper">
           <img src={fundraiser?.coverBackground} alt="" className="cover-bg" />
           { username === fundraiserName ? (
-            <button onClick={() => setIsEdit(true)} className='edit-cover-bg-btn'>
-              <FaCamera className='icon' />
-              Edit cover image
-            </button>
+            <>
+              <label htmlFor='background-file-chosen' className='edit-cover-bg-btn'>
+                <FaCamera className='icon' />
+                Edit cover image
+              </label>
+              <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeBackground} hidden />
+            </>
           ) : null }
         </div>
         <div className="info-container">
@@ -87,10 +110,10 @@ const Fundraiser = () => {
             <img src={fundraiser?.avatar} alt="" className="avatar" />
             { username === fundraiserName ? (
               <>
-                <label htmlFor='image-file-chosen' className="edit-ava-btn">
+                <label htmlFor='avatar-file-chosen' className="edit-ava-btn">
                   <FaCamera className='icon' />
                 </label>
-                <input type="file" accept='image/*' id='image-file-chosen' onChange={handleChangeAvatar} hidden />
+                <input type="file" accept='image/*' id='avatar-file-chosen' onChange={handleChangeAvatar} hidden />
               </>
             ) : null }
           </div>
@@ -141,8 +164,17 @@ const Fundraiser = () => {
           <Pagination projects={isAllSelected ? allProjects : currentProjects} projectsPerPage={projectsPerPage} />
         </div>
       </div>
-      { (isEdit || isAvatarEdit) && <div onClick={() => setIsEdit(false)} className='edit-overlay' /> }
-      { (isEdit || isAvatarEdit) && 
+      { (isEdit || isAvatarEdit || isBackgroundEdit) && (
+        <div 
+          onClick={() => {
+            setIsEdit(false);
+            setIsAvatarEdit(false);
+            setIsBackgroundEdit(false);
+          }} 
+          className='edit-overlay' 
+        /> 
+      )}
+      { (isEdit || isAvatarEdit || isBackgroundEdit) && 
         <FundraiserEditModal 
           fundraiser={fundraiser} 
           setIsEdit={setIsEdit} 
@@ -150,6 +182,10 @@ const Fundraiser = () => {
           setIsAvatarEdit={setIsAvatarEdit} 
           avatarSrc={avatarSrc}
           handleChangeAvatar={handleChangeAvatar}
+          isBackgroundEdit={isBackgroundEdit} 
+          setIsBackgroundEdit={setIsBackgroundEdit} 
+          backgroundSrc={backgroundSrc}
+          handleChangeBackground={handleChangeBackground}
         /> 
       }
       <Outlet />
