@@ -68,7 +68,7 @@ const Fundraiser = () => {
     console.log('read')
     reader.readAsDataURL(e.target.files[0]);
     setIsAvatarEdit(true);
-  }, [setIsAvatarEdit])
+  }, [setAvatarSrc, setIsAvatarEdit]);
 
 
   const handleChangeBackground = useCallback((e) => {
@@ -81,7 +81,7 @@ const Fundraiser = () => {
     console.log('read')
     reader.readAsDataURL(e.target.files[0]);
     setIsBackgroundEdit(true);
-  }, [setIsBackgroundEdit])
+  }, [setBackgroundSrc, setIsBackgroundEdit]);
 
 
   console.log('isEdit', isEdit)

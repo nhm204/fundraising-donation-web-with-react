@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './StartFundraising.scss';
 import { categories } from '../../../../constants/categories';
-import { BsCheck } from "react-icons/bs";
+import { BsCheck, BsCloudUploadFill } from "react-icons/bs";
 import PaymentMethods from '../PaymentMethods/PaymentMethods';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 
@@ -19,6 +19,9 @@ const StartFundraising = () => {
   const [ targetPriceValue, setTargetPriceValue ] = useState(0);
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ descriptionValue, setDescriptionValue ] = useState('');
+  const [ projectImage, setProjectImage ] = useState(null);
+  const [ projectImageName, setProjectImageName ] = useState(null);
+  const [ projectImageSrc, setProjectImageSrc ] = useState('');
   const [ isFeatured, setIsFeatured ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
@@ -45,20 +48,34 @@ const StartFundraising = () => {
 
   const onSubmit = async (data) => {
     if (isCreated) {
-      try {
-        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        const res = await fetchResponse.json();
-        console.log(res);
-      } 
-      catch (e) {
-        return e;
-      } 
+      // try {
+      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
+      //     method: 'POST',
+      //     body: JSON.stringify(data)
+      //   })
+      //   const res = await fetchResponse.json();
+      //   console.log(res);
+      // } 
+      // catch (e) {
+      //   return e;
+      // } 
       console.log(data)
     }
   }
+
+
+  const handleChangeProjectImage = useCallback((e) => {
+    const reader = new FileReader();
+    reader.onload = () => {
+      if (reader.readyState === 2) {
+        setProjectImage(reader.result);
+        setProjectImageName(e.target.files[0].name);
+      }
+    }
+    reader.readAsDataURL(e.target.files[0]);
+    setProjectImageSrc('');
+  }, [setProjectImage]);
+
   
   return (
     <div className='start-fundraising'>
@@ -70,11 +87,13 @@ const StartFundraising = () => {
         <div className='desc'>This information helps us get to know you and your fundraising needs.</div>
       </div>
       <div className="right">
-        <nav>
-          <Link to='/signin'>
-            <button className='sign-in-btn'>Sign In</button>
-          </Link>
-        </nav>
+        { username === null && (
+          <nav>
+            <Link to='/signin'>
+              <button className='sign-in-btn'>Sign In</button>
+            </Link>
+          </nav>
+        )}
         <form onSubmit={handleSubmit(onSubmit)} className='create-form'>
           <label onFocus={() => setIsNameFocus(true)} onBlur={() => setIsNameFocus(false)}>
             <input
@@ -101,6 +120,34 @@ const StartFundraising = () => {
                 {errors.name?.message}
               </p>
             )}
+          </label>
+          <label className='image-label'>
+            <div className='title'>Upload a photo or pass an image URL to illustrate your project</div>
+            <input 
+              type="text" 
+              className='edit-input' 
+              placeholder='Pass an image URL'
+              value={projectImageSrc} 
+              onChange={e => {
+                setProjectImageSrc(e.target.value);
+                setProjectImage(null);
+                setProjectImageName('');
+              }} 
+            />
+            { (projectImageSrc?.length === 0 && projectImage === null) && (
+              <p className='error-msg'>
+                Project image is required!
+              </p>
+            )}
+            { (projectImage || projectImageSrc) && <img src={projectImage || projectImageSrc} alt={nameValue} className='preview-img' />}
+            <div className="choose-file">
+              <div className="img-name">{projectImageName}</div>
+              <label htmlFor="project-image-file-chosen" className='upload-btn'>
+                <BsCloudUploadFill className='icon' />
+                Choose file
+              </label>
+            </div>
+            <input type="file" accept='image/*' id='project-image-file-chosen' onChange={handleChangeProjectImage} hidden />
           </label>
           <label className='category-label'>
             What best describes why you're fundraising?
@@ -159,8 +206,8 @@ const StartFundraising = () => {
               })}
               onChange={(e) => setDescriptionValue(e.target.value)}
             />
-            <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
-              <span className={`placeholder ${setIsDescriptionFocus && 'is-focus'}`}>Description</span>
+            <div className={`${(!isDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container t-12' : 'placeholder-container active'}`}>
+              <span className={`placeholder ${isDescriptionFocus && 'is-focus'}`}>Description</span>
               { isDescriptionFocus && <span className="quantity">{descriptionValue?.length}/500</span> }
             </div>
           </label>
@@ -196,9 +243,9 @@ const StartFundraising = () => {
               <button 
                 className='create-btn' 
                 onClick={() => {
-                  setValue('creatorId', user[0].id);
+                  setValue('creatorId', 1);
                   setValue('category', selectedCategory);
-                  setValue('image', 'https://images.unsplash.com/photo-1599059813005-11265ba4b4ce?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80');
+                  setValue('image', projectImage || projectImageSrc);
                   setValue('donationCount', 0);
                   setValue('currentPrice', 0);
                   setIsCreated(true);
