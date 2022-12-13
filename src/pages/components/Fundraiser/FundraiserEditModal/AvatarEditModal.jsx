@@ -1,5 +1,6 @@
 import { Cropper } from 'react-cropper';
 import "cropperjs/dist/cropper.css";
+import { useEffect } from 'react';
 
 
 const AvatarEditModal = ({ avatarSrc, setCropper }) => {

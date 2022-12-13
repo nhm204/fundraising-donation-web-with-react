@@ -8,6 +8,7 @@ import { MdEdit } from "react-icons/md";
 import FundraiserEditModal from './FundraiserEditModal/FundraiserEditModal';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import { users } from '../Projects/projects';
+import ConfirmSignOutModal from './ConfirmSignOutModal/ConfirmSignOutModal';
 
 
 const Fundraiser = () => {
@@ -20,6 +21,7 @@ const Fundraiser = () => {
   const [ backgroundSrc, setBackgroundSrc ] = useState();
   const [ isAllSelected, setIsAllSelected ] = useState(false);
   const [ isEdit, setIsEdit ] = useState(false);
+  const [ isConfirmModalShow, setIsConfirmModalShow ] = useState(false);
   const [ username, setUsername ] = useGlobalState('username');
   const paramValue = useParams();
   const fundraiserId = paramValue.id;
@@ -53,9 +55,11 @@ const Fundraiser = () => {
 
 
   useEffect(() => { 
-    document.title = `${fundraiser?.name} | BetterWorld`;
+    if (!isEdit && !isAvatarEdit && !isBackgroundEdit) {
+      document.title = `${fundraiser?.name} | BetterWorld`;
+    }
     window.scrollTo(0, 0);
-  }, [fundraiser?.name]);
+  }, [fundraiser?.name, isAvatarEdit, isBackgroundEdit, isEdit]);
 
 
   const handleChangeAvatar = useCallback((e) => {
@@ -90,7 +94,7 @@ const Fundraiser = () => {
 
 
   return (
-    <div id={fundraiserId} className={`fundraiser-section ${isEdit && 'is-fundraiser-edit'}`}>
+    <div id={fundraiserId} className={`fundraiser-section ${(isEdit || isConfirmModalShow) && 'is-fundraiser-edit'}`}>
       <Header link={'Discover'} />
       <div className="heading-container">
         <div className="cover-bg-wrapper">
@@ -125,10 +129,15 @@ const Fundraiser = () => {
               <i className="bio">{fundraiser?.description}</i>
           </div>
           { username === fundraiserName ? (
-            <button onClick={() => setIsEdit(true)} className="edit-profile-btn">
-              <MdEdit className='icon' />
-              Edit profile
-            </button>
+            <div className='btn-container'>
+              <button onClick={() => setIsEdit(true)} className="edit-profile-btn">
+                <MdEdit className='icon' />
+                Edit profile
+              </button>
+              <button onClick={() => setIsConfirmModalShow(true)} className="sign-out-btn">
+                Sign out
+              </button>
+            </div>
           ) : null }
         </div>
       </div>
@@ -165,29 +174,35 @@ const Fundraiser = () => {
         </div>
       </div>
       { (isEdit || isAvatarEdit || isBackgroundEdit) && (
-        <div 
-          onClick={() => {
-            setIsEdit(false);
-            setIsAvatarEdit(false);
-            setIsBackgroundEdit(false);
-          }} 
-          className='edit-overlay' 
-        /> 
+        <>
+          <div 
+            onClick={() => {
+              setIsEdit(false);
+              setIsAvatarEdit(false);
+              setIsBackgroundEdit(false);
+            }} 
+            className='profile-overlay' 
+          /> 
+          <FundraiserEditModal 
+            fundraiser={fundraiser} 
+            setIsEdit={setIsEdit} 
+            isAvatarEdit={isAvatarEdit} 
+            setIsAvatarEdit={setIsAvatarEdit} 
+            avatarSrc={avatarSrc}
+            handleChangeAvatar={handleChangeAvatar}
+            isBackgroundEdit={isBackgroundEdit} 
+            setIsBackgroundEdit={setIsBackgroundEdit} 
+            backgroundSrc={backgroundSrc}
+            handleChangeBackground={handleChangeBackground}
+          /> 
+        </>
       )}
-      { (isEdit || isAvatarEdit || isBackgroundEdit) && 
-        <FundraiserEditModal 
-          fundraiser={fundraiser} 
-          setIsEdit={setIsEdit} 
-          isAvatarEdit={isAvatarEdit} 
-          setIsAvatarEdit={setIsAvatarEdit} 
-          avatarSrc={avatarSrc}
-          handleChangeAvatar={handleChangeAvatar}
-          isBackgroundEdit={isBackgroundEdit} 
-          setIsBackgroundEdit={setIsBackgroundEdit} 
-          backgroundSrc={backgroundSrc}
-          handleChangeBackground={handleChangeBackground}
-        /> 
-      }
+      { isConfirmModalShow && (
+        <>
+          <div onClick={() => setIsConfirmModalShow(false)} className='profile-overlay' /> 
+          <ConfirmSignOutModal setIsConfirmModalShow={setIsConfirmModalShow} />
+        </>
+      )}
       <Outlet />
     </div>
   );

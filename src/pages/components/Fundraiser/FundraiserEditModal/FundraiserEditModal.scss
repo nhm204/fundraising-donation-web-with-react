@@ -18,7 +18,7 @@
         color: white;
         border-radius: 10px;
         height: 88vh;
-        overflow: auto;
+        overflow-y: scroll;
 
         .edit-header {
             position: sticky;
