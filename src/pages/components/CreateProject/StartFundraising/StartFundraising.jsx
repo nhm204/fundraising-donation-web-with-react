@@ -8,6 +8,7 @@ import PaymentMethods from '../PaymentMethods/PaymentMethods';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 
 
+
 const StartFundraising = () => {
   const [ username, setUsername ] = useGlobalState('username');
   const [ userList, setUserList ] = useState([]);

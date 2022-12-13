@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FundraiserEditModal.scss';
 import { useForm } from 'react-hook-form';
 import { IoCloseOutline, IoArrowBackOutline } from "react-icons/io5";
@@ -26,12 +26,14 @@ const FundraiserEditModal = ({
   const [ cropBackground, setCropBackground ] = useState(null);
   // const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
+  const [ isEmailFocus, setIsEmailFocus ] = useState(false);
   const [ isPhoneFocus, setIsPhoneFocus ] = useState(false);
   const [ isDescriptionFocus, setIsDescriptionFocus ] = useState(false);
   const [ isFacebookFocus, setIsFacebookFocus ] = useState(false);
   const [ isTwitterFocus, setIsTwitterFocus ] = useState(false);
   // const [ passwordValue, setPasswordValue ] = useState('');
   const [ nameValue, setNameValue ] = useState(fundraiser.name);
+  const [ emailValue, setEmailValue ] = useState(fundraiser.email);
   const [ phoneValue, setPhoneValue ] = useState(fundraiser.phone);
   const [ descriptionValue, setDescriptionValue ] = useState(fundraiser.description);
   const [ facebookValue, setFacebookValue ] = useState(fundraiser.facebook);
@@ -47,6 +49,12 @@ const FundraiserEditModal = ({
     } 
     // setIsEdit(false);
   }
+
+
+  useEffect(() => { 
+    document.title = `Edit profile (@${fundraiser?.name}) | BetterWorld`;
+    window.scrollTo(0, 0);
+  }, [fundraiser?.name]);
 
 
   const handleCropAvatar = () => {
@@ -117,7 +125,7 @@ const FundraiserEditModal = ({
                   </g>
                 </svg>
               </label>
-              <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeAvatar} hidden />
+              <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeBackground} hidden />
             </div>
             <div className="info-container">
               <div className="avatar-container">
@@ -166,6 +174,33 @@ const FundraiserEditModal = ({
                     </p>
                   )}
                 </label>
+                <label className='' onFocus={() => setIsEmailFocus(true)} onBlur={() => setIsEmailFocus(false)}>
+                  <input
+                    required
+                    value={emailValue}
+                    type='text'
+                    className={`edit-input ${(emailValue.length > 0 || isEmailFocus) && 'input-has-value'}`}
+                    {...register('email', { 
+                      required: {
+                        value: true, 
+                        message: 'Email is required!'
+                      }, 
+                      pattern: {
+                        value: /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
+                        message: 'Please enter a valid email.'
+                      }
+                    })}
+                    onChange={e => setEmailValue(e.target.value)}
+                  />
+                  <div className={`${(!isEmailFocus && emailValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
+                    <span className={`placeholder ${isEmailFocus && 'is-focus'}`}>Email</span>
+                  </div>
+                  { errors.email?.message && (
+                    <p className='error-msg'>
+                      {errors.email?.message}
+                    </p>
+                  )}
+                </label>
                 <label className='' onFocus={() => setIsPhoneFocus(true)} onBlur={() => setIsPhoneFocus(false)}>
                   <input
                     required
@@ -203,6 +238,12 @@ const FundraiserEditModal = ({
                     value={descriptionValue}
                     maxLength='160'
                     className={`edit-input ${(descriptionValue?.length > 0 || isDescriptionFocus) && 'input-has-value'}`}
+                    {...register("description", {
+                      maxLength: {
+                        value: 160,
+                        message: 'Your project description must be less than 160 characters'
+                      }
+                    })}
                     onChange={(e) => setDescriptionValue(e.target.value)}
                   />
                   <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>

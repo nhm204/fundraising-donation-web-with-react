@@ -41,6 +41,10 @@
                     margin-right: 8px;
                     font-size: 1.6rem;
                 }
+
+                &:hover {
+                    opacity: 0.9;
+                }
             }
         }
 
@@ -84,6 +88,10 @@
                         margin-right: -0.5px;
                         margin-top: -1px;
                     }
+
+                    &:hover {
+                        opacity: 0.9;
+                    }
                 }
             }
     
@@ -122,26 +130,54 @@
                     color: black;
                 }
             }
-    
-            .edit-profile-btn {
+
+            .btn-container {
                 position: absolute;
                 bottom: 8px;
                 right: 0;
                 display: flex;
                 align-items: center;
-                padding: 6px 14px;
-                background-color: #febebe;
-                border-radius: 5px;
-                font-size: 1.4rem;
-                border: none;
-                font-weight: 500;
-                cursor: pointer;
 
-                .icon {
-                    margin-right: 8px;
-                    font-size: 1.6rem;
+                .edit-profile-btn {
+                    display: flex;
+                    align-items: center;
+                    padding: 6px 14px;
+                    background-color: #febebe;
+                    border-radius: 5px;
+                    font-size: 1.4rem;
+                    border: none;
+                    font-weight: 500;
+                    cursor: pointer;
+    
+                    .icon {
+                        margin-right: 8px;
+                        font-size: 1.6rem;
+                    }
+
+                    &:hover {
+                        background-color: rgba($color: #febebe, $alpha: 0.8);
+                    }
+                }
+
+                .sign-out-btn {
+                    color: white;
+                    display: flex;
+                    align-items: center;
+                    padding: 6px 14px;
+                    background-color: var(--primary-color);
+                    border-radius: 5px;
+                    font-size: 1.4rem;
+                    border: none;
+                    font-weight: 500;
+                    cursor: pointer;
+                    margin-left: 8px;
+
+                    &:hover {
+                        opacity: 0.8;
+                    }
                 }
             }
+    
         }
     }
 
@@ -350,7 +386,7 @@
         }
     }
 
-    .edit-overlay {
+    .profile-overlay {
         position: fixed;
         right: 0;
         top: 0;
