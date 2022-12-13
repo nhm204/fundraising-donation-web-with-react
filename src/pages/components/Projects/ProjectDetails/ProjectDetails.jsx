@@ -4,6 +4,7 @@ import Header from '../../../../common/Header/Header';
 import './ProjectDetails.scss';
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { Banner2 } from '../../Banner/Banner';
+import { projects, users } from '../projects';
 
 
 const ProjectDetails = () => {
@@ -36,8 +37,8 @@ const ProjectDetails = () => {
   }, []);
 
 
-  const project = projectList?.find(element => element.id === +projectId);
-  const fundraiser = userList?.find(user => user.id === project?.creatorId);
+  const project = projects?.find(element => element.id === +projectId);
+  const fundraiser = users?.find(user => user.id === project?.creatorId);
   console.log(project)
   console.log(fundraiser)
 

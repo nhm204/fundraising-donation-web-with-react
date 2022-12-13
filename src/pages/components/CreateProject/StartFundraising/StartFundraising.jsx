@@ -8,7 +8,6 @@ import PaymentMethods from '../PaymentMethods/PaymentMethods';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 
 
-
 const StartFundraising = () => {
   const [ username, setUsername ] = useGlobalState('username');
   const [ userList, setUserList ] = useState([]);
@@ -48,7 +47,7 @@ const StartFundraising = () => {
 
 
   const onSubmit = async (data) => {
-    if (isCreated) {
+    if (isCreated && (projectImageSrc?.length > 0 || projectImage !== null)) {
       // try {
       //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
       //     method: 'POST',
@@ -81,9 +80,9 @@ const StartFundraising = () => {
   return (
     <div className='start-fundraising'>
       <div className="left">
-        <div className="logo-wrapper">
+        <Link to='/' className="logo-wrapper">
           <img src={require ('../../../../assets/img/logo.png')} alt="" className="logo" />
-        </div>
+        </Link>
         <h1>Tell us a bit more about your fundraiser</h1>
         <div className='desc'>This information helps us get to know you and your fundraising needs.</div>
       </div>
@@ -135,7 +134,7 @@ const StartFundraising = () => {
                 setProjectImageName('');
               }} 
             />
-            { (projectImageSrc?.length === 0 && projectImage === null) && (
+            { (isCreated && (projectImageSrc?.length === 0 && projectImage === null)) && (
               <p className='error-msg'>
                 Project image is required!
               </p>

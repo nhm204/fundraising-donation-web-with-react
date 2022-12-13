@@ -1,7 +1,7 @@
 export const projects = [
     {
-        "id": "1",
-        "creatorId": "1",
+        "id": 1,
+        "creatorId": 1,
         "name": "Poverty in Africa",
         "currentPrice": 5000,
         "targetPrice": 10000,
@@ -13,8 +13,8 @@ export const projects = [
         "createAt": "2022-10-12", 
     },
     {
-        "id": "2",
-        "creatorId": "1",
+        "id": 2,
+        "creatorId": 1,
         "name": "Public libraries for children in Africa",
         "currentPrice": 350,
         "targetPrice": 10000,
@@ -26,8 +26,8 @@ export const projects = [
         "createAt": "2022-10-15", 
     },
     {
-        "id": "3",
-        "creatorId": "2",
+        "id": 3,
+        "creatorId": 2,
         "name": "Donate for Homeless People",
         "currentPrice": 80,
         "targetPrice": 3000,
@@ -39,8 +39,8 @@ export const projects = [
         "createAt": "2022-10-15", 
     },
     {
-        "id": "4",
-        "creatorId": "2",
+        "id": 4,
+        "creatorId": 2,
         "name": "Food Donation",
         "currentPrice": 5000,
         "targetPrice": 5000,
@@ -52,8 +52,8 @@ export const projects = [
         "createAt": "2022-10-17", 
     },
     {
-        "id": "5",
-        "creatorId": "1",
+        "id": 5,
+        "creatorId": 1,
         "name": "Community School",
         "currentPrice": 0,
         "targetPrice": 2500,
@@ -65,8 +65,8 @@ export const projects = [
         "createAt": "2022-10-20", 
     },
     {
-        "id": "6",
-        "creatorId": "2",
+        "id": 6,
+        "creatorId": 2,
         "name": "Homeless People in the UK",
         "currentPrice": 800,
         "targetPrice": 7500,
@@ -78,8 +78,8 @@ export const projects = [
         "createAt": "2022-10-23", 
     },
     {
-        "id": "7",
-        "creatorId": "2",
+        "id": 7,
+        "creatorId": 2,
         "name": "Vaccine in Covid-19",
         "currentPrice": 8000,
         "targetPrice": 15000,
@@ -91,8 +91,8 @@ export const projects = [
         "createAt": "2022-10-31", 
     },
     {
-        "id": "8",
-        "creatorId": "1",
+        "id": 8,
+        "creatorId": 1,
         "name": "Free Clean Water for African",
         "currentPrice": 1300,
         "targetPrice": 7000,
@@ -104,8 +104,8 @@ export const projects = [
         "createAt": "2022-11-03", 
     },
     {
-        "id": "9",
-        "creatorId": "2",
+        "id": 9,
+        "creatorId": 2,
         "name": "Free Face Mask through Pandemic",
         "currentPrice": 2000,
         "targetPrice": 3000,
@@ -117,8 +117,8 @@ export const projects = [
         "createAt": "2022-11-05", 
     },
     {
-        "id": "10",
-        "creatorId": "2",
+        "id": 10,
+        "creatorId": 2,
         "name": "Building schools for ethnic minorities in Vietnam",
         "currentPrice": 17864,
         "targetPrice": 30000,
