@@ -1,7 +1,7 @@
 export const projects = [
     {
-        "id": "1",
-        "creatorId": "1",
+        "id": 1,
+        "creatorId": 1,
         "name": "Poverty in Africa",
         "currentPrice": 5000,
         "targetPrice": 10000,
@@ -13,8 +13,8 @@ export const projects = [
         "createAt": "2022-10-12", 
     },
     {
-        "id": "2",
-        "creatorId": "1",
+        "id": 2,
+        "creatorId": 1,
         "name": "Public libraries for children in Africa",
         "currentPrice": 350,
         "targetPrice": 10000,
@@ -26,8 +26,8 @@ export const projects = [
         "createAt": "2022-10-15", 
     },
     {
-        "id": "3",
-        "creatorId": "2",
+        "id": 3,
+        "creatorId": 2,
         "name": "Donate for Homeless People",
         "currentPrice": 80,
         "targetPrice": 3000,
@@ -35,12 +35,12 @@ export const projects = [
         "description": "This is a charity project with the aim of building a community library for children in African countries",
         "category": "Homelessness",
         "image": "https://images.unsplash.com/photo-1518398046578-8cca57782e17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "isFeatured": true,
+        "isFeatured": false,
         "createAt": "2022-10-15", 
     },
     {
-        "id": "4",
-        "creatorId": "2",
+        "id": 4,
+        "creatorId": 2,
         "name": "Food Donation",
         "currentPrice": 5000,
         "targetPrice": 5000,
@@ -52,8 +52,8 @@ export const projects = [
         "createAt": "2022-10-17", 
     },
     {
-        "id": "5",
-        "creatorId": "1",
+        "id": 5,
+        "creatorId": 1,
         "name": "Community School",
         "currentPrice": 0,
         "targetPrice": 2500,
@@ -65,8 +65,8 @@ export const projects = [
         "createAt": "2022-10-20", 
     },
     {
-        "id": "6",
-        "creatorId": "2",
+        "id": 6,
+        "creatorId": 2,
         "name": "Homeless People in the UK",
         "currentPrice": 800,
         "targetPrice": 7500,
@@ -78,8 +78,8 @@ export const projects = [
         "createAt": "2022-10-23", 
     },
     {
-        "id": "7",
-        "creatorId": "2",
+        "id": 7,
+        "creatorId": 2,
         "name": "Vaccine in Covid-19",
         "currentPrice": 8000,
         "targetPrice": 15000,
@@ -91,8 +91,8 @@ export const projects = [
         "createAt": "2022-10-31", 
     },
     {
-        "id": "8",
-        "creatorId": "1",
+        "id": 8,
+        "creatorId": 1,
         "name": "Free Clean Water for African",
         "currentPrice": 1300,
         "targetPrice": 7000,
@@ -104,8 +104,8 @@ export const projects = [
         "createAt": "2022-11-03", 
     },
     {
-        "id": "9",
-        "creatorId": "2",
+        "id": 9,
+        "creatorId": 2,
         "name": "Free Face Mask through Pandemic",
         "currentPrice": 2000,
         "targetPrice": 3000,
@@ -117,8 +117,8 @@ export const projects = [
         "createAt": "2022-11-05", 
     },
     {
-        "id": "10",
-        "creatorId": "2",
+        "id": 10,
+        "creatorId": 2,
         "name": "Building schools for ethnic minorities in Vietnam",
         "currentPrice": 17864,
         "targetPrice": 30000,
@@ -157,4 +157,56 @@ export const users = [
         "twitter": "",
         "createAt": "2022-11-03"
     },
+]
+
+export const contributionModel = [
+    {
+        "id": 1,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 230,
+        "createAt": "2022-11-22T21:47:38.457823Z"
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "projectId": 1,
+        "amount": 10000,
+        "createAt": null
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "projectId": 4,
+        "amount": 1500,
+        "createAt": null
+    },
+    {
+        "id": 4,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 200,
+        "createAt": null
+    },
+    {
+        "id": 5,
+        "userId": 2,
+        "projectId": 5,
+        "amount": 20,
+        "createAt": "2022-11-26T13:31:40.500633Z"
+    },
+    {
+        "id": 6,
+        "userId": 1,
+        "projectId": 1,
+        "amount": 10,
+        "createAt": "2022-11-26T13:32:31.241050Z"
+    },
+    {
+        "id": 7,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 5,
+        "createAt": "2022-11-26T13:34:03.490575Z"
+    }
 ]

@@ -7,13 +7,15 @@ import { FaFacebook, FaTwitter, FaYoutube, FaAward, FaChild, FaCamera } from "re
 import { MdEdit } from "react-icons/md";
 import FundraiserEditModal from './FundraiserEditModal/FundraiserEditModal';
 import { useGlobalState } from '../../../hooks/useGlobalState';
-import { users } from '../Projects/projects';
 import ConfirmSignOutModal from './ConfirmSignOutModal/ConfirmSignOutModal';
+import DonateHistory from './DonateHistory/DonateHistory';
+import { projects, users, contributionModel } from '../Projects/projects';
 
 
 const Fundraiser = () => {
-  const [ projectList, setProjectList ] = useState([]);
-  const [ userList, setUserList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
+  const [ userList, setUserList ] = useState(users);
+  const [ contributionList, setContributionList ] = useState(contributionModel);
   const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
   const [ avatarSrc, setAvatarSrc ] = useState();
@@ -28,30 +30,53 @@ const Fundraiser = () => {
   const fundraiserName = paramValue.name;
  
   
-  useEffect(() => { 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-      .then(res => res.json())
-      .then((res) => {
-        setProjectList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // useEffect(() => { 
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setProjectList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-      .then(res => res.json())
-      .then((res) => {
-        setUserList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setUserList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setContributionList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
 
-  const fundraiser = users?.find(user => user.id === +fundraiserId);
+  const fundraiser = userList?.find(user => user.id === +fundraiserId);
+  const contributions = contributionList?.filter(contribution => contribution.userId === +fundraiserId);
   const allProjects = projectList?.filter(project => project.creatorId === +fundraiserId);
   const currentProjects = allProjects?.filter(project => project.currentPrice < project.targetPrice);
+
+
+  const totalDonatedAmount = contributions?.reduce((total, contribution) => contribution.amount + total, 0);
+  let totalDonatedProject = contributions?.map(contribution => contribution.projectId);
+  totalDonatedProject = [...new Set(totalDonatedProject)];
+  
+
+  const totalRaisedAmount = allProjects?.reduce((total, project) => project.currentPrice + total, 0);
+  const totalSuppoters = allProjects?.reduce((total, project) => project.donationCount + total, 0);
+  console.log(totalDonatedProject);
+
+  const donatedProjects = totalDonatedProject?.forEach(project => projectList?.find(element => element.id === project));
+  console.log(donatedProjects)
 
 
   useEffect(() => { 
@@ -86,11 +111,6 @@ const Fundraiser = () => {
     reader.readAsDataURL(e.target.files[0]);
     setIsBackgroundEdit(true);
   }, [setBackgroundSrc, setIsBackgroundEdit]);
-
-
-  console.log('isEdit', isEdit)
-  console.log('isBackgroundEdit', isBackgroundEdit)
-  
 
 
   return (
@@ -154,17 +174,20 @@ const Fundraiser = () => {
             </div>
           </div> 
           <div className="donate-count">
-            <h2>$500,000</h2>
-            <div>donated for <span>243 projects</span></div>
+            <h2>${totalDonatedAmount}</h2>
+            <div>donated for <span>{totalDonatedProject?.length} projects</span></div>
             <FaAward className='icon' />
           </div>
           <div className="support">
-            <h2>$12,868</h2>
+            <h2>${totalRaisedAmount}</h2>
             <div>raised of <span>{allProjects.length} projects</span></div>
-            <div>by <span>312,000 supporters</span></div>
+            <div>by <span>{totalSuppoters} supporters</span></div>
             <FaChild className='icon' />
           </div>
         </div>
+        {/* { username === fundraiserName ? (
+          <DonateHistory />
+        ) : null } */}
         <div className='projects-wrapper'>
           <div className="project-selection">
             <div className={isAllSelected ? 'selection active' : 'selection'} onClick={() => setIsAllSelected(true)}>All</div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './Header.scss';
 import { BsSearch } from "react-icons/bs";
 import { DropdownSearch } from '../../pages/components';
@@ -12,7 +12,6 @@ const Header = ({ link, searchQuery, changeData }) => {
   const [ navSelected, setNavSelected ] = useState(link);
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [ isSelected, setIsSelected ] = useState(false);
-  const navigate = useNavigate();
 
 
   useEffect(() => {
@@ -37,8 +36,6 @@ const Header = ({ link, searchQuery, changeData }) => {
 
 
   const user = userList?.filter(user => user.name === username);
-  console.log(username)
-  console.log(user[0]?.avatar)
 
 
   return (
@@ -60,7 +57,7 @@ const Header = ({ link, searchQuery, changeData }) => {
           { username === null ? (
             <Link to='/signin' className='nav-link'>Sign in</Link>
             ) : (
-              <Link to={`/fundraiser/iammy/2`} className="avatar-wrapper">
+              <Link to={`/fundraiser/${username}/${user[0]?.id}`} className="avatar-wrapper">
                 <img src={user[0]?.avatar} alt="" className='user-avatar' />
               </Link>
             )

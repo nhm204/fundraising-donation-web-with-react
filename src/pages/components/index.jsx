@@ -9,3 +9,4 @@ export { default as Fundraiser } from './Fundraiser/Fundraiser';
 export { default as FundraiserEditForm } from './Fundraiser/FundraiserEditModal/FundraiserEditModal';
 export { default as Checkout } from './Checkout/Checkout';
 export { default as StartFundraising } from './CreateProject/StartFundraising/StartFundraising';
+export { default as EditProject } from './Projects/EditProject/EditProject';

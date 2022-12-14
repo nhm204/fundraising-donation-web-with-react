@@ -1,4 +1,4 @@
-.fundraiser-edit {
+.project-edit {
     position: absolute;
     top: 0;
     height: 100vh;
@@ -6,11 +6,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    
+
     ::-webkit-scrollbar-thumb {
         background: white;
     }
-    
+
     .edit-form {
         position: relative;
         z-index: 100;
@@ -88,87 +88,61 @@
             }
         }
 
-        .cover-bg-container {
+        .project-img-container {
             position: relative;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 40vh;
 
-            .cover-bg {
+            .project-img {
                 width: 100%;
                 height: 40vh;
                 object-fit: cover;
                 -webkit-user-drag: none;
-                background-color: #ccc;
+                background-color: var(--primary-color);
                 border-left: 4px solid black;
                 border-right: 4px solid black;
             }
 
-            .edit-cover-bg-btn {
+            .btn-container {
                 position: absolute;
                 display: flex;
                 align-items: center;
-                padding: 12px 10px;
-                background-color: rgba(15, 20, 25, 0.75);
-                border-radius: 50%;
-                border: none;
-                cursor: pointer;
-
-                svg {
-                    width: 28px;
-                    height: 24px;
-                    fill: white;
-                }
-
-                &:hover {
-                    background-color: rgba(39, 44, 48, 0.75);
-                }
-            }
-        }
-
-        .info-container {
-            padding: 40px 1vw;
-            margin-top: -80px;
-
-            .avatar-container {
-                position: relative;
-                width: fit-content;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-    
-                .avatar {
-                    width: 120px;
-                    height: 120px;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    -webkit-user-drag: none;
-                    background-color: var(--primary-color);
-                    outline: 4px solid black;
-                }
-    
-                .edit-ava-btn {
-                    position: absolute;
+                
+                .edit-project-img-btn {
                     display: flex;
                     align-items: center;
-                    padding: 10px 8px;
+                    padding: 12px 10px;
                     background-color: rgba(15, 20, 25, 0.75);
                     border-radius: 50%;
                     border: none;
                     cursor: pointer;
-
+    
                     svg {
-                        width: 26px;
-                        height: 22px;
+                        width: 28px;
+                        height: 24px;
                         fill: white;
                     }
 
+                    .icon {
+                        color: white;
+                    }
+    
                     &:hover {
                         background-color: rgba(39, 44, 48, 0.75);
                     }
+
+                    &:first-child {
+                        margin-right: 20px;
+                    }
                 }
             }
+
+        }
+
+        .info-container {
+            padding: 20px 1vw 40px;
 
             .input-group {
                 display: flex;
@@ -253,34 +227,5 @@
                 }
             }
         }
-
-        .avatar-edit-section {
-            width: 42vw;
-            height: 42vw;
-            display: flex;
-            margin-top: 2vh;
-            justify-content: center;
-
-            .cropper {
-                width: 30vw;
-                height: fit-content;
-                padding-bottom: 6vh;
-            }
-        }
-
-        .background-edit-section {
-            width: 42vw;
-            height: 70vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            .cropper {
-                width: 38vw;
-                height: fit-content;
-            }
-        }
     }
 }
-
-

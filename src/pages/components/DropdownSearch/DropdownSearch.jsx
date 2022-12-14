@@ -71,7 +71,6 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
     return projects?.slice(0, 3);
   }, [inputValue]);
 
-
   let recentSearch = JSON.parse(localStorage.getItem('history'));
 
   

@@ -1,17 +1,14 @@
 import React, { useCallback, useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
-import './StartFundraising.scss';
+import './EditProject.scss';
 import { categories } from '../../../../constants/categories';
 import { BsCheck, BsCloudUploadFill } from "react-icons/bs";
-import PaymentMethods from '../PaymentMethods/PaymentMethods';
-import { useGlobalState } from '../../../../hooks/useGlobalState';
+import PaymentMethods from '../../CreateProject/PaymentMethods/PaymentMethods';
 
 
-const StartFundraising = () => {
-  const [ username, setUsername ] = useGlobalState('username');
-  const [ userList, setUserList ] = useState([]);
-  const [ isCreated, setIsCreated ] = useState(false);
+const EditProject = () => {
+  const [ isProjectEdit, setIsProjectEdit ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
   const [ isTargetPriceFocus, setIsTargetPriceFocus ] = useState(false);
   const [ isDescriptionFocus, setIsDescriptionFocus ] = useState(false);
@@ -23,48 +20,47 @@ const StartFundraising = () => {
   const [ projectImageName, setProjectImageName ] = useState(null);
   const [ projectImageSrc, setProjectImageSrc ] = useState('');
   const [ isFeatured, setIsFeatured ] = useState(false);
+  const [ isProjectFeatured, setIsProjectFeatured ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
 
 
   useEffect(() => { 
-    document.title = `Create a BetterWorld`;
-    window.scrollTo(0, 0); 
-
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-      .then(res => res.json())
-      .then((res) => {
-        setUserList(res);
-        // alert('Added successfully');
+    // fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+    //   .then(res => res.json())
+    //   .then((res) => {
+    //     setUserList(res);
+    //     // alert('Added successfully');
         
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }, []);
 
-  const user = userList?.filter(user => user.name === username);
-  console.log(user)
+
+  
+
 
 
   const onSubmit = async (data) => {
-    if (isCreated && (projectImageSrc?.length > 0 || projectImage !== null)) {
-      try {
-        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
-          method: 'POST',
-          body: JSON.stringify(data)
-        })
-        const res = await fetchResponse.json();
-        if (res === 'Added successfully') {
-          window.history.back();
-        }
-      } 
-      catch (e) {
-        return e;
-      } 
+    if ((projectImageSrc?.length > 0 || projectImage !== null)) {
+      // try {
+      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
+      //     method: 'PUT',
+      //     body: JSON.stringify(data)
+      //   })
+      //   const res = await fetchResponse.json();
+      //   console.log(res);
+      // } 
+      // catch (e) {
+      //   return e;
+      // } 
       console.log(data)
     }
   }
+
+  console.log(projectImageSrc)
 
 
   const handleChangeProjectImage = useCallback((e) => {
@@ -90,27 +86,21 @@ const StartFundraising = () => {
         <div className='desc'>This information helps us get to know you and your fundraising needs.</div>
       </div>
       <div className="right">
-        { username === null && (
-          <nav>
-            <Link to='/signin'>
-              <button className='sign-in-btn'>Sign In</button>
-            </Link>
-          </nav>
-        )}
         <form onSubmit={handleSubmit(onSubmit)} className='create-form'>
           <label onFocus={() => setIsNameFocus(true)} onBlur={() => setIsNameFocus(false)}>
             <input
               type='text'
+              value={nameValue}
               className={`edit-input ${(nameValue.length > 0 || isNameFocus) && 'input-has-value'}`}
               {...register('name', { 
-                required: {
-                  value: true,
-                  message: 'Project name is required!'
-                },
-                maxLength: {
-                  value: 100,
-                  message: 'Your project name must be less than 100 characters.'
-                }
+                // required: {
+                //   value: true,
+                //   message: 'Project name is required!'
+                // },
+                // maxLength: {
+                //   value: 100,
+                //   message: 'Your project name must be less than 100 characters.'
+                // }
               })}
               onChange={e => setNameValue(e.target.value)}
             />
@@ -131,24 +121,18 @@ const StartFundraising = () => {
               className='edit-input' 
               placeholder='Pass an image URL'
               value={projectImageSrc} 
-              {...register('image', { 
-                required: {
-                  value: projectImage === null ? true : false,
-                  message: 'Project image is required!'
-                }
-              })}
               onChange={e => {
                 setProjectImageSrc(e.target.value);
                 setProjectImage(null);
                 setProjectImageName('');
               }} 
             />
-            { errors.image?.message && (
+            { (isProjectEdit && (projectImageSrc?.length === 0 && projectImage === null)) && (
               <p className='error-msg'>
-                {errors.image?.message}
+                Project image is required!
               </p>
             )}
-            {(projectImage || projectImageSrc) && <img src={projectImage || projectImageSrc} alt={nameValue} className='preview-img' />}
+            { (projectImage || projectImageSrc) && <img src={projectImage || projectImageSrc} alt={nameValue} className='preview-img' />}
             <div className="choose-file">
               <div className="img-name">{projectImageName}</div>
               <label htmlFor="project-image-file-chosen" className='upload-btn'>
@@ -175,6 +159,7 @@ const StartFundraising = () => {
           <label className='target-amount' onFocus={() => setIsTargetPriceFocus(true)} onBlur={() => setIsTargetPriceFocus(false)}>
             <input
               type='number'
+              value={targetPriceValue}
               className={`edit-input amount-input ${(targetPriceValue > 0 || isTargetPriceFocus) && 'amount-has-value'}`}
               {...register('targetPrice', { 
                 min: {
@@ -182,7 +167,7 @@ const StartFundraising = () => {
                   message: 'Your target price must greater than 1 USD.'
                 }
               })}
-              onChange={e => setTargetPriceValue(e.target.value)}
+              onChange={e => setTargetPriceValue(Number(e.target.value))}
             />
             <div className="tag">USD</div>
             <div className={`${(!isTargetPriceFocus && targetPriceValue === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
@@ -193,6 +178,11 @@ const StartFundraising = () => {
                 {errors.targetPrice?.message}
               </p>
             )}
+            {/* { targetPriceValue < project?.currentPrice && (
+              <p className='error-msg'>
+                Project target price must be greater than the current price. Current price: ${project.currentPrice}
+              </p>
+            )} */}
           </label>
           <label onFocus={() => setIsDescriptionFocus(true)} onBlur={() => setIsDescriptionFocus(false)}>
             <textarea 
@@ -204,10 +194,10 @@ const StartFundraising = () => {
               maxLength='500'
               className={`edit-input ${(descriptionValue?.length > 0 || isDescriptionFocus) && 'input-has-value'}`}
               {...register("description", {
-                required: {
-                  value: true,
-                  message: 'Project description is required!'
-                },
+                // required: {
+                //   value: true,
+                //   message: 'Project description is required!'
+                // },
                 maxLength: {
                   value: 100,
                   message: 'Your project description must be less than 500 characters'
@@ -225,28 +215,27 @@ const StartFundraising = () => {
               </p>
             )}
           </label>
-          { !isPaid ? (
+          { !isFeatured && (
             <>
               <label htmlFor="isFeatured" className='checkbox-container'>
                 <input 
                   type="checkbox" 
                   id="isFeatured" 
                   {...register('isFeatured')}
-                  onChange={(e) => e.target.checked === true ? setIsFeatured(true) : setIsFeatured(false)}
+                  onChange={e => e.target.checked === true ? setIsProjectFeatured(true) : setIsProjectFeatured(false)}
                 />
                 <span className="checkmark">
-                  { isFeatured && <BsCheck className='icon' /> }
+                  { isProjectFeatured && <BsCheck className='icon' /> }
                 </span>
                 <div className='title'>Featured this product</div>
               </label>
               <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser.</div>
-              { isFeatured && <PaymentMethods isFeatured={isFeatured} isPaid={isPaid} setIsPaid={setIsPaid} /> }
+              { isProjectFeatured && <PaymentMethods isPaid={isPaid} setIsPaid={setIsPaid} /> }
             </>
-          ) : (
-            <div className='is-paid'>You have featured this project!</div>
           )}
+          { (isFeatured || isPaid) && <div className='is-paid'>You have featured this project!</div> }
           <div className='btn-container'>
-            { (isFeatured && !isPaid) ? (
+            { (isProjectFeatured && !isPaid) ? (
               <button 
                 type=''
                 className='create-btn disabled'
@@ -258,18 +247,12 @@ const StartFundraising = () => {
               <button 
                 className='create-btn' 
                 onClick={() => {
-                  setValue('creatorId', user[0]?.id);
+                  setValue('creatorId', 2);
                   setValue('category', selectedCategory);
-                  if (projectImage !== null) {
-                    setValue('image', projectImage);
-                    setValue('imageName', projectImageName);
-                  }
-                  else {
-                    setValue('imageName', '');
-                  }
-                  setValue('donationCount', 0);
-                  setValue('currentPrice', 0);
-                  setIsCreated(true);
+                  setValue('image', projectImage || projectImageSrc);
+                  // setValue('donationCount', donationCount);
+                  // setValue('currentPrice', project?.currentPrice);
+                  setIsProjectEdit(true);
                 }} 
                 type='submit'
               >
@@ -283,4 +266,4 @@ const StartFundraising = () => {
   );
 }
 
-export default StartFundraising;
+export default EditProject;
