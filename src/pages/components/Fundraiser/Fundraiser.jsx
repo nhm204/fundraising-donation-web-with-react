@@ -67,16 +67,17 @@ const Fundraiser = () => {
 
 
   const totalDonatedAmount = contributions?.reduce((total, contribution) => contribution.amount + total, 0);
-  let totalDonatedProject = contributions?.map(contribution => contribution.projectId);
-  totalDonatedProject = [...new Set(totalDonatedProject)];
+  let totalDonatedProjectId = contributions?.map(contribution => contribution.projectId);
+  let totalDonatedProject = [...new Set(totalDonatedProjectId)]?.length;
   
 
   const totalRaisedAmount = allProjects?.reduce((total, project) => project.currentPrice + total, 0);
   const totalSuppoters = allProjects?.reduce((total, project) => project.donationCount + total, 0);
-  console.log(totalDonatedProject);
+  console.log(totalDonatedProjectId);
 
-  const donatedProjects = totalDonatedProject?.forEach(project => projectList?.find(element => element.id === project));
-  console.log(donatedProjects)
+
+  
+
 
 
   useEffect(() => { 
@@ -175,7 +176,7 @@ const Fundraiser = () => {
           </div> 
           <div className="donate-count">
             <h2>${totalDonatedAmount}</h2>
-            <div>donated for <span>{totalDonatedProject?.length} projects</span></div>
+            <div>donated for <span>{totalDonatedProject} projects</span></div>
             <FaAward className='icon' />
           </div>
           <div className="support">
@@ -185,9 +186,9 @@ const Fundraiser = () => {
             <FaChild className='icon' />
           </div>
         </div>
-        {/* { username === fundraiserName ? (
-          <DonateHistory />
-        ) : null } */}
+        { username === fundraiserName ? (
+          <DonateHistory totalDonatedProjectId={totalDonatedProjectId} projects={projectList} contributions={contributions?.reverse()} />
+        ) : null }
         <div className='projects-wrapper'>
           <div className="project-selection">
             <div className={isAllSelected ? 'selection active' : 'selection'} onClick={() => setIsAllSelected(true)}>All</div>

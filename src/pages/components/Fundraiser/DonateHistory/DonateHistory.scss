@@ -1,0 +1,82 @@
+.donate-history {
+    margin: 80px 0;
+    padding: 40px 0;
+    // background-color: #111;
+    // border: 5px solid #44434a;
+    
+    h1 {
+        // color: white;
+    }
+    
+    ul {
+        display: flex;
+        align-items: center;
+        margin-top: 30px;
+        overflow-x: scroll;
+
+
+        &::-webkit-scrollbar-thumb {
+            background: white;
+        }
+        
+        .contribution {
+            display: flex;
+            flex-direction: column;
+            width: 230px;
+            min-height: 340px;
+            border-radius: 15px;
+            background-color: #febebe;
+            margin-right: 1vw;
+            padding: 5px 5px 0;
+
+            img {
+                width: 220px;
+                height: 220px;
+                object-fit: cover;
+                border-top-left-radius: 10px;
+                border-top-right-radius: 10px;
+                -webkit-user-drag: none;
+            }
+
+            .info-wrapper {
+                padding: 12px 0;
+                display: flex;
+                flex: 1;
+                flex-direction: column;
+                justify-content: space-between;
+
+                .title {
+                    display: -webkit-box;
+                    -webkit-line-clamp: 2;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+                    
+                    a {
+                        color: black;
+                        font-weight: 600;
+                    }
+                }
+    
+                .info {
+                    display: flex;
+                    align-items: flex-end;
+                    // margin-top: 10px;
+    
+                    .amount {
+                        font-weight: 600;
+                        padding: 5px 12px 4px;
+                        background-color: #f3f2f2;
+                        border-radius: 20px;
+                    }
+
+                    .time {
+                        font-size: 1.2rem;
+                        // line-height: 1.2rem;
+                    }
+                }
+            }
+            
+        }
+    }
+}
