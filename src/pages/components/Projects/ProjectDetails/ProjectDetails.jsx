@@ -5,11 +5,15 @@ import './ProjectDetails.scss';
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { Banner2 } from '../../Banner/Banner';
 import { projects, users } from '../projects';
+import { useGlobalState } from '../../../../hooks/useGlobalState';
+import EditProjectModal from '../EditProjectModal/EditProjectModal';
 
 
 const ProjectDetails = () => {
+  const [ username, setUsername ] = useGlobalState('username');
   const [ projectList, setProjectList ] = useState([]);
   const [ userList, setUserList ] = useState([]);
+  const [ isProjectEditModal, setIsProjectEditModal ] = useState(false);
   const paramValue = useParams();
   const projectId = paramValue.id;
   const projectName = paramValue.name;
@@ -37,10 +41,12 @@ const ProjectDetails = () => {
   }, []);
 
 
-  const project = projects?.find(element => element.id === +projectId);
-  const fundraiser = users?.find(user => user.id === project?.creatorId);
-  console.log(project)
-  console.log(fundraiser)
+  const project = projectList?.find(element => element.id === +projectId);
+  const fundraiser = userList?.find(user => user.id === project?.creatorId);
+  // console.log(project)
+  // console.log(fundraiser)
+
+  // console.log(isProjectEditModal)
 
 
   useEffect(() => { 
@@ -61,7 +67,7 @@ const ProjectDetails = () => {
 
   
   return (
-    <div id={projectId} className='project'>
+    <div id={projectId} className={`project ${isProjectEditModal && 'is-project-edit'}`}>
       <Header link={'Discover'} />
       <div className="project-heading">
         <div className="overview">
@@ -93,9 +99,23 @@ const ProjectDetails = () => {
             <progress max={100} value={progressValue} />
             <div className="count">
               <div className="donations"><b>{project?.donationCount}</b> donations</div>
-              <div className="to-go"><b>${project?.targetPrice - project?.currentPrice}</b> to go</div>
+              <div className="to-go"><b>${+project?.targetPrice - project?.currentPrice}</b> to go</div>
             </div>
-            <button className={`${project?.currentPrice === project?.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>{project?.currentPrice === project?.targetPrice ? 'Funded' : 'Donate'}</button>
+            { username !== fundraiser?.name ? (
+              <button 
+                className={`${project?.currentPrice === +project?.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} 
+                onClick={handleDonate}
+              >
+                {project?.currentPrice === project?.targetPrice ? 'Funded' : 'Donate'}
+              </button>
+            ) : (
+              <button 
+                className='donate-btn' 
+                onClick={() => setIsProjectEditModal(true)}
+              >
+                Edit project
+              </button>
+            )}
           </div>
           { relatedProjects?.length !== 0 && <div className="related">
             <h3>Related Projects</h3>
@@ -121,6 +141,12 @@ const ProjectDetails = () => {
           }
         </div>
       </div>
+      { isProjectEditModal ? (
+        <>
+          <div className='modal-overlay' onClick={() => setIsProjectEditModal(false)} /> 
+          <EditProjectModal project={project} setIsProjectEditModal={setIsProjectEditModal} />
+        </>
+      ) : null }
       <Banner2 />
       <Outlet />
     </div>

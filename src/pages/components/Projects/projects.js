@@ -35,7 +35,7 @@ export const projects = [
         "description": "This is a charity project with the aim of building a community library for children in African countries",
         "category": "Homelessness",
         "image": "https://images.unsplash.com/photo-1518398046578-8cca57782e17?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-        "isFeatured": true,
+        "isFeatured": false,
         "createAt": "2022-10-15", 
     },
     {
@@ -157,4 +157,56 @@ export const users = [
         "twitter": "",
         "createAt": "2022-11-03"
     },
+]
+
+export const contributionModel = [
+    {
+        "id": 1,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 230,
+        "createAt": "2022-11-22T21:47:38.457823Z"
+    },
+    {
+        "id": 2,
+        "userId": 1,
+        "projectId": 1,
+        "amount": 10000,
+        "createAt": null
+    },
+    {
+        "id": 3,
+        "userId": 2,
+        "projectId": 4,
+        "amount": 1500,
+        "createAt": null
+    },
+    {
+        "id": 4,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 200,
+        "createAt": null
+    },
+    {
+        "id": 5,
+        "userId": 2,
+        "projectId": 5,
+        "amount": 20,
+        "createAt": "2022-11-26T13:31:40.500633Z"
+    },
+    {
+        "id": 6,
+        "userId": 1,
+        "projectId": 1,
+        "amount": 10,
+        "createAt": "2022-11-26T13:32:31.241050Z"
+    },
+    {
+        "id": 7,
+        "userId": 2,
+        "projectId": 1,
+        "amount": 5,
+        "createAt": "2022-11-26T13:34:03.490575Z"
+    }
 ]

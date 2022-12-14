@@ -2,7 +2,7 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 
 
-const PaymentMethods = ({ isFeatured, isPaid, setIsPaid }) => {
+const PaymentMethods = ({ isPaid, setIsPaid }) => {
   const [ error, setError ] = useState(null);
 
 

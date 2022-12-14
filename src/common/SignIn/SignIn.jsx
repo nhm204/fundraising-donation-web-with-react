@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import './SignIn.scss';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
@@ -15,7 +15,6 @@ const SignIn = () => {
   const [ passwordValue, setPasswordValue ] = useState('');
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const navigate = useNavigate();
   const formData = new FormData();
 
   
@@ -30,7 +29,7 @@ const SignIn = () => {
           body: formData
         })
         const res = await fetchResponse.json();
-        alert(res);
+        alert(res.charAt(0).toUpperCase() + res.slice(1));
         if (res === 'login successfully') {
           window.history.back();
         }

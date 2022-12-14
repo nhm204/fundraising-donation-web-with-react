@@ -4,8 +4,6 @@ import { useForm } from 'react-hook-form';
 import { IoCloseOutline, IoArrowBackOutline } from "react-icons/io5";
 import AvatarEditModal from './AvatarEditModal';
 import BackgroundEditModal from './BackgroundEditModal';
-// import { FaEye, FaEyeSlash } from "react-icons/fa";
-// import { PasswordGuidance } from '../../../../common';
 
 
 const FundraiserEditModal = ({ 
@@ -24,32 +22,41 @@ const FundraiserEditModal = ({
   const [ cropper, setCropper ] = useState();
   const [ cropAvatar, setCropAvatar ] = useState(null);
   const [ cropBackground, setCropBackground ] = useState(null);
-  // const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
   const [ isNameFocus, setIsNameFocus ] = useState(false);
   const [ isEmailFocus, setIsEmailFocus ] = useState(false);
   const [ isPhoneFocus, setIsPhoneFocus ] = useState(false);
   const [ isDescriptionFocus, setIsDescriptionFocus ] = useState(false);
   const [ isFacebookFocus, setIsFacebookFocus ] = useState(false);
   const [ isTwitterFocus, setIsTwitterFocus ] = useState(false);
-  // const [ passwordValue, setPasswordValue ] = useState('');
   const [ nameValue, setNameValue ] = useState(fundraiser.name);
   const [ emailValue, setEmailValue ] = useState(fundraiser.email);
   const [ phoneValue, setPhoneValue ] = useState(fundraiser.phone);
   const [ descriptionValue, setDescriptionValue ] = useState(fundraiser.description);
   const [ facebookValue, setFacebookValue ] = useState(fundraiser.facebook);
   const [ twitterValue, setTwitterValue ] = useState(fundraiser.twitter);
-  // const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
  
 
   const onSubmit = async (data) => {
     if (profileEdit) {
-      console.log(data.coverBackground)
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/users`, {
+          method: 'PUT',
+          credentials: 'same-origin',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        alert(res);
+      } 
+      catch (e) {
+        return e;
+      } 
       console.log(data)
     } 
     // setIsEdit(false);
   }
 
+  console.log(profileEdit)
 
   useEffect(() => { 
     document.title = `Edit profile (@${fundraiser?.name}) | BetterWorld`;
@@ -99,8 +106,10 @@ const FundraiserEditModal = ({
               <button 
                 type='submit' 
                 onClick={() => {
+                  setValue('id', fundraiser.id);
                   setValue('avatar', String(cropAvatar || fundraiser.avatar));
                   setValue('coverBackground', String(cropBackground || fundraiser.coverBackground));
+                  setValue('createAt', fundraiser.createAt);
                   setProfileEdit(true);
                 }} 
                 className='save-btn'
@@ -144,7 +153,6 @@ const FundraiserEditModal = ({
               <div className='input-group'>
                 <label className='' onFocus={() => setIsNameFocus(true)} onBlur={() => setIsNameFocus(false)}>
                   <input
-                    required
                     value={nameValue}
                     type='text'
                     className={`edit-input ${(nameValue.length > 0 || isNameFocus) && 'input-has-value'}`}
@@ -176,7 +184,6 @@ const FundraiserEditModal = ({
                 </label>
                 <label className='' onFocus={() => setIsEmailFocus(true)} onBlur={() => setIsEmailFocus(false)}>
                   <input
-                    required
                     value={emailValue}
                     type='text'
                     className={`edit-input ${(emailValue.length > 0 || isEmailFocus) && 'input-has-value'}`}
@@ -251,34 +258,6 @@ const FundraiserEditModal = ({
                     { isDescriptionFocus && <span className="quantity">{descriptionValue?.length}/160</span> }
                   </div>
                 </label>
-                {/* <label className='password-field' onFocus={() => setIsPasswordFocus(true)} onBlur={() => setIsPasswordFocus(false)}>
-                  <input
-                    type={isShow ? 'text' : 'password'}
-                    className={`edit-input ${(passwordValue.length > 0 || isPasswordFocus) && 'input-has-value'}`}
-                    {...register('password', {
-                      minLength: {
-                        value: 8,
-                        message: 'Your password must contain between 8 and 60 characters.'
-                      },
-                      maxLength: {
-                        value: 60,
-                        message: 'Your password must contain between 6 and 60 characters.'
-                      }
-                    })}
-                    onChange={e => setPasswordValue(e.target.value)}
-                  />
-                  <div className={`${(!isPasswordFocus && passwordValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
-                    <span className={`placeholder ${isPasswordFocus && 'is-focus'}`}>New password</span>
-                    { isPasswordFocus && <span className="quantity">{passwordValue?.length}/60</span> }
-                  </div>
-                  { passwordValue.length > 0 && (isShow ? <FaEye className='icon' onClick={() => setIsShow(!isShow)} /> : <FaEyeSlash className='icon' onClick={() => setIsShow(!isShow)} />) }
-                  { errors.password?.message && (
-                    <p className='error-msg'>
-                      {errors.password?.message}
-                    </p>
-                  )}
-                </label>
-                { (isPasswordFocus || passwordValue.length > 0) && <PasswordGuidance passwordValue={passwordValue} /> } */}
                 <label className='' onFocus={() => setIsFacebookFocus(true)} onBlur={() => setIsFacebookFocus(false)}>
                   <input
                     value={facebookValue}
@@ -301,7 +280,7 @@ const FundraiserEditModal = ({
                     </p>
                   )}
                 </label>
-                <label className='' onFocus={() => setIsTwitterFocus(true)} onBlur={() => setIsTwitterFocus(false)}>
+                {/* <label className='' onFocus={() => setIsTwitterFocus(true)} onBlur={() => setIsTwitterFocus(false)}>
                   <input
                     value={twitterValue}
                     type='link'
@@ -322,7 +301,7 @@ const FundraiserEditModal = ({
                       {errors.twitter?.message}
                     </p>
                   )}
-                </label>
+                </label> */}
               </div>
             </div>
           </>

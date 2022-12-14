@@ -7,6 +7,7 @@
 }
 
 .project {
+    position: relative;
     display: flex;
     flex-direction: column;
 
@@ -302,4 +303,20 @@
             }
         }
     }
+
+    .modal-overlay {
+        position: fixed;
+        right: 0;
+        top: 0;
+        left: 0;
+        bottom: 0;
+        background-color: rgba($color: black, $alpha: 0.5);
+        // animation: fadeIn linear 0.3s;
+        z-index: 100;
+    }
+}
+
+.is-project-edit {
+    height: 100vh;
+    overflow: hidden;
 }
