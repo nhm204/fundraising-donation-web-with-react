@@ -35,8 +35,6 @@ const StartFundraising = () => {
       .then(res => res.json())
       .then((res) => {
         setUserList(res);
-        // alert('Added successfully');
-        
       })
       .catch((err) => {
         console.log(err.message);
@@ -44,17 +42,17 @@ const StartFundraising = () => {
   }, []);
 
   const user = userList?.filter(user => user.name === username);
-  console.log(user)
 
 
   const onSubmit = async (data) => {
-    if (isCreated && (projectImageSrc?.length > 0 || projectImage !== null)) {
+    if (isCreated) {
       try {
         const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`, {
           method: 'POST',
           body: JSON.stringify(data)
         })
         const res = await fetchResponse.json();
+        alert(res);
         if (res === 'Added successfully') {
           window.history.back();
         }
@@ -79,6 +77,7 @@ const StartFundraising = () => {
     setProjectImageSrc('');
   }, [setProjectImage]);
 
+  console.log(isPaid)
   
   return (
     <div className='start-fundraising'>
@@ -182,7 +181,7 @@ const StartFundraising = () => {
                   message: 'Your target price must greater than 1 USD.'
                 }
               })}
-              onChange={e => setTargetPriceValue(e.target.value)}
+              onChange={e => setTargetPriceValue(Number(e.target.value))}
             />
             <div className="tag">USD</div>
             <div className={`${(!isTargetPriceFocus && targetPriceValue === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
@@ -209,8 +208,8 @@ const StartFundraising = () => {
                   message: 'Project description is required!'
                 },
                 maxLength: {
-                  value: 100,
-                  message: 'Your project description must be less than 500 characters'
+                  value: 500,
+                  message: 'Your project description must be less than 500 characters.'
                 }
               })}
               onChange={(e) => setDescriptionValue(e.target.value)}
@@ -240,7 +239,7 @@ const StartFundraising = () => {
                 <div className='title'>Featured this product</div>
               </label>
               <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser.</div>
-              { isFeatured && <PaymentMethods isFeatured={isFeatured} isPaid={isPaid} setIsPaid={setIsPaid} /> }
+              { isFeatured && <PaymentMethods isPaid={isPaid} setIsPaid={setIsPaid} /> }
             </>
           ) : (
             <div className='is-paid'>You have featured this project!</div>
@@ -264,12 +263,11 @@ const StartFundraising = () => {
                     setValue('image', projectImage);
                     setValue('imageName', projectImageName);
                   }
-                  else {
-                    setValue('imageName', '');
-                  }
                   setValue('donationCount', 0);
                   setValue('currentPrice', 0);
-                  setIsCreated(true);
+                  if (projectImageSrc?.length > 0 || projectImage !== null) {
+                    setIsCreated(true);
+                  }
                 }} 
                 type='submit'
               >

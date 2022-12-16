@@ -4,7 +4,6 @@ import Header from '../../../../common/Header/Header';
 import './ProjectDetails.scss';
 import { HiChevronDoubleRight } from "react-icons/hi";
 import { Banner2 } from '../../Banner/Banner';
-import { projects, users } from '../projects';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 import EditProjectModal from '../EditProjectModal/EditProjectModal';
 
@@ -41,16 +40,12 @@ const ProjectDetails = () => {
   }, []);
 
 
-  const project = projectList?.find(element => element.id === +projectId);
+  const project = projectList?.find(project => project.id === +projectId);
   const fundraiser = userList?.find(user => user.id === project?.creatorId);
-  // console.log(project)
-  // console.log(fundraiser)
-
-  // console.log(isProjectEditModal)
-
+  
 
   useEffect(() => { 
-    document.title = `${project?.name}. ${project?.category} on BetterWorld`;
+    document.title = `${project?.name} | ${project?.category} on BetterWorld`;
     window.scrollTo(0, 0); 
   }, [project?.name, project?.category]);
 
@@ -84,7 +79,7 @@ const ProjectDetails = () => {
           <div className='desc'>{project?.description}</div>
           <div className="fundraising-by">
             <Link to={`/fundraiser/${fundraiser?.name}/${fundraiser?.id}`} className="user">
-              <img src={fundraiser?.avatar} alt={fundraiser?.name} />
+              <img src={fundraiser?.avatar} alt='' />
               <h4>{fundraiser?.name}</h4>
             </Link>
             <div className='bio'>{fundraiser?.description}</div>
@@ -144,7 +139,7 @@ const ProjectDetails = () => {
       { isProjectEditModal ? (
         <>
           <div className='modal-overlay' onClick={() => setIsProjectEditModal(false)} /> 
-          <EditProjectModal project={project} setIsProjectEditModal={setIsProjectEditModal} />
+          <EditProjectModal project={project} setIsProjectEditModal={setIsProjectEditModal} user={fundraiser} />
         </>
       ) : null }
       <Banner2 />

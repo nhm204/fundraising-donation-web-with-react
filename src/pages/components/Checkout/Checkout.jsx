@@ -1,63 +1,118 @@
 import React, { useEffect, useState } from 'react';
 import './Checkout.scss';
 import { Link, useParams } from 'react-router-dom';
-import { projects, users } from '../Projects/projects';
 import { BsChevronLeft } from 'react-icons/bs';
 import { FaDollarSign } from 'react-icons/fa';
+import { useForm } from 'react-hook-form';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { useGlobalState } from '../../../hooks/useGlobalState';
+import PaymentCheckout from './PaymentCheckout/PaymentCheckout';
 
 
 const Checkout = () => {
+  const [ username, setUsername ] = useGlobalState('username');
+  const [ projectList, setProjectList ] = useState([]);
+  const [ userList, setUserList ] = useState([]);
   const [ donationAmount, setDonationAmount ] = useState(0);
   const [ isAmountFocus, setIsAmountFocus ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
+  const [ isDonated, setIsDonated ] = useState(false);
+  const [ isSubmit, setIsSubmit ] = useState(false);
   const [ error, setError ] = useState(null);
+  const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const paramValue = useParams();
   const projectName = paramValue.name;
   const projectId = paramValue.id;
 
 
-  const project = projects.find(element => element.id === paramValue.id);
-  const fundraiser = users.find(user => user.id === project.creatorId);
-  
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
+
+
+  const project = projectList?.find(project => project.id === +projectId);
+  const fundraiser = userList?.find(user => user.id === project?.creatorId);
+  const user = userList?.find(user => user.name === username);
+
+
+  const onSubmit = async (data) => {
+    if (isDonated) {
+      // try {
+      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`, {
+      //     method: 'POST',
+      //     body: JSON.stringify(data)
+      //   })
+      //   const res = await fetchResponse.json();
+      //   console.log(res);
+      //   // if (res === 'Added successfully') {
+      //   //   window.history.back();
+      //   // }
+      // } 
+      // catch (e) {
+      //   return e;
+      // } 
+      console.log('submit');
+    }
+  }
+
+  
+  useEffect(() => { 
+    document.title = `Donate to ${project?.name} | #${projectId}`;
+    window.scrollTo(0, 0); 
+  }, [project?.name, projectId]);
+
+  
   const handleApprove = (orderId) => {
     setIsPaid(true);
   }
+  
+  console.log(isPaid)
   if (isPaid) {
     alert(`Thank you for donating to ${projectName}`);
     setIsPaid(false);
   }
+
   if (error) {
     alert(error);
     setError(null);
   }
 
 
-  useEffect(() => { 
-    document.title = `Donate to ${project?.name} | #${projectId}`;
-    window.scrollTo(0, 0); 
-
-
-    // fetch(`https://betterworld-doan.herokuapp.com/api/projects`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setProjects(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
-  }, [project?.name, projectId]);
-
-
   return (
     <div className='checkout'>
       <header>
         <Link to='/' className='logo'>BetterWorld</Link>
-        <div className="text">
-          Already have an account?
-          <Link to='/signin' className='nav-link'>Sign in</Link>
-        </div>
+        { username === null ? (
+          <div className="text">
+            Already have an account?
+            <Link to='/signin' className='nav-link'>Sign in</Link>
+          </div>
+        ) : (
+          <div className='right-side'>
+            <Link to={`/fundraiser/${username}/${user?.id}`} className="avatar-wrapper">
+              <img src={user?.avatar} alt="" className='user-avatar' />
+            </Link>
+            <Link to='/create/fundraiser/regform' className='fundraise-btn'>
+              Start a Fundraising
+            </Link>
+          </div>
+        )}
       </header>
       <div className="checkout-body">
         <div className="left">
@@ -69,61 +124,77 @@ const Checkout = () => {
             Return to project
           </button>
           <div className="project-info">
-            <img src={project.image} alt={projectName} />
+            <img src={project?.image} alt={projectName} />
             <div className="content">
               <div className='title'>You're supporting <span>{projectName}</span></div>
-              <div className='fundraiser'>You're donation will benefit <span>{fundraiser.name}</span></div>
+              <div className='fundraiser'>You're donation will benefit <span>{fundraiser?.name}</span></div>
             </div>
           </div>
-          <div className="donation-section">
-            <label htmlFor="donation-amount">Enter your donation</label>
-            <div className={`input-field ${isAmountFocus && 'focus'}`}>
-              <div className="currency">
-                <FaDollarSign className='icon' />
-                <div>USD</div>
-              </div>
-              <input
-                required
-                id='donation-amount'
-                type='number'
-                className='amount-input'
-                onChange={e => setDonationAmount(e.target.value)}
-                onFocus={() => setIsAmountFocus(true)}
-                onBlur={() => setIsAmountFocus(false)}
-              />
-              <span className='text'>.00</span>
-            </div>
-          </div>
-          <h4 className='payment-title'>Choose your payment method</h4>
-          <div className="payment-section">
-            <PayPalScriptProvider>
-              <PayPalButtons
-                createOrder = {(data, actions) => {
-                  return actions.order.create({
-                    purchase_units: [
-                      {
-                        description: project.name,
-                        amount: {
-                          value: donationAmount,
-                          currency: 'USD',
+            <form onSubmit={handleSubmit(onSubmit)}>
+              <div className="donation-section">
+                <label htmlFor="donation-amount" onFocus={() => setIsAmountFocus(true)} onBlur={() => setIsAmountFocus(false)}>
+                  Enter your donation
+                  <div className={`input-field ${isAmountFocus && 'focus'}`}>
+                    <div className="currency">
+                      <FaDollarSign className='icon' />
+                      <div>USD</div>
+                    </div>
+                    <input
+                      id='donation-amount'
+                      type='number'
+                      className='amount-input'
+                      {...register("amount", {
+                        required: {
+                          value: true,
+                          message: 'Donation price is required!'
                         },
-                      },
-                    ],
-                  });
-                }}
-                onApprove = { async (data, action) => {
-                    const order = await action.order.capture();
-                    console.log("order", order);
-                    handleApprove(data.orderID);
-                }}
-                onCancel={() => {}}
-                onError={(err) => {
-                    setError(err);
-                    console.log("PayPal Checkout onError", err);
-                }}
-              />
-            </PayPalScriptProvider>
-          </div>
+                        min: {
+                          value: 1,
+                          message: 'Your donation price must be greater than 1 USD.'
+                        },
+                        max: {
+                          value: project?.targetPrice - project?.currentPrice,
+                          message: 'Your donation price is greater than target price.'
+                        }
+                      })}
+                      onChange={e => setDonationAmount(e.target.value)}
+                    />
+                    <span className='text'>.00</span>
+                  </div>
+                  { errors.amount?.message && (
+                    <p className='error-msg'>
+                      {errors.amount?.message}
+                    </p>
+                  )}
+                </label>
+              </div>
+              { !isPaid ? ( 
+                <PaymentCheckout setIsPaid={setIsPaid} isPaid={isPaid} projectName={projectName} />
+              ) : (<div>Paid</div>)}
+              <div className="btn-wrapper">
+                { (+donationAmount === 0 || (+donationAmount > 0 && !isPaid)) ? (
+                  <button 
+                    type='button' 
+                    className='next-btn disabled'
+                    onClick={() => alert('Please pay to donate this project before submitting!')}
+                  >
+                    Complete donation
+                  </button>
+                ) : (
+                  <button 
+                    type='submit' 
+                    className='next-btn'
+                    onClick={() => {
+                      setValue('userId', user?.id);
+                      setValue('projectId', project?.id);
+                      setIsDonated(true);
+                    }}
+                  >
+                    Complete donation
+                  </button>
+                )}
+              </div>
+            </form>
         </div>
         <div className="right">
           <h3>Your donation</h3>

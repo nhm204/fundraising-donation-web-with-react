@@ -18,12 +18,12 @@
         color: white;
         border-radius: 10px;
         height: 88vh;
+        width: 42vw;
         overflow-y: scroll;
 
         .edit-header {
             position: sticky;
             top: 0;
-            width: 42vw;
             height: 72px;
             display: flex;
             align-items: center;
@@ -154,7 +154,29 @@
                     margin-top: 28px;
                     width: 100%;
                     display: flex;
-                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
+
+                    .tag {
+                        position: absolute;
+                        top: 15px;
+                        right: 12px;
+                        font-weight: 600;
+                        padding: 4px 8px;
+                        background-color: #f1f1f1;
+                        border-radius: 20px;
+                        line-height: 1.8rem;
+                        width: 48px;
+                    }
+                    
+                    .amount-input {
+
+                        &::-webkit-outer-spin-button,
+                        &::-webkit-inner-spin-button {
+                            -webkit-appearance: none;
+                            margin: 0;
+                        }
+                    }
 
                     .placeholder-container {
                         display: flex;
@@ -213,6 +235,10 @@
                     .input-has-value {
                         padding: 24px 8px 0;
                     }
+
+                    .amount-has-value {
+                        padding: 24px 60px 0 12px;
+                    }
     
                     .error-msg {
                         color: red;
@@ -225,6 +251,54 @@
                         height: unset;
                     }
                 }
+
+                .category-label {
+                    flex-direction: column;
+                    margin-top: 30px;
+                    align-items: flex-start;
+                    color: white;
+
+                    .selection {
+                        display: flex;
+                        align-items: center;
+                        flex-wrap: wrap;
+                        margin-top: 16px;
+                        color: white;
+    
+                        .option {
+                            padding: 8px 12px;
+                            border: 1px solid rgb(51, 54, 57);
+                            border-radius: 20px;
+                            margin-right: 8px;
+                            font-weight: 300;
+                            line-height: 2rem;
+    
+                            &:hover {
+                                margin-left: 0;
+                            }
+                        }
+    
+                        .active {
+                            color: var(--primary-color);
+                            font-size: 1.6rem;
+                            border-color: var(--primary-color);
+                            background-color: rgba($color: #febebe, $alpha: 0.25);
+                        }
+                    }
+                }
+            }
+        }
+
+        .project-img-edit-section {
+            width: 42vw;
+            height: 70vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .cropper {
+                width: 38vw;
+                height: fit-content;
             }
         }
     }
