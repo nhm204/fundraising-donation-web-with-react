@@ -9,13 +9,12 @@ import FundraiserEditModal from './FundraiserEditModal/FundraiserEditModal';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import ConfirmSignOutModal from './ConfirmSignOutModal/ConfirmSignOutModal';
 import DonateHistory from './DonateHistory/DonateHistory';
-import { projects, users, contributionModel } from '../Projects/projects';
 
 
 const Fundraiser = () => {
-  const [ projectList, setProjectList ] = useState(projects);
-  const [ userList, setUserList ] = useState(users);
-  const [ contributionList, setContributionList ] = useState(contributionModel);
+  const [ projectList, setProjectList ] = useState([]);
+  const [ userList, setUserList ] = useState([]);
+  const [ contributionList, setContributionList ] = useState([]);
   const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
   const [ avatarSrc, setAvatarSrc ] = useState();
@@ -30,34 +29,34 @@ const Fundraiser = () => {
   const fundraiserName = paramValue.name;
  
   
-  // useEffect(() => { 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setProjectList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setUserList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setContributionList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`)
+      .then(res => res.json())
+      .then((res) => {
+        setContributionList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
 
   const fundraiser = userList?.find(user => user.id === +fundraiserId);
@@ -74,10 +73,6 @@ const Fundraiser = () => {
   const totalRaisedAmount = allProjects?.reduce((total, project) => project.currentPrice + total, 0);
   const totalSuppoters = allProjects?.reduce((total, project) => project.donationCount + total, 0);
   console.log(totalDonatedProjectId);
-
-
-  
-
 
 
   useEffect(() => { 

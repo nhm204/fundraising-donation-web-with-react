@@ -24,7 +24,7 @@ const DonateHistory = ({ totalDonatedProjectId, projects, contributions }) => {
               <div className='title'>Donate for <Link to={`/discover/${project?.name}/${project?.id}`}>{project?.name}</Link></div>
               <div className="info">
                 <div className='amount'>${contributions[index]?.amount}</div>
-                <div className='time'>{contributions[index]?.createAt}</div>
+                { contributions[index]?.createAt !== null && <div className='time'>at {contributions[index]?.createAt?.slice(0, 10)}</div> }
               </div>
             </div>
           </li>

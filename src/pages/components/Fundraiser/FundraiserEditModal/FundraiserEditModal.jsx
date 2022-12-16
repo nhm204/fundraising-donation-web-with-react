@@ -47,13 +47,15 @@ const FundraiserEditModal = ({
         })
         const res = await fetchResponse.json();
         alert(res);
+        if (res === 'Update successfully') {
+          setIsEdit(false);
+        }
       } 
       catch (e) {
         return e;
       } 
       console.log(data)
     } 
-    // setIsEdit(false);
   }
 
   console.log(profileEdit)

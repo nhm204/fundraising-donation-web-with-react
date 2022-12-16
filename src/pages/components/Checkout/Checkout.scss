@@ -32,12 +32,43 @@
                 text-decoration: underline;
             }
         }
+
+        .right-side {
+            display: flex;
+            align-items: center;
+
+            .avatar-wrapper {
+                display: flex;
+                margin-right: 12px;
+    
+                .user-avatar {
+                    background-color: var(--primary-color);
+                    width: 36px;
+                    height: 36px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                }
+            }
+
+            .fundraise-btn {
+                color: white;
+                background-color: var(--primary-color);
+                font-weight: 600;
+                padding: 4px 12px;
+                border-radius: 20px;
+                border: none;
+                outline: 1px solid var(--primary-color);
+                cursor: pointer;
+            }
+        }
+
     }
 
     .checkout-body {
-        padding: calc(var(--navbar-height) + 8vh) 16vw 6vh;
+        padding: calc(var(--navbar-height) + 6vh) 16vw 6vh;
         display: flex;
         justify-content: space-between;
+        // height: 100vh;
 
         .left {
             width: 48vw;
@@ -109,58 +140,99 @@
                 label {
                     font-weight: 600;
                     margin-bottom: 8px;
-                }
 
-                .input-field {
-                    display: flex;
-                    align-items: center;
-                    height: 80px;
-                    outline: 1px solid #ccc;
-                    border-radius: 12px;
-                    padding: 0 16px;
-
-                    .currency {
+                    .input-field {
                         display: flex;
-                        flex-direction: column;
                         align-items: center;
-                        font-weight: 600;
-                        margin-right: 8px;
-
-                        .icon {
-                            font-size: 2.4rem;
-                            margin-bottom: 12px;
-                        }
-
-                        div {
-                            line-height: 1.6rem;
-                        }
-                    }
-
-                    .amount-input {
-                        font-size: 4rem;
-                        font-weight: 600;
-                        height: 50px;
-                        width: 100%;
-                        text-align: end;
-                        color: var(--text-color);
-                        border: none;
-                        outline: none;
+                        height: 80px;
+                        outline: 1px solid #ccc;
+                        border-radius: 12px;
+                        padding: 0 16px;
+                        margin-top: 12px;
     
-                        &::-webkit-outer-spin-button,
-                        &::-webkit-inner-spin-button {
-                            -webkit-appearance: none;
-                            margin: 0;
+                        .currency {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            font-weight: 600;
+                            margin-right: 8px;
+    
+                            .icon {
+                                font-size: 2.4rem;
+                                margin-bottom: 12px;
+                            }
+    
+                            div {
+                                line-height: 1.6rem;
+                            }
+                        }
+    
+                        .amount-input {
+                            font-size: 4rem;
+                            font-weight: 600;
+                            height: 50px;
+                            width: 100%;
+                            text-align: end;
+                            color: var(--text-color);
+                            border: none;
+                            outline: none;
+        
+                            &::-webkit-outer-spin-button,
+                            &::-webkit-inner-spin-button {
+                                -webkit-appearance: none;
+                                margin: 0;
+                            }
+                        }
+    
+                        .text {
+                            font-size: 4rem;
+                            font-weight: 600;
                         }
                     }
+    
+                    .focus {
+                        outline: 2px solid black;
+                    }
 
-                    .text {
-                        font-size: 4rem;
-                        font-weight: 600;
+                    .error-msg {
+                        color: red;
+                        font-size: 1.2rem;
+                        margin-top: 4px;
+                        font-weight: 400;
                     }
                 }
 
-                .focus {
-                    outline: 2px solid black;
+            }
+
+            .btn-wrapper {
+                width: 100%;
+                display: flex;
+                justify-content: center;
+                margin-top: 60px;
+
+                .next-btn {
+                    font-size: 2rem;
+                    padding: 8px 120px;
+                    color: black;
+                    background-color: var(--primary-color);
+                    border-radius: 30px;
+                    border: 5px solid var(--secondary-color);
+                    cursor: pointer;
+                    font-weight: 600;
+
+                    &:hover {
+                        background-color: white;
+                    }
+                }
+
+                .disabled {
+                    background-color: #ccc;
+                    border-color: #ccc;
+                    cursor: default;
+
+                    &:hover {
+                        background-color: #ccc;
+                    }
                 }
             }
 
@@ -172,7 +244,13 @@
             }
 
             .payment-section {
-                padding: 0 8vw;
+                display: flex;
+                justify-content: center;
+                width: 100%;
+
+                div {
+                    width: 60%;
+                }
             }
         }
         
