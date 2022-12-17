@@ -4,17 +4,16 @@ import { HiVolumeOff, HiVolumeUp } from 'react-icons/hi';
 import { Link } from 'react-router-dom';
 
 
-const MainBanner = ({ projects }) => {
+const MainBanner = ({ featuredList }) => {
   const [ project, setProject ] = useState();
-
-  let featuredList = projects?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
 
   
   useEffect(() => {
-    setProject(featuredList[Math.floor(Math.random() * featuredList.length)]);
-  }, []);
-  
-  console.log(project)
+    const index = Math.floor(Math.random() * featuredList.length);
+    console.log(index);
+    setProject(featuredList[index]);
+  }, [featuredList]);
+ 
 
   return (
     <div className='main-banner'>

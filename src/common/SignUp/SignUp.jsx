@@ -179,7 +179,7 @@ const SignUp = () => {
           { (isPasswordFocus1 || passwordValue1.length > 0) && <PasswordGuidance passwordValue={passwordValue1} />}
           <label className='password-field' onFocus={() => setIsPasswordFocus2(true)} onBlur={() => setIsPasswordFocus2(false)}>
             <input
-              type={isShow ? 'text' : 'password'}
+              type='password'
               placeholder={!isPasswordFocus2 ? 'Confirm password' : null}
               className=''
               {...register('password2', { 

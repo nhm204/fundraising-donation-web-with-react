@@ -2,17 +2,17 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 
 
-const PaymentCheckout = ({ isPaid, setIsPaid, projectName }) => {
+const PaymentCheckout = ({ isPaid, setIsPaid, projectName, donationAmount }) => {
   const [ error, setError ] = useState(null);
 
   const handleApprove = (orderId) => {
     setIsPaid(true);
   }
     
-  if (isPaid) {
-    alert(`Thank you for donating to ${projectName}`);
-    setIsPaid(false);
-  }
+  // if (isPaid) {
+   
+  //   setIsPaid(false);
+  // }
 
   if (error) {
     alert(error);
@@ -32,7 +32,7 @@ const PaymentCheckout = ({ isPaid, setIsPaid, projectName }) => {
                   {
                     description: 'Donate to ' + projectName,
                     amount: {
-                    value: 3,
+                    value: 10,
                     currency: 'USD',
                     },
                   },

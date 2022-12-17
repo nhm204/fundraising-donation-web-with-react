@@ -28,7 +28,9 @@ const DonateHistory = ({ totalDonatedProjectId, projects, contributions }) => {
               </div>
             </div>
           </li>
-        )) : null }
+        )) : (
+          <div>You don't have any payment history.</div>
+        ) }
       </ul>
     </div>
   );

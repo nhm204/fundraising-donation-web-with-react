@@ -36,6 +36,7 @@ const Header = ({ link, searchQuery, changeData }) => {
 
 
   const user = userList?.filter(user => user.name === username);
+  // console.log(userList)
 
 
   return (

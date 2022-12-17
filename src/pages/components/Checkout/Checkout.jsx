@@ -7,6 +7,7 @@ import { useForm } from 'react-hook-form';
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import PaymentCheckout from './PaymentCheckout/PaymentCheckout';
+import PaymentMethods from '../CreateProject/PaymentMethods/PaymentMethods';
 
 
 const Checkout = () => {
@@ -17,8 +18,6 @@ const Checkout = () => {
   const [ isAmountFocus, setIsAmountFocus ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
   const [ isDonated, setIsDonated ] = useState(false);
-  const [ isSubmit, setIsSubmit ] = useState(false);
-  const [ error, setError ] = useState(null);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
   const paramValue = useParams();
   const projectName = paramValue.name;
@@ -51,23 +50,25 @@ const Checkout = () => {
   const user = userList?.find(user => user.name === username);
 
 
+  
   const onSubmit = async (data) => {
     if (isDonated) {
-      // try {
-      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`, {
-      //     method: 'POST',
-      //     body: JSON.stringify(data)
-      //   })
-      //   const res = await fetchResponse.json();
-      //   console.log(res);
-      //   // if (res === 'Added successfully') {
-      //   //   window.history.back();
-      //   // }
-      // } 
-      // catch (e) {
-      //   return e;
-      // } 
-      console.log('submit');
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`, {
+          method: 'POST',
+          body: JSON.stringify(data)
+        })
+        const res = await fetchResponse.json();
+        console.log(res);
+        if (res === 'Added successfully') {
+          alert(`Thank you for donating to ${projectName}`);
+          window.history.back();
+        }
+      } 
+      catch (e) {
+        return e;
+      } 
+      console.log(data);
     }
   }
 
@@ -78,21 +79,8 @@ const Checkout = () => {
   }, [project?.name, projectId]);
 
   
-  const handleApprove = (orderId) => {
-    setIsPaid(true);
-  }
-  
   console.log(isPaid)
-  if (isPaid) {
-    alert(`Thank you for donating to ${projectName}`);
-    setIsPaid(false);
-  }
-
-  if (error) {
-    alert(error);
-    setError(null);
-  }
-
+ 
 
   return (
     <div className='checkout'>
@@ -169,31 +157,36 @@ const Checkout = () => {
                 </label>
               </div>
               { !isPaid ? ( 
-                <PaymentCheckout setIsPaid={setIsPaid} isPaid={isPaid} projectName={projectName} />
-              ) : (<div>Paid</div>)}
-              <div className="btn-wrapper">
-                { (+donationAmount === 0 || (+donationAmount > 0 && !isPaid)) ? (
-                  <button 
-                    type='button' 
-                    className='next-btn disabled'
-                    onClick={() => alert('Please pay to donate this project before submitting!')}
-                  >
-                    Complete donation
-                  </button>
-                ) : (
-                  <button 
-                    type='submit' 
-                    className='next-btn'
-                    onClick={() => {
-                      setValue('userId', user?.id);
-                      setValue('projectId', project?.id);
-                      setIsDonated(true);
-                    }}
-                  >
-                    Complete donation
-                  </button>
-                )}
-              </div>
+                <PaymentCheckout setIsPaid={setIsPaid} isPaid={isPaid} projectName={projectName} donationAmount={donationAmount} />
+              ) : (
+                <div className="btn-wrapper">
+                  { (+donationAmount === 0 || (+donationAmount > 0 && !isPaid)) ? (
+                    <button 
+                      type='submit' 
+                      className='next-btn disabled'
+                      onClick={() => {
+                        setValue('userId', user?.id);
+                        setValue('projectId', project?.id);
+                        setIsDonated(true);
+                      }}
+                    >
+                      Complete donation
+                    </button>
+                  ) : (
+                    <button 
+                      type='submit' 
+                      className='next-btn'
+                      onClick={() => {
+                        setValue('userId', user?.id);
+                        setValue('projectId', project?.id);
+                        setIsDonated(true);
+                      }}
+                    >
+                      Complete donation
+                    </button>
+                  )}
+                </div>
+              )}
             </form>
         </div>
         <div className="right">

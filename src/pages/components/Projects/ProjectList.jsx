@@ -32,14 +32,19 @@ const Projects = () => {
       });
   }, []);
 
-  console.log(process.env.REACT_APP_BASE_URL)
-  console.log(projectList)
-  // const projectList = projects?.map((project) => project);
+  // console.log(process.env.REACT_APP_BASE_URL)
+  // console.log(projectList?.reverse())
 
-  let filteredList = projectList;
-  if (sortProject === 'Newest' && selectedCategory === 'Newest') {
-    filteredList = projectList?.reverse();
-  }
+
+  // let filteredList = [...projectList];
+  
+  let filteredList = useMemo(() => {
+    if (sortProject === 'Newest' && selectedCategory === 'Newest') {
+      return [...projectList]?.reverse();
+    }
+    return [...projectList];
+  }, [selectedCategory, sortProject, projectList]);
+  
   
   let featuredList = filteredList?.filter(project => project.isFeatured === true);
 
@@ -137,7 +142,15 @@ const Projects = () => {
             <div>Filter</div>
             <IoCloseOutline />       
           </label>
-          <div className={selectedCategory === '' ? 'all active' : 'all'} onClick={() => setSelectedCategory('')}>All</div>
+          <div 
+            className={selectedCategory === '' ? 'all active' : 'all'} 
+            onClick={() => {
+              setSelectedCategory('');
+              setSortProject('');
+            }}
+          >
+            All
+          </div>
           <div 
             className={selectedCategory === 'Featured' ? 'option active' : 'option'} 
             onClick={() => {

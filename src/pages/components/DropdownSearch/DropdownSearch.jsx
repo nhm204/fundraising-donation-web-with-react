@@ -8,9 +8,22 @@ import Project from '../Projects/ProjectCard/ProjectCard';
 
 
 const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
+  const [ projectList, setProjectList ] = useState([]);
   const [ inputValue, setInputValue ] = useState('');
   const [ searchParams, setSearchParams ] = useSearchParams();
   const navigate = useNavigate();
+
+
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
 
   const handleRecentSearch = () => {
@@ -23,6 +36,7 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
     localStorage.setItem('history', JSON.stringify(history.filter(el => el))); // convert object to string
   }
 
+  
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
       if (e.target.value !== '') {
@@ -49,6 +63,7 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
     setSearchParams({ search: e.target.value })
   };
 
+  
   const handleClear = () => {
     const param = searchParams.get('search');
 
@@ -66,10 +81,10 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
 
   let searchList = useMemo(() => {
     if (inputValue) {
-      return projects?.filter(project => project.name.toLowerCase().includes(inputValue.toLocaleLowerCase()) || project.category.toLowerCase().includes(inputValue.toLocaleLowerCase())).slice(0, 3); 
+      return projectList?.filter(project => project.name.toLowerCase().includes(inputValue.toLocaleLowerCase()) || project.category.toLowerCase().includes(inputValue.toLocaleLowerCase())).slice(0, 3); 
     }
-    return projects?.slice(0, 3);
-  }, [inputValue]);
+    return projectList?.slice(0, 3);
+  }, [inputValue, projectList]);
 
   let recentSearch = JSON.parse(localStorage.getItem('history'));
 

@@ -6,7 +6,7 @@ import './Pagination.scss';
 const renderProjects = (projects) => {
   return (
     <ul className='project-list'>
-      { projects.length !== 0 ? projects.map((project => (
+      { projects?.length !== 0 ? projects?.map((project => (
         <li key={project.id}>
           <Project project={project} />   
         </li> 
@@ -27,13 +27,13 @@ const Pagination = ({ projects, projectsPerPage }) => {
   };
 
   const pages = [];
-  for (let i = 1; i <= Math.ceil(projects.length / projectsPerPage); i++) {
+  for (let i = 1; i <= Math.ceil(projects?.length / projectsPerPage); i++) {
     pages.push(i);
   }
 
   const indexOfLastProject = currentPage * projectsPerPage;
   const indexOfFirstProject = indexOfLastProject - projectsPerPage;
-  const currentProjects = projects.slice(indexOfFirstProject, indexOfLastProject);
+  const currentProjects = projects?.slice(indexOfFirstProject, indexOfLastProject);
 
   const renderPageNumbers = pages.map(page => (
     (page < maxPageNumberLimit + 1 && page > minPageNumberLimit) ? <li key={page} id={page} className={currentPage === page ? 'active' : null} onClick={handleClick}>{page}</li> : null
