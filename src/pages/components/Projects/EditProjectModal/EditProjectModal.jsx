@@ -22,7 +22,7 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
   const [ selectedCategory, setSelectedCategory ] = useState(project?.category);
   const [ descriptionValue, setDescriptionValue ] = useState(project?.description);
   const [ projectImage, setProjectImage ] = useState(null);
-  const [ projectImageName, setProjectImageName ] = useState(project?.imageName);
+  const [ projectImageName, setProjectImageName ] = useState(null);
   const [ projectImageSrc, setProjectImageSrc ] = useState('');
   const [ isFeatured, setIsFeatured ] = useState(false);
   const [ isProjectFeatured, setIsProjectFeatured ] = useState(project?.isFeatured);
@@ -39,6 +39,7 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
     }
     if (project?.image.includes('data:image/')) {
       setProjectImage(project?.image);
+      setProjectImageName(project?.imageName);
     }
   }, [project?.name, project?.image, project?.imageName]);
 
@@ -87,7 +88,7 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
     setIsProjectImageEdit(false);
   }
 
-  console.log(isPaid)
+  console.log(isProjectEdit)
 
   return (
     <div className='project-edit'>
@@ -119,10 +120,13 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
                     setValue('image', (cropProjectImage || projectImage));
                     setValue('imageName', projectImageName);
                   }
+                  else {
+                    setValue('imageName', 'image');
+                  }
                   setValue('createAt', project?.createAt);
                   setValue('donationCount', 0);
                   setValue('currentPrice', 0);
-                  if (projectImageSrc?.length > 0 || cropProjectImage !== null) {
+                  if (projectImageSrc?.length > 0 || cropProjectImage !== null || projectImage !== null) {
                     setIsProjectEdit(true);
                   }
                 }} 

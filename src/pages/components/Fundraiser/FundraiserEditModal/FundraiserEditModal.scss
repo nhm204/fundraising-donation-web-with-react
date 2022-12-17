@@ -180,7 +180,8 @@
                     margin-top: 28px;
                     width: 100%;
                     display: flex;
-                    align-items: center;
+                    flex-direction: column;
+                    justify-content: center;
 
                     .placeholder-container {
                         display: flex;
@@ -207,6 +208,10 @@
                             color: #ccc;
                             font-weight: 300;
                         }
+                    }
+
+                    .t-8 {
+                        top: 8px;
                     }
     
                     .active {

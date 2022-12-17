@@ -3,25 +3,40 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import './DropdownSearch.scss';
 import { BsSearch } from 'react-icons/bs';
 import { HiOutlineBackspace } from 'react-icons/hi';
-import { projects } from '../Projects/projects';
 import Project from '../Projects/ProjectCard/ProjectCard';
 
 
 const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
+  const [ projectList, setProjectList ] = useState([]);
   const [ inputValue, setInputValue ] = useState('');
   const [ searchParams, setSearchParams ] = useSearchParams();
   const navigate = useNavigate();
+
+
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
 
   const handleRecentSearch = () => {
     let history = JSON.parse(localStorage.getItem('history') || '[]'); // convert string to object
     history.unshift(inputValue?.toLowerCase());
     let sameSearchIndex = history?.indexOf(inputValue?.toLowerCase(), 1);
+
     if (sameSearchIndex !== -1) {
       history.splice(sameSearchIndex, 1);
     }
     localStorage.setItem('history', JSON.stringify(history.filter(el => el))); // convert object to string
+    console.log('handleRecentSearch');
   }
+
 
   const handleSearch = (e) => {
     if (e.key === 'Enter') {
@@ -49,6 +64,7 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
     setSearchParams({ search: e.target.value })
   };
 
+  
   const handleClear = () => {
     const param = searchParams.get('search');
 
@@ -66,14 +82,15 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
 
   let searchList = useMemo(() => {
     if (inputValue) {
-      return projects?.filter(project => project.name.toLowerCase().includes(inputValue.toLocaleLowerCase()) || project.category.toLowerCase().includes(inputValue.toLocaleLowerCase())).slice(0, 3); 
+      return projectList?.filter(project => project.name.toLowerCase().includes(inputValue?.toLocaleLowerCase()) || project.category.toLowerCase().includes(inputValue?.toLocaleLowerCase())).slice(0, 3); 
     }
-    return projects?.slice(0, 3);
-  }, [inputValue]);
+    return projectList?.slice(0, 3);
+  }, [inputValue, projectList]);
+
 
   let recentSearch = JSON.parse(localStorage.getItem('history'));
-
   
+
   return (
     <div className='dropdown-search'>
       <div className='searchbar-wrapper'>
@@ -99,15 +116,15 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
               <li key={index}>
                 <button 
                   className='search-keyword'
-                  onClick={() => {
-                    link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
-                    changeData(search);
-                    setInputValue(search);
-                    console.log(inputValue)
-                    handleRecentSearch();
-                    setIsSelected(false);
-                    console.log('end')
-                  }}
+                  // onClick={(e) => {
+                  //   link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
+                  //   changeData(search, '', 1);
+                  //   if (search) {
+                  //     // handleRecentSearch();
+                  //     // setIsSelected(false);
+                  //     console.log(inputValue)
+                  //   }
+                  // }}
                 >
                   {search?.toLowerCase()}
                 </button>

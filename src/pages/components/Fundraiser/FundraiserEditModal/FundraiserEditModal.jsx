@@ -255,7 +255,7 @@ const FundraiserEditModal = ({
                     })}
                     onChange={(e) => setDescriptionValue(e.target.value)}
                   />
-                  <div className={`${(!setIsDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container' : 'placeholder-container active'}`}>
+                  <div className={`${(!isDescriptionFocus && descriptionValue?.length === 0) ? 'placeholder-container t-8' : 'placeholder-container active'}`}>
                     <span className={`placeholder ${isDescriptionFocus && 'is-focus'}`}>Bio</span>
                     { isDescriptionFocus && <span className="quantity">{descriptionValue?.length}/160</span> }
                   </div>

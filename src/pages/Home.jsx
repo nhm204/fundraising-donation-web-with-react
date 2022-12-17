@@ -8,7 +8,7 @@ const Home = () => {
   const [ projectList, setProjectList ] = useState([]);
 
   let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
-
+ 
 
   useEffect(() => { 
     document.title = `Home. BetterWorld: #1 for Donation and Fundraising Platform`;
@@ -28,7 +28,7 @@ const Home = () => {
   return (
     <div className='home'>
       <Header link={'Home'} />
-      <Banner projects={projectList} />
+      <Banner featuredList={featuredList} />
       { featuredList.length > 0 && <FeaturedProjects featuredList={featuredList} />}
       <Banner1 />
     </div>

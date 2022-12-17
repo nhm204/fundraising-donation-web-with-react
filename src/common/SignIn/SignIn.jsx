@@ -1,14 +1,13 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.scss';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import { setGlobalState, useGlobalState } from '../../hooks/useGlobalState';
+import { setGlobalState } from '../../hooks/useGlobalState';
 
 
 const SignIn = () => {
   const [ login, setLogin ] = useState(false);
-  // const [ username, setUsername ] = useGlobalState('username');
   const [ isUsernameFocus, setIsUsernameFocus ] = useState(false);
   const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
   const [ usernameValue, setUsernameValue ] = useState('');
@@ -16,27 +15,30 @@ const SignIn = () => {
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const formData = new FormData();
+  const navigate = useNavigate();
 
   
   const onSubmit = async (data) => {
     if (login) {
-      formData.append('username', data.username);
-      formData.append('password', data.password);
-
-      try {
-        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-          method: 'POST',
-          body: formData
-        })
-        const res = await fetchResponse.json();
-        alert(res.charAt(0).toUpperCase() + res.slice(1));
+      // formData.append('username', data.username);
+      // formData.append('password', data.password);
+      
+      // try {
+      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+      //     method: 'POST',
+      //     body: formData
+      //   })
+      //   const res = await fetchResponse.json();
+      //   alert(res.charAt(0).toUpperCase() + res.slice(1));
+        const res = 'login successfully'
         if (res === 'login successfully') {
-          window.history.back();
+          localStorage.setItem('globalUsername', data.username);
+          navigate('/');
         }
-      } 
-      catch (e) {
-        return e;
-      } 
+      // } 
+      // catch (e) {
+      //   return e;
+      // } 
     } 
     console.log(data)
   }
