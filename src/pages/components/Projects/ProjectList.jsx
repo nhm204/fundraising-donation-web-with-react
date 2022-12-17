@@ -35,8 +35,6 @@ const Projects = () => {
   // console.log(process.env.REACT_APP_BASE_URL)
   // console.log(projectList?.reverse())
 
-
-  // let filteredList = [...projectList];
   
   let filteredList = useMemo(() => {
     if (sortProject === 'Newest' && selectedCategory === 'Newest') {
