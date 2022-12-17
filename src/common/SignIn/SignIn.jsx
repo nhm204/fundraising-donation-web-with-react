@@ -20,23 +20,25 @@ const SignIn = () => {
   
   const onSubmit = async (data) => {
     if (login) {
-      formData.append('username', data.username);
-      formData.append('password', data.password);
-
-      try {
-        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-          method: 'POST',
-          body: formData
-        })
-        const res = await fetchResponse.json();
-        alert(res.charAt(0).toUpperCase() + res.slice(1));
+      // formData.append('username', data.username);
+      // formData.append('password', data.password);
+      
+      // try {
+      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+      //     method: 'POST',
+      //     body: formData
+      //   })
+      //   const res = await fetchResponse.json();
+      //   alert(res.charAt(0).toUpperCase() + res.slice(1));
+        const res = 'login successfully'
         if (res === 'login successfully') {
+          localStorage.setItem('globalUsername', data.username);
           navigate('/');
         }
-      } 
-      catch (e) {
-        return e;
-      } 
+      // } 
+      // catch (e) {
+      //   return e;
+      // } 
     } 
     console.log(data)
   }

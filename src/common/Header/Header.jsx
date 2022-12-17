@@ -36,7 +36,6 @@ const Header = ({ link, searchQuery, changeData }) => {
 
 
   const user = userList?.filter(user => user.name === username);
-  // console.log(userList)
 
 
   return (
@@ -57,12 +56,11 @@ const Header = ({ link, searchQuery, changeData }) => {
         <div className="right-side">
           { username === null ? (
             <Link to='/signin' className='nav-link'>Sign in</Link>
-            ) : (
-              <Link to={`/fundraiser/${username}/${user[0]?.id}`} className="avatar-wrapper">
-                <img src={user[0]?.avatar} alt="" className='user-avatar' />
-              </Link>
-            )
-          }
+          ) : (
+            <Link to={`/fundraiser/${username}/${user[0]?.id}`} className="avatar-wrapper">
+              <img src={user[0]?.avatar} alt="" className='user-avatar' />
+            </Link>
+          )}
           <Link to='/create/fundraiser/regform' className={`fundraise-btn ${!isScrolled && link === 'Home' && 'btn--scroll'}`}>
             Start a Fundraising
           </Link>

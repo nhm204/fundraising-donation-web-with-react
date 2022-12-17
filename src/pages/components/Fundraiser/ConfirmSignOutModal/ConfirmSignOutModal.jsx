@@ -17,6 +17,7 @@ const ConfirmSignOutModal = ({ setIsConfirmModalShow }) => {
           className='confirm-btn' 
           onClick={() => {
             setGlobalState('username', null);
+            localStorage.removeItem('globalUsername');
             setIsConfirmModalShow(false);
           }}
         >
