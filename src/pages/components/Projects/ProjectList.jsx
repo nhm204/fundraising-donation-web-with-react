@@ -10,7 +10,7 @@ import { projects } from './projects';
 
 
 const Projects = () => {
-  const [ projectList, setProjectList ] = useState(projects);
+  const [ projectList, setProjectList ] = useState([]);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
