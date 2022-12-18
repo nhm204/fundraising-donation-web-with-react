@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import './SignIn.scss';
 import { useForm } from 'react-hook-form';
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import { BsCheck } from "react-icons/bs";
 import { setGlobalState } from '../../hooks/useGlobalState';
 
 
@@ -10,8 +11,9 @@ const SignIn = () => {
   const [ login, setLogin ] = useState(false);
   const [ isUsernameFocus, setIsUsernameFocus ] = useState(false);
   const [ isPasswordFocus, setIsPasswordFocus ] = useState(false);
-  const [ usernameValue, setUsernameValue ] = useState('');
-  const [ passwordValue, setPasswordValue ] = useState('');
+  const [ usernameValue, setUsernameValue ] = useState(localStorage.getItem('username') || '' );
+  const [ passwordValue, setPasswordValue ] = useState(localStorage.getItem('password') || '' );
+  const [ isRemember, setIsRemember ] = useState(false);
   const [ isShow, setIsShow ] = useState(false);
   const { register, handleSubmit, formState: { errors } } = useForm();
   const formData = new FormData();
@@ -20,25 +22,28 @@ const SignIn = () => {
   
   const onSubmit = async (data) => {
     if (login) {
-      // formData.append('username', data.username);
-      // formData.append('password', data.password);
+      formData.append('username', data.username);
+      formData.append('password', data.password);
       
-      // try {
-      //   const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
-      //     method: 'POST',
-      //     body: formData
-      //   })
-      //   const res = await fetchResponse.json();
-      //   alert(res.charAt(0).toUpperCase() + res.slice(1));
-        const res = 'login successfully'
+      try {
+        const fetchResponse = await fetch(`${process.env.REACT_APP_BASE_URL}/api/login`, {
+          method: 'POST',
+          body: formData
+        })
+        const res = await fetchResponse.json();
+        alert(res.charAt(0).toUpperCase() + res.slice(1));
         if (res === 'login successfully') {
           localStorage.setItem('globalUsername', data.username);
+          if (isRemember) {
+            localStorage.setItem('username', data.username);
+            localStorage.setItem('password', data.password);
+          }
           navigate('/');
         }
-      // } 
-      // catch (e) {
-      //   return e;
-      // } 
+      } 
+      catch (e) {
+        return e;
+      } 
     } 
     console.log(data)
   }
@@ -65,6 +70,7 @@ const SignIn = () => {
           <label onFocus={() => setIsUsernameFocus(true)} onBlur={() => setIsUsernameFocus(false)}>
             <input
               type='text'
+              value={usernameValue}
               placeholder={!isUsernameFocus ? 'Username' : null}
               {...register('username', { 
                 required: {
@@ -87,6 +93,7 @@ const SignIn = () => {
           <label className='password-field' onFocus={() => setIsPasswordFocus(true)} onBlur={() => setIsPasswordFocus(false)}>
             <input
               type={isShow ? 'text' : 'password'}
+              value={passwordValue}
               placeholder={!isPasswordFocus ? 'Password' : null}
               className=''
               {...register('password', { 
@@ -112,6 +119,17 @@ const SignIn = () => {
                 {errors.password?.message}
               </p>
             )}
+          </label>
+          <label htmlFor="isRemember" className='checkbox-container'>
+            <input 
+              type="checkbox" 
+              id="isRemember" 
+              onChange={(e) => e.target.checked === true ? setIsRemember(true) : setIsRemember(false)}
+            />
+            <span className="checkmark">
+              { isRemember && <BsCheck className='icon' /> }
+            </span>
+            <div className='title'>Remember me</div>
           </label>
         </div>
         <button 
