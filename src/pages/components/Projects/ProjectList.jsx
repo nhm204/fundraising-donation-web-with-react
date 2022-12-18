@@ -6,6 +6,7 @@ import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
 import { Header } from '../../../common';
 import { categories } from '../../../constants/categories';
+import { projects } from './projects';
 
 
 const Projects = () => {

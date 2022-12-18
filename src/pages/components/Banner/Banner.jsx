@@ -51,8 +51,8 @@ export const Banner1 = () => {
   );
 }
 
-export const Banner2 = () => {
 
+export const Banner2 = () => {
   return (
     <div className="banner2">
       <h2>Your easy, powerful, and trusted home for help</h2>
@@ -117,3 +117,37 @@ export const Banner2 = () => {
   );
 }
 
+
+
+export const Banner3 = () => {
+  return (
+    <div className='banner3'>
+      <h4>
+        <svg class="mr" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M19.2824 16.717L17.5371 17.4225L16.6596 19.4905C16.2046 20.5628 14.9502 21.0699 13.8781 20.6149L11.7913 19.7295L10.046 20.435C8.9552 20.876 7.72992 20.356 7.28911 19.2652L6.58382 17.5198L4.51615 16.6424C3.44403 16.1875 2.9371 14.933 3.3921 13.8607L4.26959 11.7928L3.5643 10.0474C3.12349 8.95653 3.64349 7.73107 4.73429 7.29011L6.47956 6.58457L7.35706 4.5166C7.81205 3.44433 9.06647 2.93722 10.1386 3.39215L12.2063 4.26951L13.9515 3.56397C15.0423 3.12301 16.2676 3.64293 16.7084 4.73379L17.4137 6.47917L19.4814 7.35654C20.5535 7.81147 21.0604 9.06596 20.6054 10.1382L19.728 12.2062L20.4332 13.9516C20.874 15.0424 20.3541 16.2679 19.2824 16.717Z" stroke="white" stroke-miterlimit="10"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M15.68 9.4711C15.2744 9.06562 14.6109 9.06562 14.2053 9.4711L10.6363 12.9879C10.2307 13.3933 10.2307 14.057 10.6363 14.4626C11.0418 14.8681 11.7054 14.8681 12.1109 14.4626L15.68 10.9458C16.0855 10.5404 16.0855 9.87674 15.68 9.4711Z" fill="white"></path>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M9.00967 11.3988C8.6042 11.8045 8.6042 12.4681 9.00967 12.8736L10.6209 14.4848C11.0264 14.8903 11.69 14.8903 12.0955 14.4848C12.5011 14.0792 12.5011 13.4155 12.0955 13.0101L10.4844 11.3988C10.0788 10.9934 9.41532 10.9934 9.00967 11.3988Z" fill="white"></path>
+        </svg>
+        Trust & Safety
+      </h4>
+      <h3>We have your back.</h3>
+      <p>With one-quarter of our global team dedicated to trust and safety, we’ve successfully managed fundraisers worldwide for more than a decade.</p>
+      <p>Don’t worry about a thing, we’ve got you covered.</p>
+    </div>
+  );
+}
+
+
+export const Banner4 = () => {
+  return (
+    <div className="banner4">
+      <div className="right">
+        <h1>Ready to get started? Join thousands of others today.</h1>
+        <Link to='/create/fundraiser/regform' className='fundraiser-btn'>
+          Start a BetterWorld
+        </Link>
+      </div>
+      <img alt="" class="FooterCTA_footer-cta-flower__k01Kt" src="https://d25oniaj7o2jcw.cloudfront.net/footer-flower-cta.png" srcset="https://d25oniaj7o2jcw.cloudfront.net/footer-flower-cta.png 1x, https://d25oniaj7o2jcw.cloudfront.net/footer-flower-cta@2x.png 2x" />
+    </div>
+  );
+}

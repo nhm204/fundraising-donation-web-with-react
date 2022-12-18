@@ -6,11 +6,11 @@ import './Pagination.scss';
 const renderProjects = (projects) => {
   return (
     <ul className='project-list'>
-      { projects?.length !== 0 ? projects?.map((project => (
+      { projects?.length !== 0 ? projects?.map(project => (
         <li key={project.id}>
           <Project project={project} />   
         </li> 
-      ))) : <h2 style={{ margin: '4vh auto'}}>There is no matching project.</h2>} 
+      )) : <h2 style={{ margin: '4vh auto'}}>There is no matching project.</h2>} 
     </ul>
   );
 };
