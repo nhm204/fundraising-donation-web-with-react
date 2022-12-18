@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import './StartFundraising.scss';
 import { categories } from '../../../../constants/categories';
-import { BsCheck, BsCloudUploadFill } from "react-icons/bs";
+import { BsCheck, BsChevronLeft, BsCloudUploadFill } from "react-icons/bs";
 import PaymentMethods from '../PaymentMethods/PaymentMethods';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 
@@ -82,9 +82,13 @@ const StartFundraising = () => {
   return (
     <div className='start-fundraising'>
       <div className="left">
-        <Link to='/' className="logo-wrapper">
-          <img src={require ('../../../../assets/img/logo.png')} alt="" className="logo" />
-        </Link>
+        <button
+          className='back-btn'
+          onClick={() => window.history.back()}
+        >
+          <BsChevronLeft className='icon'/>
+          Back to home
+        </button>
         <h1>Tell us a bit more about your fundraiser</h1>
         <div className='desc'>This information helps us get to know you and your fundraising needs.</div>
       </div>
