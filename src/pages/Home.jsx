@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { Header } from '../common';
-import { Banner1 } from './components/Banner/Banner';
+import { Footer, Header } from '../common';
+import { Banner1, Banner3, Banner4 } from './components/Banner/Banner';
 import { Banner, FeaturedProjects } from './components/index.jsx';
+import { projects } from './components/Projects/projects';
 
 
 const Home = () => {
-  const [ projectList, setProjectList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
 
   let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
  
@@ -31,6 +32,9 @@ const Home = () => {
       <Banner featuredList={featuredList} />
       { featuredList.length > 0 && <FeaturedProjects featuredList={featuredList} />}
       <Banner1 />
+      <Banner3 />
+      <Banner4 />
+      <Footer />
     </div>
   );
 }

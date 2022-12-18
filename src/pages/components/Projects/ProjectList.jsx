@@ -6,10 +6,11 @@ import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
 import { Header } from '../../../common';
 import { categories } from '../../../constants/categories';
+import { projects } from './projects';
 
 
 const Projects = () => {
-  const [ projectList, setProjectList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);

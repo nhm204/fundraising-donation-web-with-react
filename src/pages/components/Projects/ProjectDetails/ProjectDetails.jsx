@@ -6,6 +6,7 @@ import { HiChevronDoubleRight } from "react-icons/hi";
 import { Banner2 } from '../../Banner/Banner';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 import EditProjectModal from '../EditProjectModal/EditProjectModal';
+import { Footer } from '../../../../common';
 
 
 const ProjectDetails = () => {
@@ -143,6 +144,7 @@ const ProjectDetails = () => {
         </>
       ) : null }
       <Banner2 />
+      <Footer />
       <Outlet />
     </div>
   );
