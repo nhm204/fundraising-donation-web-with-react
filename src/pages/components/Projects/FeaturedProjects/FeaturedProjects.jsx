@@ -19,7 +19,7 @@ const FeaturedProjects = ({ featuredList }) => {
         </div>
       </div>
       <ul className='featured-projects'>
-        { featuredList?.slice(0, 4).map(project => (
+        { [...featuredList]?.reverse().slice(0, 4).map(project => (
           <li key={project.id}>
             <Project project={project} />   
           </li> 

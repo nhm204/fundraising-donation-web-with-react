@@ -2,14 +2,10 @@ import React, { useEffect, useState } from 'react';
 import { Footer, Header } from '../common';
 import { Banner1, Banner3, Banner4 } from './components/Banner/Banner';
 import { Banner, FeaturedProjects } from './components/index.jsx';
-import { projects } from './components/Projects/projects';
 
 
 const Home = () => {
   const [ projectList, setProjectList ] = useState([]);
-
-  let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
- 
 
   useEffect(() => { 
     document.title = `Home. BetterWorld: #1 for Donation and Fundraising Platform`;
@@ -25,6 +21,8 @@ const Home = () => {
       });
   }, []);
 
+  let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
+ 
 
   return (
     <div className='home'>
