@@ -97,7 +97,7 @@ export const projects = [
         "currentPrice": 1300,
         "targetPrice": 7000,
         "donationCount": 98,
-        "description": "This is a charity project with the aim of giving free water for African",
+        "description": "This is a charity project with the aim of giving free water to African",
         "category": "Food Banks",
         "image": "https://images.unsplash.com/photo-1574482620826-40685ca5ebd2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=387&q=80",
         "isFeatured": true,

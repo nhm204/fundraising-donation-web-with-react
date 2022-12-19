@@ -6,7 +6,6 @@ import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
 import { Header } from '../../../common';
 import { categories } from '../../../constants/categories';
-import { projects } from './projects';
 
 
 const Projects = () => {
@@ -179,7 +178,7 @@ const Projects = () => {
             <input 
               type="range" 
               min='0' 
-              max='100000' 
+              max='10000' 
               className='slider' 
               onChange={e => setSelectedPrice(e.target.value)}
             />
