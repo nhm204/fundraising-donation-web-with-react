@@ -240,7 +240,7 @@ const StartFundraising = () => {
                 <span className="checkmark">
                   { isFeatured && <BsCheck className='icon' /> }
                 </span>
-                <div className='title'>Featured this product</div>
+                <div className='title'>Featured this project</div>
               </label>
               <div className='tips'>Keeps in mind that this will charge you 5 dollars fee to feature your fundraiser.</div>
               { isFeatured && <PaymentMethods isPaid={isPaid} setIsPaid={setIsPaid} /> }
@@ -249,11 +249,18 @@ const StartFundraising = () => {
             <div className='is-paid'>You have featured this project!</div>
           )}
           <div className='btn-container'>
-            { (isFeatured && !isPaid) ? (
+            { ((isFeatured && !isPaid) || username === null) ? (
               <button 
                 type=''
                 className='create-btn disabled'
-                onClick={() => alert('Please pay to featured this project before submitting!')}
+                onClick={() => {
+                  if (isFeatured && !isPaid) {
+                    alert('Please pay to featured this project before submitting!');
+                  }
+                  if (username === null) {
+                    alert('Please sign in before submitting!');
+                  }
+                }}
               >
                 Submit
               </button>

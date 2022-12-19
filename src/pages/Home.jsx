@@ -6,7 +6,7 @@ import { projects } from './components/Projects/projects';
 
 
 const Home = () => {
-  const [ projectList, setProjectList ] = useState(projects);
+  const [ projectList, setProjectList ] = useState([]);
 
   let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
  

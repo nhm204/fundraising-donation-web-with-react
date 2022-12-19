@@ -184,6 +184,10 @@
             width: fit-content;
             padding: 16px 32px;
             border-radius: 30px;
+
+            &:hover {
+                opacity: 0.9;
+            }
         }
     }
 }
