@@ -191,3 +191,89 @@
         }
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .main-banner {
+        height: 42vh;
+    
+        .desc {
+            top: 40%;
+    
+            h1 {
+                font-size: 4.5rem;
+                line-height: 5rem;
+            }
+    
+            
+        }
+    }
+
+    .banner1 {
+        padding: 0 2vw 6vh;
+
+        .heading {
+            h1 {
+                max-width: 80vw;
+            }
+        }
+
+        video {
+            width: 96vw;
+        }
+
+        .volume-btn {
+            right: 5%;
+        }
+    }
+
+    .banner2 {
+        padding: 8vh 4vw;
+
+        h2 {
+            margin-bottom: 4vh;
+        }
+
+        ul {
+            flex-direction: column;
+            align-items: flex-start;
+
+            li {
+                padding: 2vh 0;
+            }
+        }
+    }
+
+    .banner3 {
+        padding: 20vh 4vw;
+
+        h4 {
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            font-size: 4rem;
+        }
+
+        p {
+            font-size: 2.8rem;
+            max-width: 100%;
+        }
+    }
+
+    .banner4 {
+        margin: 4vh 2vw;
+        padding: 40px 40px;
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
+}

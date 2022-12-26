@@ -402,3 +402,54 @@
     height: 100vh;
     overflow: hidden;
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .fundraiser-section {
+        .heading-container {
+            padding: 0 2vw 2vh;
+
+            .cover-bg-wrapper {
+                .cover-bg {
+                    height: 40vh;
+                    margin: calc(var(--navbar-height) + 1vh) 0 0;
+                }
+            }
+
+            .info-container {
+                width: 93vw;
+                padding: 0 3vw;
+
+                .avatar-wrapper {
+                    .avatar {
+                        width: 180px;
+                        height: 180px;
+                    }
+
+                    .edit-ava-btn {
+                        bottom: 25px;
+                    }
+                }
+
+                .info {
+                    padding: 60px 0 24px;
+                }
+            }
+        }
+
+        .body-container {
+            padding: 2vh 5vw;
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
+}

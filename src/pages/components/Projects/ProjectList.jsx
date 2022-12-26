@@ -4,36 +4,38 @@ import './ProjectList.scss';
 import { BsSliders } from "react-icons/bs";
 import { IoCloseOutline } from "react-icons/io5";
 import Pagination from '../Pagination/Pagination';
-import { Header } from '../../../common';
+import { Footer, Header } from '../../../common';
 import { categories } from '../../../constants/categories';
+import { projects } from '../../../constants/projects';
+import { HiOutlineAdjustments } from 'react-icons/hi';
 
 
 const Projects = () => {
-  const [ projectList, setProjectList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
   const [ sortProject, setSortProject ] = useState();
-  const [ projectsPerPage, setProjectsPerPage ] = useState(9);
+  const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ currentPage, setCurrentPage ] = useState(1);
+  const [ isShowFilter, setIsShowFilter ] = useState(false);
 
   
   useEffect(() => { 
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
     window.scrollTo(0, 0); 
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-      .then(res => res.json())
-      .then((res) => {
-        setProjectList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+    // fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+    //   .then(res => res.json())
+    //   .then((res) => {
+    //     setProjectList(res);
+    //   })
+    //   .catch((err) => {
+    //     console.log(err.message);
+    //   });
   }, []);
 
   // console.log(process.env.REACT_APP_BASE_URL)
-  // console.log(projectList?.reverse())
 
   
   let filteredList = useMemo(() => {
@@ -130,21 +132,21 @@ const Projects = () => {
     <div className='discover'>
       <Header searchQuery={searchQuery} link={'Discover'} changeData={changeData} />
       <div className='filter-projects'>
-        <label htmlFor='mobile-filter' className='mobile-filter-btn'>
-          <span>Filter</span>
-          <BsSliders />
-        </label>
-        <input type='checkbox' id='mobile-filter' hidden className='mobile-filter-checkbox-input' />
-        <div className='filter'>
-          <label htmlFor='mobile-filter' className='close-btn'>
-            <div>Filter</div>
-            <IoCloseOutline />       
-          </label>
+        <button className='filter-btn' onClick={() => setIsShowFilter(true)}>
+          Filter
+          <HiOutlineAdjustments className='icon' />
+        </button>
+        <div className={`filter ${isShowFilter && 'filter--show'}`}>
+          <div className='close-btn' onClick={() => setIsShowFilter(false)}>
+            <div className='heading'>Filter</div>
+            <IoCloseOutline className='icon' />       
+          </div>
           <div 
             className={selectedCategory === '' ? 'all active' : 'all'} 
             onClick={() => {
               setSelectedCategory('');
               setSortProject('');
+              setIsShowFilter(false);
             }}
           >
             All
@@ -154,6 +156,7 @@ const Projects = () => {
             onClick={() => {
               setSelectedCategory('Featured');
               setSortProject('Featured');
+              setIsShowFilter(false);
             }}
           >
             Featured
@@ -163,6 +166,7 @@ const Projects = () => {
             onClick={() => {
               setSortProject('Newest');
               setSelectedCategory('Newest');
+              setIsShowFilter(false);
             }}
           >
               Newest
@@ -170,7 +174,16 @@ const Projects = () => {
           <span className='title'>Purpose</span>
           <div className='selection'>
             { categories.map((category, index) => (
-              <div key={index} className={selectedCategory === category ? 'option active' : 'option'} onClick={() => setSelectedCategory(category)}>{category}</div>
+              <div 
+                key={index} 
+                className={selectedCategory === category ? 'option active' : 'option'} 
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setIsShowFilter(false);
+                }}
+              >
+                {category}
+              </div>
             ))}
           </div>
           <span className='price'>Price: <span style={{ color: "var(--primary-color)" }}>${selectedPrice}</span></span>
@@ -185,15 +198,48 @@ const Projects = () => {
           </div>
           <div className='sort-project'>
             <span className='sort'>Sort by</span>
-            <div className={sortProject === 'ASC' ? 'option active' : 'option'} onClick={() => setSortProject('ASC')}>Price: Low - High</div>
-            <div className={sortProject === 'DESC' ? 'option active' : 'option'} onClick={() => setSortProject('DESC')}>Price: High - Low</div>
-            <div className={sortProject === 'A-Z' ? 'option active' : 'option'} onClick={() => setSortProject('A-Z')}>Name: A to Z</div>
-            <div className={sortProject === 'Z-A' ? 'option active' : 'option'} onClick={() => setSortProject('Z-A')}>Name: Z to A</div>
+            <div 
+              className={sortProject === 'ASC' ? 'option active' : 'option'} 
+              onClick={() => {
+                setSortProject('ASC');
+                setIsShowFilter(false);
+              }}
+            >
+              Price: Low - High
+            </div>
+            <div 
+              className={sortProject === 'DESC' ? 'option active' : 'option'} 
+              onClick={() => {
+                setSortProject('DESC');
+                setIsShowFilter(false);
+              }}
+            >
+              Price: High - Low
+            </div>
+            <div 
+              className={sortProject === 'A-Z' ? 'option active' : 'option'} 
+              onClick={() => {
+                setSortProject('A-Z');
+                setIsShowFilter(false);
+              }}
+            >
+              Name: A to Z
+            </div>
+            <div 
+              className={sortProject === 'Z-A' ? 'option active' : 'option'} 
+              onClick={() => {
+                setSortProject('Z-A');
+                setIsShowFilter(false);
+              }}
+            >
+              Name: Z to A
+            </div>
             <div 
               className='option default' 
               onClick={() => {
                 setSortProject();
                 setSelectedCategory('');
+                setIsShowFilter(false);
               }}
             >
               Reset

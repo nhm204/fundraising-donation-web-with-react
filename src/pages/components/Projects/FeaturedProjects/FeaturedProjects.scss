@@ -96,3 +96,63 @@
         
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .featured {
+        padding: 6vh 2vw;
+
+        .heading {
+            .see-all {
+                h1 {
+                    max-width: 60vw;
+                }
+
+                .more {
+                    .icon {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .featured-projects {
+            justify-content: space-between;
+
+            li {
+                margin: 2.5vh 0;
+                
+                &:nth-child(odd) {
+                    padding-left: 0;
+                }
+
+                &:nth-child(even) {
+                    padding-right: 0;
+                }
+
+                .project-wrapper {
+                    width: 360px;
+
+                    .project {
+
+                        img {
+                            width: 360px;
+                            height: 360px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
+}

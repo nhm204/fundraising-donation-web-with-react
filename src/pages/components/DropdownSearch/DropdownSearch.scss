@@ -1,3 +1,7 @@
+::-webkit-scrollbar {
+    display: none;
+}
+
 .dropdown-search {
     .searchbar-wrapper {
         position: fixed;
@@ -144,4 +148,47 @@
         // animation: fadeIn linear 0.3s;
         z-index: 2;
     }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .dropdown-search {
+        .searchbar-wrapper {
+            height: 57vh;
+
+            .searchbar-container {
+                .cancel-btn {
+                    right: 4vw;
+                }
+            }
+
+            .recent-search {
+                top: 27%;
+                left: 3%;
+            }
+
+            .search-projects {
+                position: absolute;
+                top: 15%;
+                right: 0;
+                width: 72%;
+                overflow-x: scroll;
+
+                &:last-child {
+                    padding-right: 3%;
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
 }
