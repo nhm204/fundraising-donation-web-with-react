@@ -25,6 +25,10 @@ const FeaturedProjects = ({ featuredList }) => {
           </li> 
         ))}
       </ul>
+      <Link to='/discover' className="discover-btn">
+        See more
+        <HiChevronDoubleRight className='icon' />
+      </Link>
     </section>
   );
 }

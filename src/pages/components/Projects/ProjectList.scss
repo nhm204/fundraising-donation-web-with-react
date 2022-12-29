@@ -159,7 +159,16 @@
             // overflow-y: scroll;
 
             .project-list {
-                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+
+                li {
+                //     max-width: 320px;
+                //     // flex: 1;
+                //     min-width: 280px;
+                    margin: 4vh 0;
+                    padding: 0 1vw;
+                }
             }
     
             .end {
@@ -167,19 +176,6 @@
                 text-align: center;
                 padding: 5vh 0;
             }
-        }
-    }
-
-    .project-list {
-        display: flex;
-        flex-wrap: wrap;
-
-        li {
-        //     max-width: 320px;
-        //     // flex: 1;
-        //     min-width: 280px;
-            margin: 4vh 0;
-            padding: 0 1vw;
         }
     }
 }
@@ -272,6 +268,7 @@
             .filter-btn {
                 margin-right: 7.5vw;
             }
+
             .projects-wrapper {
                 width: 94vw;
             }
@@ -282,9 +279,21 @@
 // Mobile
 @media (max-width: 46.1875em) {
     .discover {
-        
-        
-        
+        .filter-projects {
+            .filter-btn {
+                margin-right: 7.5vw;
+                margin-bottom: 4vh;
+            }
+
+            .projects-wrapper {
+                margin-top: 4vh;
+                width: 100vw;
+
+                .project-list {
+                    justify-content: center;
+                }
+            }
+        }
     }
 
 }

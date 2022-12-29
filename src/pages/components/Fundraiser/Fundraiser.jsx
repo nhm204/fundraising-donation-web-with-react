@@ -170,16 +170,18 @@ const Fundraiser = () => {
               <FaYoutube className='icon' />
             </div>
           </div> 
-          <div className="donate-count">
-            <h2>${totalDonatedAmount}</h2>
-            <div>donated for <span>{totalDonatedProject} projects</span></div>
-            <FaAward className='icon' />
-          </div>
-          <div className="support">
-            <h2>${totalRaisedAmount}</h2>
-            <div>raised of <span>{allProjects.length} projects</span></div>
-            <div>by <span>{totalSuppoters} supporters</span></div>
-            <FaChild className='icon' />
+          <div className='contribution-count'>
+            <div className="donate-count">
+              <h2>${totalDonatedAmount}</h2>
+              <div>donated for <span>{totalDonatedProject} projects</span></div>
+              <FaAward className='icon' />
+            </div>
+            <div className="support">
+              <h2>${totalRaisedAmount}</h2>
+              <div>raised of <span>{allProjects.length} projects</span></div>
+              <div>by <span>{totalSuppoters} supporters</span></div>
+              <FaChild className='icon' />
+            </div>
           </div>
         </div>
         { username === fundraiserName ? (

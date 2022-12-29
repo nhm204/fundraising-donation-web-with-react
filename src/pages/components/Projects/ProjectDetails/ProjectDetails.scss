@@ -39,6 +39,11 @@
         .fundraiser {
             font-size: 1.8rem;
             line-height: 1.8rem;
+            width: 90vw;
+            margin: 0 auto;
+            overflow: hidden; 
+            text-overflow: ellipsis; 
+            white-space: nowrap;
 
             a {
                 color: var(--text-color);
@@ -74,6 +79,8 @@
             .desc {
                 padding: 12px 0 100px;
                 line-height: 2.5rem;
+                text-align: justify;
+                text-justify: inter-word;
             }
 
             .fundraising-by {
@@ -124,6 +131,7 @@
                 .bio {
                     margin-bottom: 70px;
                     color: black;
+                    text-align: center;
                 }
             }
         }
@@ -326,20 +334,12 @@
 // Tablet & mobile
 @media (max-width: 63.9375em) {
     .project {
-
-    }
-}
-
-// Tablet
-@media (min-width: 46.25em) and (max-width: 63.9375em) {
-    .project {
         .project-heading {
             padding: calc(var(--navbar-height) + 5vh) 0 4vh;
         }
 
         .project-container {
             display: unset;
-            padding: 0 2vw 6vh;
 
             .content {
                 width: unset;
@@ -351,8 +351,8 @@
                 h3 {
                     margin-top: 60px;
                 }
-            }
-
+            } 
+            
             .amount--responsive {
                 margin-top: 4vh;
 
@@ -461,6 +461,15 @@
                 }
             }
         }
+    }
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .project {
+        .project-container {
+            padding: 0 2vw 6vh;
+        }
 
     }
 }
@@ -468,8 +477,17 @@
 // Mobile
 @media (max-width: 46.1875em) {
     .project {
-        
-        
+        .project-container {
+            padding: 0 5vw 6vh;
+
+            .content {
+                .fundraising-by {
+                    .bio {
+
+                    }
+                }
+            }
+        }
         
     }
 

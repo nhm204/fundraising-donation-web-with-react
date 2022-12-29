@@ -23,7 +23,7 @@
         .edit-header {
             position: sticky;
             top: 0;
-            width: 42vw;
+            // width: 42vw;
             height: 72px;
             display: flex;
             align-items: center;
@@ -33,7 +33,7 @@
             .blur-bg {
                 background-color: rgba(0, 0, 0, 0.65);
                 height: 72px;
-                width: 42vw;
+                width: 100%;
                 backdrop-filter: blur(12px);
             }
 
@@ -254,6 +254,8 @@
                         font-family: inherit;
                         font-weight: 300;
                         height: unset;
+                        text-align: justify;
+                        text-justify: inter-word;
                     }
                 }
             }
@@ -289,3 +291,39 @@
 }
 
 
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .fundraiser-edit {
+        .edit-form {
+            .edit-header {
+
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .fundraiser-edit {
+        .edit-form {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
+
+            .cover-bg-container {
+                height: 32vh;
+
+                .cover-bg {
+                    height: 32vh;
+                }
+            }
+            
+        }
+    }
+}

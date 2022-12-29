@@ -1,6 +1,7 @@
 import './HeaderMenu.scss';
 import { IoCloseOutline } from 'react-icons/io5';
 import { Link } from 'react-router-dom';
+import { setGlobalState } from '../../hooks/useGlobalState';
 
 
 const HeaderMenu = ({ user, username, navSelected, setNavSelected, setIsSelected, setIsShowMenu }) => {
@@ -12,14 +13,14 @@ const HeaderMenu = ({ user, username, navSelected, setNavSelected, setIsSelected
       </Link>
       { username !== null && (
         <div className="avatar-wrapper">
-          <img src={user[0]?.avatar} alt="" className='user-avatar' />
+          <img src={user?.avatar} alt="" className='user-avatar' />
           <div className="info">
             <div className="name">
-              {user[0]?.name} 
+              {user?.name} 
               <span className="separator">|</span>
-              <span className="id">Fundraiser #{user[0]?.id}</span>
+              <span className="id">Fundraiser #{user?.id}</span>
             </div>
-            <Link to={`/fundraiser/${username}/${user[0]?.id}`}>View profile</Link>
+            <Link to={`/fundraiser/${username}/${user?.id}`}>View profile</Link>
           </div>
         </div>
       )}
@@ -37,8 +38,10 @@ const HeaderMenu = ({ user, username, navSelected, setNavSelected, setIsSelected
       <Link to='/create/fundraiser/regform' className='fundraise-btn'>
         Start a BetterWorld
       </Link>
-      { username === null && (
+      { username === null ? (
         <Link to='/signin' className='login-btn'>Sign in</Link>
+      ) : (
+        <button className='logout-btn' onClick={() => setGlobalState('username', null)}>Log out</button>
       )}
     </div>
   );

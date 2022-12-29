@@ -15,12 +15,13 @@
     right: 0;
     left: 0;
     bottom: 0;
+    height: 100vh;
     background-color: white;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     padding: 2vh 2vw;
-    z-index: 100;
+    z-index: 110;
 
     .close-icon {
         align-self: flex-end;
@@ -37,7 +38,7 @@
     .avatar-wrapper {
         display: flex;
         align-items: flex-end;
-        margin-bottom: 2vh;
+        margin: 4vh 0 2vh;
 
         .user-avatar {
             width: 120px;
@@ -70,7 +71,7 @@
 
             a {
                 text-decoration: underline;
-                padding: 8px 0;
+                padding: 12px 0;
             }
         }
     }
@@ -97,5 +98,11 @@
     .login-btn {
         @extend .button;
         border: 1px solid #ccc;
+    }
+
+    .logout-btn {
+        @extend .button;
+        border: none;
+        background-color: #ccc;
     }
 }

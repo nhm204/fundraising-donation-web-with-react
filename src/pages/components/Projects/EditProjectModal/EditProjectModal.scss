@@ -26,7 +26,7 @@
             position: sticky;
             top: 0;
             height: 72px;
-            width: 42vw;
+            width: 100%;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -35,7 +35,7 @@
             .blur-bg {
                 background-color: rgba(0, 0, 0, 0.65);
                 height: 72px;
-                width: 42vw;
+                width: 100%;
                 backdrop-filter: blur(12px);
             }
 
@@ -250,6 +250,8 @@
                         font-family: inherit;
                         font-weight: 300;
                         height: unset;
+                        text-align: justify;
+                        text-justify: inter-word;
                     }
                 }
 
@@ -357,6 +359,33 @@
                 width: 38vw;
                 height: fit-content;
             }
+        }
+    }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .project-edit {
+        .edit-form {
+            height: 90vh;
+            width: 90vw;
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .project-edit {
+        .edit-form {
+            width: 100vw;
+            height: 100vh;
+            border-radius: 0;
         }
     }
 }

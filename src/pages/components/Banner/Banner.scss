@@ -275,5 +275,81 @@
 
 // Mobile
 @media (max-width: 46.1875em) {
-    
+    .banner1 {
+        padding: 6vh 5vw ;
+
+        .heading {
+            h1 {
+                max-width: 80vw;
+            }
+        }
+
+        video {
+            width: 90vw;
+        }
+
+        .volume-btn {
+            bottom: 12%;
+            right: 8%;
+            height: 40px;
+            width: 40px;
+
+            .icon {
+                font-size: 2.5rem;
+            }
+        }
+    }
+
+    .banner2 {
+        padding: 8vh 5vw;
+
+        h2 {
+            font-size: 2.8rem;
+            line-height: 3.5rem;
+            margin-bottom: 5vh;
+        }
+
+        ul {
+            flex-direction: column;
+            align-items: flex-start;
+
+            li {
+                padding: 4vh 0;
+            }
+        }
+    }
+
+    .banner3 {
+        padding: 12vh 5vw;
+
+        h4 {
+            font-size: 1.6rem;
+        }
+
+        h3 {
+            font-size: 3.5rem;
+        }
+
+        p {
+            font-size: 2.5rem;
+            max-width: 100%;
+        }
+    }
+
+    .banner4 {
+        margin: 8vh 5vw;
+        padding: 40px 20px;
+        flex-direction: column-reverse;
+
+        .right {
+            padding-top: 4vh;
+            align-items: center;
+
+            h1 {
+                text-align: center;
+                font-size: 3.6rem;
+            }
+        }
+
+    }
 }

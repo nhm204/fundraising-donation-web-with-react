@@ -1,24 +1,26 @@
 import React, { useEffect, useState } from 'react';
 import './Checkout.scss';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { BsChevronLeft } from 'react-icons/bs';
 import { FaDollarSign } from 'react-icons/fa';
 import { useForm } from 'react-hook-form';
-import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import PaymentCheckout from './PaymentCheckout/PaymentCheckout';
-import PaymentMethods from '../CreateProject/PaymentMethods/PaymentMethods';
+import { projects, users } from '../../../constants/projects';
+import { HiOutlineMenu } from 'react-icons/hi';
+import { HeaderMenu } from '../../../common';
 
 
 const Checkout = () => {
   const [ username, setUsername ] = useGlobalState('username');
-  const [ projectList, setProjectList ] = useState([]);
-  const [ userList, setUserList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
+  const [ userList, setUserList ] = useState(users);
   const [ donationAmount, setDonationAmount ] = useState(0);
   const [ isAmountFocus, setIsAmountFocus ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);
   const [ isDonated, setIsDonated ] = useState(false);
   const { register, handleSubmit, setValue, formState: { errors } } = useForm();
+  const navigate = useNavigate();
   const paramValue = useParams();
   const projectName = paramValue.name;
   const projectId = paramValue.id;
@@ -50,7 +52,14 @@ const Checkout = () => {
   const user = userList?.find(user => user.name === username);
 
 
-  
+  useEffect(() => {
+    if (project.creatorId === user.id) {
+      navigate(`/discover/${project.name}/${project.id}`);
+      alert('You cannot donate to your project!')
+    }
+  }, [navigate, project.creatorId, user.id, project.name, project.id]);
+
+
   const onSubmit = async (data) => {
     if (isDonated) {
       try {
@@ -77,9 +86,6 @@ const Checkout = () => {
     document.title = `Donate to ${project?.name} | #${projectId}`;
     window.scrollTo(0, 0); 
   }, [project?.name, projectId]);
-
-  
-  console.log(isPaid)
  
 
   return (

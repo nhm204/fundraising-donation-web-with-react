@@ -227,66 +227,73 @@
                     margin-right: 10px;
                 }
             }
+
+            .contribution-count {
+                display: flex;
+                justify-content: space-between;
+                width: 33vw;
+
+                .donate-count {
+                    border-radius: 20px;
+                    box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+                    padding: 30px 2vw;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
     
-            .donate-count {
-                border-radius: 20px;
-                box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
-                padding: 30px 2vw;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                h2 {
-                    color: var(--primary-color);
-                    font-size: 3.5rem;
-                    line-height: 3.8rem;
-                    margin-bottom: 12px;
-                }
-
-                span {
-                    color: black;
-                    font-weight: 600;
-                }
-
-                .icon {
-                    font-size: 4.5rem;
-                    color: var(--primary-color);
-                    margin-top: 32px;
-                }
-            }
-
-            .support {
-                border-radius: 20px;
-                box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
-                padding: 30px 2vw;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                h2 {
-                    color: var(--primary-color);
-                    font-size: 3.5rem;
-                    line-height: 3.8rem;
-                    margin-bottom: 12px;
-                }
-
-                div {
-                    &:last-child {
-                        margin-top: 8px;
+                    h2 {
+                        color: var(--primary-color);
+                        font-size: 3.5rem;
+                        line-height: 3.8rem;
+                        margin-bottom: 12px;
                     }
-
+    
                     span {
                         color: black;
                         font-weight: 600;
                     }
+    
+                    .icon {
+                        font-size: 4.5rem;
+                        color: var(--primary-color);
+                        margin-top: 32px;
+                    }
                 }
-
-                .icon {
-                    font-size: 4rem;
-                    color: var(--primary-color);
-                    margin-top: 24px;
+    
+                .support {
+                    border-radius: 20px;
+                    box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+                    padding: 30px 2vw;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+    
+                    h2 {
+                        color: var(--primary-color);
+                        font-size: 3.5rem;
+                        line-height: 3.8rem;
+                        margin-bottom: 12px;
+                    }
+    
+                    div {
+                        &:last-child {
+                            margin-top: 8px;
+                        }
+    
+                        span {
+                            color: black;
+                            font-weight: 600;
+                        }
+                    }
+    
+                    .icon {
+                        font-size: 4rem;
+                        color: var(--primary-color);
+                        margin-top: 24px;
+                    }
                 }
             }
+    
         }
         
         .projects-wrapper {
@@ -304,7 +311,7 @@
                     cursor: pointer;
                     color: black;
                     padding: 16px 24px;
-                    border: 4px solid black;
+                    border: 4px solid #1d1c21;
                     border-radius: 20px;
                     border-bottom-left-radius: 0;
                     border-bottom-right-radius: 0;
@@ -361,7 +368,6 @@
                         padding: 0 1.5vw;
         
                         .project-wrapper {
-                            width: 320px;
         
                             .project {
                                 .info {
@@ -445,6 +451,37 @@
 
         .body-container {
             padding: 2vh 5vw;
+
+            .overview {
+                .contact {
+                    justify-content: flex-start;
+                    width: 45vw;
+                }
+
+                .contribution-count {
+                    width: 40vw;
+                    flex-direction: column;
+
+                    .support {
+                        margin-top: 2vh;
+                    }
+                }
+            }
+
+            .projects-wrapper {
+                margin-top: 50px;
+
+                .pagination-wrapper {
+                    
+                    .project-list {
+                        margin-left: 0.8vw;
+
+                        li {
+                            padding: 0 1vw;
+                        }
+                    }
+                }
+            }
         }
     }
 }

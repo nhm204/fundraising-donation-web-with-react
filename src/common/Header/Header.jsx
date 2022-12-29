@@ -75,7 +75,7 @@ const Header = ({ link, searchQuery, changeData }) => {
           </div>
         </nav>
       </header>
-      { isShowMenu && <HeaderMenu user={user} username={username} navSelected={navSelected} setNavSelected={setNavSelected} setIsSelected={setIsSelected} setIsShowMenu={setIsShowMenu} />}
+      { isShowMenu && <HeaderMenu user={user[0]} username={username} navSelected={navSelected} setNavSelected={setNavSelected} setIsSelected={setIsSelected} setIsShowMenu={setIsShowMenu} />}
     </>
   );
 }

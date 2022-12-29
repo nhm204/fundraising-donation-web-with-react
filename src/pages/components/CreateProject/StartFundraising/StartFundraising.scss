@@ -187,6 +187,8 @@
                     font-family: inherit;
                     font-weight: 300;
                     height: unset;
+                    text-align: justify;
+                    text-justify: inter-word;
                 }
             }
 
@@ -366,4 +368,39 @@
 
         }
     }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    .start-fundraising {
+        flex-direction: column;
+
+        .left {
+            width: 100vw;
+            height: unset;
+            padding: 4vh 2vw 6vh;
+
+            h1 {
+                margin: 8vh 0 2vh;
+            }
+        }
+
+        .right {
+            width: 100vw;
+            padding: 4vh 2vw 6vh;
+        }
+    }
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .start-fundraising {
+        
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
 }

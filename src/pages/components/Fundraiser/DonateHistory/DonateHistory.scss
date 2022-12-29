@@ -1,5 +1,5 @@
 .donate-history {
-    margin-top: 80px;
+    margin-top: 60px;
     padding: 40px 0;
     
     ul {
@@ -77,4 +77,22 @@
             
         }
     }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .donate-history {
+        margin-top: 40px;
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    
 }
