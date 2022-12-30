@@ -94,5 +94,15 @@
 
 // Mobile
 @media (max-width: 46.1875em) {
-    
+    .donate-history {
+        margin-top: 20px;
+
+        ul {
+            margin-top: 16px;
+
+            .contribution {
+                margin-right: 2vw;
+            }
+        }
+    }
 }

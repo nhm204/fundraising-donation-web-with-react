@@ -73,7 +73,6 @@ const Fundraiser = () => {
 
   const totalRaisedAmount = allProjects?.reduce((total, project) => project.currentPrice + total, 0);
   const totalSuppoters = allProjects?.reduce((total, project) => project.donationCount + total, 0);
-  console.log(totalDonatedProjectId);
 
 
   useEffect(() => { 
@@ -120,7 +119,7 @@ const Fundraiser = () => {
             <>
               <label htmlFor='background-file-chosen' className='edit-cover-bg-btn'>
                 <FaCamera className='icon' />
-                Edit cover image
+                <span>Edit cover image</span>
               </label>
               <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeBackground} hidden />
             </>
@@ -222,7 +221,7 @@ const Fundraiser = () => {
       { isConfirmModalShow && (
         <>
           <div onClick={() => setIsConfirmModalShow(false)} className='profile-overlay' /> 
-          <ConfirmSignOutModal setIsConfirmModalShow={setIsConfirmModalShow} />
+          <ConfirmSignOutModal isConfirmModalShow={isConfirmModalShow} setIsConfirmModalShow={setIsConfirmModalShow} />
         </>
       )}
       <Outlet />

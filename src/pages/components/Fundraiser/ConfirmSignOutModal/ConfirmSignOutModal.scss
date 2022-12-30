@@ -6,7 +6,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    z-index: 100;
+    z-index: 130;
     border-radius: 10px;
     background-color: white;
 
@@ -35,6 +35,30 @@
             padding: 4px 12px;
             border-radius: 5px;
             cursor: pointer;
+        }
+    }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .confirm-modal {
+        padding: 60px 20px;
+
+        .btn-container {
+            .confirm-btn, .cancel-btn {
+                padding: 8px 16px;
+            }
         }
     }
 }

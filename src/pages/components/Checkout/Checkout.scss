@@ -384,7 +384,7 @@
         }
 
         .checkout-body {
-            height: 100vh;
+            height: unset;
             padding: calc(var(--navbar-height) + 4vh) 5vw 4vh;
 
             .left {

@@ -111,28 +111,30 @@ const DropdownSearch = ({ searchQuery, changeData, setIsSelected, link }) => {
             Cancel
           </div>
         </div>
-        <ul className='recent-search'>
+        <div className='recent-search'>
           <h4>Recent search:</h4>
-          { recentSearch?.slice(0, 8).map((search, index) => (
-              <li key={index}>
-                <button 
-                  className='search-keyword'
-                  // onClick={(e) => {
-                  //   link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
-                  //   changeData(search, '', 1);
-                  //   if (search) {
-                  //     // handleRecentSearch();
-                  //     // setIsSelected(false);
-                  //     console.log(inputValue)
-                  //   }
-                  // }}
-                >
-                  {search?.toLowerCase()}
-                </button>
-              </li>
-            ))
-          }
-        </ul>
+          <ul>
+            { recentSearch?.slice(0, 8).map((search, index) => (
+                <li key={index}>
+                  <button 
+                    className='search-keyword'
+                    // onClick={(e) => {
+                    //   link !== 'Discover' ? navigate({ pathname: '/discover', search: `?search=${search}`}) : setSearchParams({search: search});
+                    //   changeData(search, '', 1);
+                    //   if (search) {
+                    //     // handleRecentSearch();
+                    //     // setIsSelected(false);
+                    //     console.log(inputValue)
+                    //   }
+                    // }}
+                  >
+                    {search?.toLowerCase()}
+                  </button>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
         <ul className='search-projects'>
           { searchList.map(project => (
               <li key={project.id}>

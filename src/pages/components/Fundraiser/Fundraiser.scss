@@ -38,8 +38,11 @@
                 cursor: pointer;
 
                 .icon {
-                    margin-right: 8px;
                     font-size: 1.6rem;
+                }
+
+                span {
+                    margin-left: 8px;
                 }
 
                 &:hover {
@@ -128,6 +131,11 @@
 
                 .bio {
                     color: black;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
 
@@ -488,5 +496,104 @@
 
 // Mobile
 @media (max-width: 46.1875em) {
-    
+    .fundraiser-section {
+        .heading-container {
+            padding: 0 0 2vh;
+
+            .cover-bg-wrapper {
+                .cover-bg {
+                    margin: calc(var(--navbar-height)) 0 0;
+                    height: 30vh;
+                    border-radius: 0;
+                }
+
+                .edit-cover-bg-btn {
+                    padding: 10px 12px;
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+
+            .info-container {
+                width: 100vw;
+                flex-direction: column;
+
+                .avatar-wrapper {
+                    width: fit-content;
+
+                    .avatar {
+                        width: 150px;
+                        height: 150px;
+                    }
+
+                    .edit-ava-btn {
+                        bottom: 8px;
+                        right: 6px;
+                    }
+                }
+
+                .info {
+                    height: unset;
+                    justify-content: unset;
+                    padding: 0;
+                    margin-left: 0;
+                }
+
+                .btn-container {
+                    position: unset;
+                    flex-direction: column;
+
+                    .edit-profile-btn, .sign-out-btn {
+                        width: 100%;
+                        justify-content: center;
+                        padding: 8px 0;
+                        margin: 0;
+                    }
+
+                    .edit-profile-btn {
+                        margin-top: 30px;
+                    }
+
+                    .sign-out-btn {
+                        margin-top: 8px;
+                    }
+                }
+            }
+        }
+
+        .body-container {
+            padding: 0 4vw 2vh;
+
+            .overview {
+                flex-direction: column;
+
+                .contact {
+                    width: 100%;
+                }
+
+                .contribution-count {
+                    flex-direction: column;
+                    width: 100%;
+
+                    .donate-count, .support {
+                        margin-top: 20px;
+                    }
+                }
+            }
+
+            .projects-wrapper {
+                margin-top: 30px;
+
+                .pagination-wrapper {
+                    .project-list {
+                        margin-left: 0;
+                        flex-direction: column;
+                        align-items: center;
+                    }
+                }
+            }
+        }
+    }
 }

@@ -92,7 +92,7 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
 
   return (
     <div className='project-edit'>
-      <form onSubmit={handleSubmit(onSubmit)} className='edit-form'>
+      <form onSubmit={handleSubmit(onSubmit)} className={`edit-form ${isProjectImageEdit && 'edit-form--has-cropper'}`}>
         <header className='edit-header'>
           <div className='blur-bg' />
           <div className='header-content'>
