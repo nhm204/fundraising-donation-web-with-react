@@ -9,11 +9,6 @@ const PaymentCheckout = ({ isPaid, setIsPaid, projectName, donationAmount }) => 
     setIsPaid(true);
   }
     
-  // if (isPaid) {
-   
-  //   setIsPaid(false);
-  // }
-
   if (error) {
     alert(error);
     setError(null);

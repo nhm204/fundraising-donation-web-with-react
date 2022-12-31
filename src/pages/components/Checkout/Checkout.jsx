@@ -53,11 +53,11 @@ const Checkout = () => {
 
 
   useEffect(() => {
-    if (project.creatorId === user.id) {
+    if (project.creatorId === user?.id) {
       navigate(`/discover/${project.name}/${project.id}`);
       alert('You cannot donate to your project!')
     }
-  }, [navigate, project.creatorId, user.id, project.name, project.id]);
+  }, [navigate, project.creatorId, user?.id, project.name, project.id]);
 
 
   const onSubmit = async (data) => {
@@ -166,14 +166,17 @@ const Checkout = () => {
                 <PaymentCheckout setIsPaid={setIsPaid} isPaid={isPaid} projectName={projectName} donationAmount={donationAmount} />
               ) : (
                 <div className="btn-wrapper">
-                  { (+donationAmount === 0 || (+donationAmount > 0 && !isPaid)) ? (
+                  { (username === null || +donationAmount === 0 || (+donationAmount > 0 && !isPaid)) ? (
                     <button 
                       type='submit' 
                       className='next-btn disabled'
                       onClick={() => {
-                        setValue('userId', user?.id);
-                        setValue('projectId', project?.id);
-                        setIsDonated(true);
+                        if (username === null) {
+                          alert('Please login before continuing on donation');
+                        }
+                        if (+donationAmount > 0 && !isPaid) {
+                          alert('Please pay before continuing on donation');
+                        }
                       }}
                     >
                       Complete donation

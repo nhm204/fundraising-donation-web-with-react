@@ -3,7 +3,7 @@ import { BsCircleFill, BsCheck2 } from "react-icons/bs";
 
 
 const PasswordGuidance = ({ passwordValue }) => {
-  const isValidLength = /^.{6,60}$/;
+  const isValidLength = /^.{8,60}$/;
   const isWhitespace = /^(?=.*\s)/;
   const isContainsUppercase = /^(?=.*[A-Z])/;
   const isContainsLowercase = /^(?=.*[a-z])/;
@@ -16,7 +16,7 @@ const PasswordGuidance = ({ passwordValue }) => {
       <h5>Your password must have:</h5>
       <div className={`${(passwordValue?.length > 0 && isValidLength.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
         { (passwordValue.length > 0 && isValidLength.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
-        <span>Between 6 and 60 characters</span>
+        <span>Between 8 and 60 characters</span>
       </div>
       <div className={`${(passwordValue?.length > 0 && !isWhitespace.test(passwordValue)) ? 'guidance-text pass' : 'guidance-text'}`}>
         { (passwordValue.length > 0 && !isWhitespace.test(passwordValue)) ? <BsCheck2 className='check-icon' /> : <BsCircleFill className='icon' /> }
