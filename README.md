@@ -1,6 +1,6 @@
 # BetterWorld: Donation and Fundraising Platform with React
 
-This is a website for people to donate and fundraise made with React ![Main UI](./src/assets/img/MainUI.png).
+This is a website for people to donate and fundraise made with React ![Main UI](./src/assets/img/MainUI.png)
 
 ## Registration Page
 
