@@ -58,7 +58,6 @@ const FundraiserEditModal = ({
     } 
   }
 
-  console.log(profileEdit)
 
   useEffect(() => { 
     document.title = `Edit profile (@${fundraiser?.name}) | BetterWorld`;

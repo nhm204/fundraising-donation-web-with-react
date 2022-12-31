@@ -11,7 +11,7 @@ import HeaderMenu from '../HeaderMenu/HeaderMenu';
 
 const Header = ({ link, searchQuery, changeData }) => {
   const [ username, setUsername ] = useGlobalState('username');
-  const [ userList, setUserList ] = useState(users);
+  const [ userList, setUserList ] = useState([]);
   const [ navSelected, setNavSelected ] = useState(link);
   const [ isScrolled, setIsScrolled ] = useState(false);
   const [ isSelected, setIsSelected ] = useState(false);
@@ -24,14 +24,14 @@ const Header = ({ link, searchQuery, changeData }) => {
     }
     window.addEventListener('scroll', handleScroll)
 
-    // fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setUserList(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
     return () => {
       window.removeEventListener('scroll', handleScroll)

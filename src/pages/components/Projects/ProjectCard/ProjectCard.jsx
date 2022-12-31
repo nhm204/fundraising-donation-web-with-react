@@ -1,32 +1,32 @@
 import './ProjectCard.scss';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { users } from '../../../../constants/projects';
 
 
 const Project = ({ project }) => {
-  const [ userList, setUserList ] = useState(users);
+  const [ userList, setUserList ] = useState([]);
   const [ username, setUsername ] = useGlobalState('username');
   const navigate = useNavigate();
 
 
-  // useEffect(() => { 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setUserList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
 
   const user = userList?.filter(user => user.name === username);
 
   const handleDonate = () => {
-    if (project.currentPrice === project.targetPrice || project.creatorId === user[0].id) {
+    if (project.currentPrice === project.targetPrice || project.creatorId === user[0]?.id) {
       navigate(`/discover/${project.name}/${project.id}`);
     } 
     else {
@@ -48,7 +48,7 @@ const Project = ({ project }) => {
       </Link>
       <button className={`${project.currentPrice === project.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} onClick={handleDonate}>{project.currentPrice === project.targetPrice ? 'Funded' : 'Donate'}</button>
     </div>
-  )
+  );
 }
 
 export default Project;

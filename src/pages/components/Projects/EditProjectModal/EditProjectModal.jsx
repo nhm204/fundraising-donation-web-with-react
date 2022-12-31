@@ -88,7 +88,6 @@ const EditProjectModal = ({ project, setIsProjectEditModal, user }) => {
     setIsProjectImageEdit(false);
   }
 
-  console.log(isProjectEdit)
 
   return (
     <div className='project-edit'>
