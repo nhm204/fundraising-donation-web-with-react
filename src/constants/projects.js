@@ -129,6 +129,19 @@ export const projects = [
         "isFeatured": true,
         "createAt": "2022-11-06", 
     },
+    {
+        "id": 11,
+        "creatorId": 1,
+        "name": "Help handicapped persons in assimilating into the community",
+        "currentPrice": 1864,
+        "targetPrice": 5000,
+        "donationCount": 3643,
+        "description": "Wearing a mask is a critical way to prevent the spread of COVID-19. Masks and respirators, when worn consistently and correctly, are effective at reducing the transmission of SARS-CoV-2, the virus that causes COVID-19. Free N95 masks are available to pick up at local pharmacies and community health center sites across the country. Every person is allowed up to 3 free masks pending availability.",
+        "category": "Education",
+        "image": "https://images.unsplash.com/photo-1464998857633-50e59fbf2fe6?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8ZGlzYWJsZWQlMjBwZW9wbGV8ZW58MHx8MHx8&auto=format&fit=crop&w=500&q=60",
+        "isFeatured": true,
+        "createAt": "2022-12-06", 
+    },
 ]
 
 export const users = [

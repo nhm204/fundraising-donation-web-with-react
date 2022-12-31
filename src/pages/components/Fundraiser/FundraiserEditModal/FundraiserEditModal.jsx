@@ -86,7 +86,7 @@ const FundraiserEditModal = ({
 
   return (
     <div className='fundraiser-edit'>
-      <form onSubmit={handleSubmit(onSubmit)} className='edit-form'>
+      <form onSubmit={handleSubmit(onSubmit)} className={`edit-form ${(isAvatarEdit || isBackgroundEdit) && 'edit-form--has-cropper'}`}>
         <header className='edit-header'>
           <div className='blur-bg' />
           <div className='header-content'>

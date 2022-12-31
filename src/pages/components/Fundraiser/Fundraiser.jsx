@@ -9,12 +9,13 @@ import FundraiserEditModal from './FundraiserEditModal/FundraiserEditModal';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import ConfirmSignOutModal from './ConfirmSignOutModal/ConfirmSignOutModal';
 import DonateHistory from './DonateHistory/DonateHistory';
+import { contributionModel, projects, users } from '../../../constants/projects';
 
 
 const Fundraiser = () => {
-  const [ projectList, setProjectList ] = useState([]);
-  const [ userList, setUserList ] = useState([]);
-  const [ contributionList, setContributionList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
+  const [ userList, setUserList ] = useState(users);
+  const [ contributionList, setContributionList ] = useState(contributionModel);
   const [ projectsPerPage, setProjectsPerPage ] = useState(6);
   const [ isAvatarEdit, setIsAvatarEdit ] = useState(false);
   const [ avatarSrc, setAvatarSrc ] = useState();
@@ -29,34 +30,34 @@ const Fundraiser = () => {
   const fundraiserName = paramValue.name;
  
   
-  useEffect(() => { 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-      .then(res => res.json())
-      .then((res) => {
-        setProjectList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // useEffect(() => { 
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setProjectList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-      .then(res => res.json())
-      .then((res) => {
-        setUserList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setUserList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`)
-      .then(res => res.json())
-      .then((res) => {
-        setContributionList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/contribution`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setContributionList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
 
   const fundraiser = userList?.find(user => user.id === +fundraiserId);
@@ -72,7 +73,6 @@ const Fundraiser = () => {
 
   const totalRaisedAmount = allProjects?.reduce((total, project) => project.currentPrice + total, 0);
   const totalSuppoters = allProjects?.reduce((total, project) => project.donationCount + total, 0);
-  console.log(totalDonatedProjectId);
 
 
   useEffect(() => { 
@@ -119,7 +119,7 @@ const Fundraiser = () => {
             <>
               <label htmlFor='background-file-chosen' className='edit-cover-bg-btn'>
                 <FaCamera className='icon' />
-                Edit cover image
+                <span>Edit cover image</span>
               </label>
               <input type="file" accept='image/*' id='background-file-chosen' onChange={handleChangeBackground} hidden />
             </>
@@ -169,16 +169,18 @@ const Fundraiser = () => {
               <FaYoutube className='icon' />
             </div>
           </div> 
-          <div className="donate-count">
-            <h2>${totalDonatedAmount}</h2>
-            <div>donated for <span>{totalDonatedProject} projects</span></div>
-            <FaAward className='icon' />
-          </div>
-          <div className="support">
-            <h2>${totalRaisedAmount}</h2>
-            <div>raised of <span>{allProjects.length} projects</span></div>
-            <div>by <span>{totalSuppoters} supporters</span></div>
-            <FaChild className='icon' />
+          <div className='contribution-count'>
+            <div className="donate-count">
+              <h2>${totalDonatedAmount}</h2>
+              <div>donated for <span>{totalDonatedProject} projects</span></div>
+              <FaAward className='icon' />
+            </div>
+            <div className="support">
+              <h2>${totalRaisedAmount}</h2>
+              <div>raised of <span>{allProjects.length} projects</span></div>
+              <div>by <span>{totalSuppoters} supporters</span></div>
+              <FaChild className='icon' />
+            </div>
           </div>
         </div>
         { username === fundraiserName ? (
@@ -219,7 +221,7 @@ const Fundraiser = () => {
       { isConfirmModalShow && (
         <>
           <div onClick={() => setIsConfirmModalShow(false)} className='profile-overlay' /> 
-          <ConfirmSignOutModal setIsConfirmModalShow={setIsConfirmModalShow} />
+          <ConfirmSignOutModal isConfirmModalShow={isConfirmModalShow} setIsConfirmModalShow={setIsConfirmModalShow} />
         </>
       )}
       <Outlet />

@@ -61,7 +61,6 @@
                 cursor: pointer;
             }
         }
-
     }
 
     .checkout-body {
@@ -113,6 +112,11 @@
                 .content {
                     .title {
                         font-weight: 300;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 1;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
 
                         span {
                             font-weight: 600;
@@ -124,6 +128,11 @@
                         font-weight: 300;
                         color: #767676;
                         margin-top: 4px;
+                        display: -webkit-box;
+                        -webkit-line-clamp: 2;
+                        -webkit-box-orient: vertical;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
 
                         span {
                             font-weight: 600;
@@ -285,6 +294,114 @@
                 padding-top: 20px;
                 margin-top: 12px;
                 border-top: 1px solid #ccc;
+            }
+        }
+    }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    .checkout {
+        
+        .checkout-body {
+            
+            
+            .left {
+                .back-btn {
+                    padding: 8px 20px;
+                }
+            }
+            
+            .right {
+                
+            }
+        }
+    }
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .checkout {
+        height: 100vh;
+
+        header {
+            padding: 0 4vw;
+        }
+        
+        .checkout-body {
+            padding: calc(var(--navbar-height) + 6vh) 2vw 6vh;
+            
+            .left {
+                width: 62vw;
+                padding: 20px 2vw;
+
+                .project-info {
+                    img {
+                        height: 8vh;
+                        width: 14vw;
+                        margin-right: 12px;
+                    }
+                }
+            }
+
+            .right {
+                width: 32vw;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .checkout {
+        height: fit-content;
+
+        header {
+            padding: 0 2vw;
+
+            .logo {
+                font-size: 2.4rem;
+            }
+
+            .text {
+                font-size: 1.3rem;
+
+                .nav-link {
+                    padding: 12px 0;
+                }
+            }
+
+            .right-side {
+                .avatar-wrapper {
+                    margin-right: 8px;
+                }
+
+                .fundraise-btn {
+                    font-size: 1.4rem;
+                }
+            }
+        }
+
+        .checkout-body {
+            height: unset;
+            padding: calc(var(--navbar-height) + 4vh) 5vw 4vh;
+
+            .left {
+                width: 100%;
+                padding: 15px 3vw;
+
+                .project-info {
+                    img {
+                        height: 8vh;
+                        width: 20vw;
+                        margin-right: 12px;
+                    }
+                }
+            }
+
+            .right {
+                display: none;
             }
         }
     }

@@ -2,14 +2,21 @@ import { setGlobalState } from '../../../../hooks/useGlobalState';
 import './ConfirmSignOutModal.scss';
 
 
-const ConfirmSignOutModal = ({ setIsConfirmModalShow }) => {
+const ConfirmSignOutModal = ({ isConfirmModalShow, setIsConfirmModalShow, isModalShow, setIsModalShow }) => {
   return (
     <div className='confirm-modal'>
       <h5>Do you want to sign out?</h5>
       <div className="btn-container">
         <button 
           className='cancel-btn' 
-          onClick={() => setIsConfirmModalShow(false)}
+          onClick={() => {
+            if (isConfirmModalShow) {
+              setIsConfirmModalShow(false);
+            }
+            if (isModalShow) {
+              setIsModalShow(false);
+            }
+          }}
         >
             Cancel
         </button>
@@ -18,7 +25,12 @@ const ConfirmSignOutModal = ({ setIsConfirmModalShow }) => {
           onClick={() => {
             setGlobalState('username', null);
             localStorage.removeItem('globalUsername');
-            setIsConfirmModalShow(false);
+            if (isConfirmModalShow) {
+              setIsConfirmModalShow(false);
+            }
+            if (isModalShow) {
+              setIsModalShow(false);
+            }
           }}
         >
             Ye, sure!

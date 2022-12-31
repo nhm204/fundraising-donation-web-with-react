@@ -52,8 +52,10 @@
             flex-direction: column;
             align-items: center;
             margin-top: 6vh;
+            width: 100%;
 
             .info {
+                width: 100%;
                 display: flex;
                 align-items: center;
 
@@ -158,5 +160,93 @@
             }
         }
     }
+}
 
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .signup {
+        height: 100vh;
+        overflow-y: scroll;
+
+        header {
+            padding: 0 5vw;
+        }
+
+        .form {
+            height: fit-content;
+
+            .input-group {
+                margin-top: 5vh;
+
+                .info {
+                    label {
+                        .name {
+                            width: 40vw;
+                        }
+                    }
+                }
+            }
+
+            .signup-btn {
+                width: 12vw;
+                margin-top: 8vh;
+            }
+
+            .terms {
+                margin-top: 50px;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .signup {
+        padding: 0;
+
+        header {
+            padding: 0 2vw;
+
+            .logo {
+                font-size: 2.4rem;
+            }
+
+            .text {
+                font-size: 1.3rem;
+
+                .nav-link {
+                    padding: 12px 0;
+                }
+            }
+        }
+        
+        .form {
+            padding: calc(var(--navbar-height) + 6vh) 6vw 8vh;
+            width: 100vw;
+            justify-content: center;
+
+            .input-group {
+                .info {
+                    flex-direction: column;
+
+                    label {
+                        .name {
+                            width: 100%;
+                            margin-bottom: 28px;
+                        }
+                    }
+                }
+            }
+
+            .signup-btn {
+                width: 20vw;
+            }
+        }
+    }
 }

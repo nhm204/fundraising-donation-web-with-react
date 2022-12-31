@@ -38,8 +38,11 @@
                 cursor: pointer;
 
                 .icon {
-                    margin-right: 8px;
                     font-size: 1.6rem;
+                }
+
+                span {
+                    margin-left: 8px;
                 }
 
                 &:hover {
@@ -128,6 +131,11 @@
 
                 .bio {
                     color: black;
+                    display: -webkit-box;
+                    -webkit-line-clamp: 1;
+                    -webkit-box-orient: vertical;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
                 }
             }
 
@@ -227,66 +235,73 @@
                     margin-right: 10px;
                 }
             }
+
+            .contribution-count {
+                display: flex;
+                justify-content: space-between;
+                width: 33vw;
+
+                .donate-count {
+                    border-radius: 20px;
+                    box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+                    padding: 30px 2vw;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
     
-            .donate-count {
-                border-radius: 20px;
-                box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
-                padding: 30px 2vw;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                h2 {
-                    color: var(--primary-color);
-                    font-size: 3.5rem;
-                    line-height: 3.8rem;
-                    margin-bottom: 12px;
-                }
-
-                span {
-                    color: black;
-                    font-weight: 600;
-                }
-
-                .icon {
-                    font-size: 4.5rem;
-                    color: var(--primary-color);
-                    margin-top: 32px;
-                }
-            }
-
-            .support {
-                border-radius: 20px;
-                box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
-                padding: 30px 2vw;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-
-                h2 {
-                    color: var(--primary-color);
-                    font-size: 3.5rem;
-                    line-height: 3.8rem;
-                    margin-bottom: 12px;
-                }
-
-                div {
-                    &:last-child {
-                        margin-top: 8px;
+                    h2 {
+                        color: var(--primary-color);
+                        font-size: 3.5rem;
+                        line-height: 3.8rem;
+                        margin-bottom: 12px;
                     }
-
+    
                     span {
                         color: black;
                         font-weight: 600;
                     }
+    
+                    .icon {
+                        font-size: 4.5rem;
+                        color: var(--primary-color);
+                        margin-top: 32px;
+                    }
                 }
-
-                .icon {
-                    font-size: 4rem;
-                    color: var(--primary-color);
-                    margin-top: 24px;
+    
+                .support {
+                    border-radius: 20px;
+                    box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 20%);
+                    padding: 30px 2vw;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+    
+                    h2 {
+                        color: var(--primary-color);
+                        font-size: 3.5rem;
+                        line-height: 3.8rem;
+                        margin-bottom: 12px;
+                    }
+    
+                    div {
+                        &:last-child {
+                            margin-top: 8px;
+                        }
+    
+                        span {
+                            color: black;
+                            font-weight: 600;
+                        }
+                    }
+    
+                    .icon {
+                        font-size: 4rem;
+                        color: var(--primary-color);
+                        margin-top: 24px;
+                    }
                 }
             }
+    
         }
         
         .projects-wrapper {
@@ -304,7 +319,7 @@
                     cursor: pointer;
                     color: black;
                     padding: 16px 24px;
-                    border: 4px solid black;
+                    border: 4px solid #1d1c21;
                     border-radius: 20px;
                     border-bottom-left-radius: 0;
                     border-bottom-right-radius: 0;
@@ -361,7 +376,6 @@
                         padding: 0 1.5vw;
         
                         .project-wrapper {
-                            width: 320px;
         
                             .project {
                                 .info {
@@ -401,4 +415,192 @@
 .is-fundraiser-edit {
     height: 100vh;
     overflow: hidden;
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .fundraiser-section {
+        .heading-container {
+            padding: 0 2vw 2vh;
+
+            .cover-bg-wrapper {
+                .cover-bg {
+                    height: 40vh;
+                    margin: calc(var(--navbar-height) + 1vh) 0 0;
+                }
+            }
+
+            .info-container {
+                width: 93vw;
+                padding: 0 3vw;
+
+                .avatar-wrapper {
+                    .avatar {
+                        width: 180px;
+                        height: 180px;
+                    }
+
+                    .edit-ava-btn {
+                        bottom: 25px;
+                    }
+                }
+
+                .info {
+                    padding: 60px 0 24px;
+                }
+            }
+        }
+
+        .body-container {
+            padding: 2vh 5vw;
+
+            .overview {
+                .contact {
+                    justify-content: flex-start;
+                    width: 45vw;
+                }
+
+                .contribution-count {
+                    width: 40vw;
+                    flex-direction: column;
+
+                    .support {
+                        margin-top: 2vh;
+                    }
+                }
+            }
+
+            .projects-wrapper {
+                margin-top: 50px;
+
+                .pagination-wrapper {
+                    
+                    .project-list {
+                        margin-left: 0.8vw;
+
+                        li {
+                            padding: 0 1vw;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .fundraiser-section {
+        .heading-container {
+            padding: 0 0 2vh;
+
+            .cover-bg-wrapper {
+                .cover-bg {
+                    margin: calc(var(--navbar-height)) 0 0;
+                    height: 32vh;
+                    border-radius: 0;
+                }
+
+                .edit-cover-bg-btn {
+                    padding: 10px 12px;
+
+                    span {
+                        display: none;
+                    }
+                }
+            }
+
+            .info-container {
+                width: 100vw;
+                flex-direction: column;
+
+                .avatar-wrapper {
+                    width: fit-content;
+
+                    .avatar {
+                        width: 160px;
+                        height: 160px;
+                    }
+
+                    .edit-ava-btn {
+                        bottom: 12px;
+                        right: 6px;
+                    }
+                }
+
+                .info {
+                    height: unset;
+                    justify-content: unset;
+                    padding: 0;
+                    margin-left: 0;
+                    margin-top: 8px;
+                }
+
+                .btn-container {
+                    position: unset;
+                    flex-direction: column;
+
+                    .edit-profile-btn, .sign-out-btn {
+                        width: 100%;
+                        justify-content: center;
+                        padding: 8px 0;
+                        margin: 0;
+                        font-size: 1.6rem;
+                    }
+
+                    .edit-profile-btn {
+                        margin-top: 40px;
+                    }
+
+                    .sign-out-btn {
+                        margin-top: 8px;
+                    }
+                }
+            }
+        }
+
+        .body-container {
+            padding: 0 4vw 2vh;
+
+            .overview {
+                flex-direction: column;
+
+                .contact {
+                    width: 100%;
+                }
+
+                .contribution-count {
+                    flex-direction: column;
+                    width: 100%;
+
+                    .donate-count, .support {
+                        margin-top: 20px;
+                        box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 30%);
+                    }
+                }
+            }
+
+            .projects-wrapper {
+                margin-top: 30px;
+
+                .pagination-wrapper {
+                    .project-list {
+                        margin-left: 0;
+                        flex-direction: column;
+                        align-items: center;
+
+                        li {
+                            margin: 2vh 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

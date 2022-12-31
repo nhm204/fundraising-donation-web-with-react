@@ -7,12 +7,13 @@ import { Banner2 } from '../../Banner/Banner';
 import { useGlobalState } from '../../../../hooks/useGlobalState';
 import EditProjectModal from '../EditProjectModal/EditProjectModal';
 import { Footer } from '../../../../common';
+import { projects, users } from '../../../../constants/projects';
 
 
 const ProjectDetails = () => {
   const [ username, setUsername ] = useGlobalState('username');
-  const [ projectList, setProjectList ] = useState([]);
-  const [ userList, setUserList ] = useState([]);
+  const [ projectList, setProjectList ] = useState(projects);
+  const [ userList, setUserList ] = useState(users);
   const [ isProjectEditModal, setIsProjectEditModal ] = useState(false);
   const paramValue = useParams();
   const projectId = paramValue.id;
@@ -20,25 +21,25 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
 
   
-  useEffect(() => { 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-      .then(res => res.json())
-      .then((res) => {
-        setProjectList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
+  // useEffect(() => { 
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setProjectList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
 
-    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-      .then(res => res.json())
-      .then((res) => {
-        setUserList(res);
-      })
-      .catch((err) => {
-        console.log(err.message);
-      });
-  }, []);
+  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+  //     .then(res => res.json())
+  //     .then((res) => {
+  //       setUserList(res);
+  //     })
+  //     .catch((err) => {
+  //       console.log(err.message);
+  //     });
+  // }, []);
 
 
   const project = projectList?.find(project => project.id === +projectId);
@@ -76,6 +77,32 @@ const ProjectDetails = () => {
       <div className='project-container'>
         <div className='content'>
           <img src={project?.image} alt={project?.name} />
+          <div className="amount--responsive">
+            <div>
+              <span className='current-price'>${project?.currentPrice}</span>
+              <span className='target-price'> raised of ${project?.targetPrice} goal</span>
+            </div>
+            <progress max={100} value={progressValue} />
+            <div className="count">
+              <div className="donations"><b>{project?.donationCount}</b> donations</div>
+              <div className="to-go"><b>${+project?.targetPrice - project?.currentPrice}</b> to go</div>
+            </div>
+            { username !== fundraiser?.name ? (
+              <button 
+                className={`${project?.currentPrice === +project?.targetPrice ? 'donate-btn disable' : 'donate-btn'}`} 
+                onClick={handleDonate}
+              >
+                {project?.currentPrice === project?.targetPrice ? 'Funded' : 'Donate'}
+              </button>
+            ) : (
+              <button 
+                className='donate-btn' 
+                onClick={() => setIsProjectEditModal(true)}
+              >
+                Edit project
+              </button>
+            )}
+          </div>
           <h3>The Story Behind</h3>
           <div className='desc'>{project?.description}</div>
           <div className="fundraising-by">

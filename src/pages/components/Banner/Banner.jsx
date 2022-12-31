@@ -10,7 +10,6 @@ const MainBanner = ({ featuredList }) => {
   
   useEffect(() => {
     const index = Math.floor(Math.random() * featuredList.length);
-    console.log(index);
     setProject(featuredList[index]);
   }, [featuredList]);
  

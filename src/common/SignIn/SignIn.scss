@@ -53,9 +53,11 @@
             flex-direction: column;
             align-items: center;
             margin-top: 8vh;
+            width: 100%;
 
             label {
                 position: relative;
+                width: 100%;
 
                 .active {
                     position: absolute;
@@ -80,6 +82,7 @@
                     padding: 0 20px;
                     border-radius: 5px;
                     border: none;
+                    width: 100%;
                     outline: 1px solid #ccc;
 
                     &:focus {
@@ -157,6 +160,60 @@
             margin-top: 10vh;
             font-weight: 500;
             cursor: pointer;
+        }
+    }
+}
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .signin {
+        header {
+            padding: 0 5vw;
+        }
+
+        .form {
+            width: 65vw;
+
+            .input-group {
+                margin-top: 5vh;
+            }
+
+            .signin-btn {
+                margin-top: 8vh;
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .signin {
+        header {
+            padding: 0 2vw;
+
+            .logo {
+                font-size: 2.4rem;
+            }
+
+            .text {
+                font-size: 1.3rem;
+
+                .nav-link {
+                    padding: 12px 0;
+                }
+            }
+        }
+        
+        .form {
+            width: 100vw;
+            height: 100vh;
+            justify-content: center;
         }
     }
 }

@@ -19,12 +19,16 @@ const FeaturedProjects = ({ featuredList }) => {
         </div>
       </div>
       <ul className='featured-projects'>
-        { featuredList?.slice(0, 4).map(project => (
+        { [...featuredList]?.reverse().slice(0, 4).map(project => (
           <li key={project.id}>
             <Project project={project} />   
           </li> 
         ))}
       </ul>
+      <Link to='/discover' className="discover-btn">
+        See more
+        <HiChevronDoubleRight className='icon' />
+      </Link>
     </section>
   );
 }

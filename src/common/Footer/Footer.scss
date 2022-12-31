@@ -131,3 +131,117 @@
         }
     }
 }
+
+
+// Tablet & mobile
+@media (max-width: 63.9375em) {
+    .footer {
+        
+    }
+}
+
+// Tablet
+@media (min-width: 46.25em) and (max-width: 63.9375em) {
+    .footer {
+        .top {
+            padding: 4vh 2vw;
+            
+            .logo {
+                min-width: unset;
+
+                a {
+                    font-size: 2.4rem;
+                }
+            }
+
+            ul {
+                li {
+                    min-width: unset;
+                }
+            }
+        }
+
+        .bottom {
+            padding: 4vh 2vw;
+
+            .right {
+                .language-btn {
+                    background-color: transparent;
+                }
+
+                .content {
+                    flex-direction: column;
+                    align-items: flex-start;
+
+                    ul {
+                        li {
+                            padding: 4px 0;
+
+                            &:first-child {
+                                margin-left: 0;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// Mobile
+@media (max-width: 46.1875em) {
+    .footer {
+        .top {
+            padding: 6vh 5vw;
+            flex-direction: column;
+
+            ul {
+                li {
+                    padding: 8px 0;
+                }
+
+                .title {
+                    padding-top: 28px;
+                }
+            }
+        }
+
+        .bottom {
+            padding: 6vh 2vw;
+            flex-direction: column;
+
+            .right {
+                align-items: center;
+
+                .content {
+                    flex-direction: column;
+
+                    .copyright {
+                        margin-right: 0;
+                        margin-top: 20px;
+                    }
+
+                    ul {
+                        li {
+                            margin-left: 0;
+                            font-size: 1.4rem;
+                            padding: 12px 8px;
+                        }
+                    }
+                }
+            }
+
+            .left {
+                .logo-container {
+                    margin-top: 30px;
+                    
+                    .icon {
+                        &:last-child {
+                            margin-right: 0;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

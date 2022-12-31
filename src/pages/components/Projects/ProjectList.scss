@@ -21,7 +21,7 @@
         justify-content: space-between;
         padding: calc(var(--navbar-height) + 4vh) 0 0;
 
-        .mobile-filter-btn {
+        .filter-btn {
             display: none;
         }
 
@@ -159,7 +159,16 @@
             // overflow-y: scroll;
 
             .project-list {
-                flex: 1;
+                display: flex;
+                flex-wrap: wrap;
+
+                li {
+                //     max-width: 320px;
+                //     // flex: 1;
+                //     min-width: 280px;
+                    margin: 4vh 0;
+                    padding: 0 1vw;
+                }
             }
     
             .end {
@@ -169,19 +178,6 @@
             }
         }
     }
-
-    .project-list {
-        display: flex;
-        flex-wrap: wrap;
-
-        li {
-        //     max-width: 320px;
-        //     // flex: 1;
-        //     min-width: 280px;
-            margin: 4vh 0;
-            padding: 0 1vw;
-        }
-    }
 }
 
 
@@ -189,7 +185,56 @@
 @media (max-width: 63.9375em) {
     .discover {
         .filter-projects {
+            padding: calc(var(--navbar-height) + 3vh) 0 1vh;
+
+            .filter-btn {
+                display: flex;
+                align-items: center;
+                color: white;
+                font-weight: 500;
+                background-color: var(--primary-color);
+                border: none;
+                padding: 4px 12px;
+                border-radius: 20px;
+                margin-left: auto;
+
+                .icon {
+                    font-size: 1.4rem;
+                    margin-left: 6px;
+                }
+            }
+
             .filter {
+                top: -100vh;
+                height: 100vh;
+                width: 100vw;
+                background-color: white;
+                margin: 0;
+                z-index: 100;
+                padding: 2vh 2vw;
+
+                &--show {
+                    top: 0;
+                    animation: filterSlideIn linear 0.3s;
+                }
+
+                .close-btn {
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-bottom: 4vh;
+
+                    .heading {
+                        font-size: 7vw;
+                        line-height: 8vw;
+                        font-weight: 600;
+                    }
+
+                    .icon {
+                        font-size: 5vw;
+                    }
+                }
+
                 .all {
                     &:hover {
                         margin-left: 0;
@@ -220,69 +265,12 @@
 @media (min-width: 46.25em) and (max-width: 63.9375em) {
     .discover {
         .filter-projects {
-            padding: calc(var(--navbar-height) + 2vh) 0 0;
-
-            .filter {
-                margin: 1vh 4.5vw 1vh 5vw;
-                
-                .all {
-                    margin-top: 1.4vh;
-                    font-size: 1.5rem;
-                    line-height: 1.5rem;
-                }
-
-                .gender {
-                    padding-top: 2vh;
-                    margin-top: 1.5vh;
-                }
-
-                span {
-                    font-size: 2rem;
-                    margin: 2vh 0 1vh;
-                    padding: 0;
-                }
-
-                .selection {
-                    padding: 0 0 1.5vh;
-
-                    .option {
-                        font-size: 1.5rem;
-                        line-height: 1.5rem;
-                        margin-top: 0.8vh;
-                    }
-                }
-
-                .price {
-                    padding: 0;
-                }
-
-                .price-container {
-                    padding-bottom: 2vh;
-                }
-
-                .sort-project {
-                    .option {
-                        font-size: 1.5rem;
-                        line-height: 1.5rem;
-                        margin-top: 0.8vh;
-                    }
-
-                    .default {
-                        margin-top: 4vh;
-                        padding: 1vh 0 0.6vh;
-                    }
-                }
+            .filter-btn {
+                margin-right: 7.5vw;
             }
 
             .projects-wrapper {
-                padding: 0;
-
-                .project-list {
-                    li {
-                        min-width: 280px;
-                        margin: 1vh 0;
-                    }
-                }
+                width: 94vw;
             }
         }
     }
@@ -291,151 +279,32 @@
 // Mobile
 @media (max-width: 46.1875em) {
     .discover {
-        position: relative;
-        
         .filter-projects {
-            flex-direction: column;
-            align-items: center;
-            padding: calc(var(--navbar-height) + 5vh) 0 0;
-
-            .mobile-filter-btn {
-                display: flex;
-                align-items: center;
-                padding: 6px 16px;
-                border-radius: 20px;
-                align-self: flex-end;
-                margin-right: 20px;
-                background-color: var(--primary-color);
-                color: white;
-
-                span {
-                    height: 17px;
-                    font-size: 1.8rem;
-                    font-weight: 300;
-                    margin-right: 8px;
-                }
-
-                svg {
-                    font-size: 1.5rem;
-                }
-            }
-
-            .mobile-filter-checkbox-input {
-                &:checked ~ .filter {
-                    display: flex;
-                }
-            }
-
-            .filter {
-                position: fixed;
-                top: 0;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                width: 100vw;
-                margin: 0;
-                padding: 4vh 6vw 0;
-                background-color: white;
-                animation: mobileFilterSlideIn linear 0.5s;
-                z-index: 100;
-                height: 100vh;
-                overflow-y: scroll;
-                display: none;
-
-                .close-btn {
-                    display: flex;
-                    justify-content: space-between;
-                    height: 32px;
-                    
-                    div {
-                        font-size: 4rem;
-                        margin: 0;
-                        padding: 8px 0 0;
-                        color: var(--text-color);
-                        font-weight: 600;
-                    }
-                    
-                    svg {
-                        font-size: 3.2rem;
-                        color: var(--text-color);
-                    }
-                }
-
-                span {
-                    padding: 2vh 0 1vh;
-                    font-size: 2.6rem;
-                }
-
-                .all {
-                    margin-top: 8vh;
-                    font-size: 2rem;
-                    line-height: 2rem;
-                }
-
-                .gender {
-                    padding-top: 4vh;
-                }
-
-                .selection {
-                    padding: 0 0 4vh;
-
-                    .option {
-                        margin-top: 2.2vh;
-                        font-size: 2rem;
-                        line-height: 2rem;
-                    }
-                }
-
-                .price {
-                    padding: 2vh 0 2.5vh;
-                }
-
-                .price-container {
-                    padding-bottom: 4vh;
-                }
-
-                .sort-project {
-                    .sort {
-                        &:nth-child(4) {
-                            padding-top: 3vh;
-                        }
-                    }
-
-                    .option {
-                        margin-top: 2.2vh;
-                        font-size: 2rem;
-                        line-height: 2rem;
-                    }
-
-                    .default {
-                        margin: 10vh 12vw 4vh;
-                        padding: 2vh 0 1.5vh;
-                    }
-                }
+            .filter-btn {
+                margin-right: 7.5vw;
+                margin-bottom: 4vh;
             }
 
             .projects-wrapper {
-                padding-top: 2vh;
+                margin-top: 4vh;
+                width: 100vw;
 
                 .project-list {
                     justify-content: center;
-
-                    li {
-                        min-width: 300px;
-                    }
                 }
             }
         }
     }
 
-    @keyframes mobileFilterSlideIn {
-        from {
-            // opacity: 0;
-            top: calc(100vh / 0.5);
-        }
-        to {
-            // opacity: 1;
-            top: 0;
-        }
+}
+
+@keyframes filterSlideIn {
+    from {
+        // opacity: 0;
+        top: calc(100vh / 0.5);
+    }
+    to {
+        // opacity: 1;
+        top: 0;
     }
 }
