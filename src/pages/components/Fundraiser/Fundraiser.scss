@@ -503,7 +503,7 @@
             .cover-bg-wrapper {
                 .cover-bg {
                     margin: calc(var(--navbar-height)) 0 0;
-                    height: 30vh;
+                    height: 32vh;
                     border-radius: 0;
                 }
 
@@ -524,12 +524,12 @@
                     width: fit-content;
 
                     .avatar {
-                        width: 150px;
-                        height: 150px;
+                        width: 160px;
+                        height: 160px;
                     }
 
                     .edit-ava-btn {
-                        bottom: 8px;
+                        bottom: 12px;
                         right: 6px;
                     }
                 }
@@ -539,6 +539,7 @@
                     justify-content: unset;
                     padding: 0;
                     margin-left: 0;
+                    margin-top: 8px;
                 }
 
                 .btn-container {
@@ -550,10 +551,11 @@
                         justify-content: center;
                         padding: 8px 0;
                         margin: 0;
+                        font-size: 1.6rem;
                     }
 
                     .edit-profile-btn {
-                        margin-top: 30px;
+                        margin-top: 40px;
                     }
 
                     .sign-out-btn {
@@ -579,6 +581,7 @@
 
                     .donate-count, .support {
                         margin-top: 20px;
+                        box-shadow: 0 0.3125rem 1rem -0.1875rem rgb(0 0 0 / 30%);
                     }
                 }
             }
@@ -591,6 +594,10 @@
                         margin-left: 0;
                         flex-direction: column;
                         align-items: center;
+
+                        li {
+                            margin: 2vh 0;
+                        }
                     }
                 }
             }

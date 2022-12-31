@@ -37,7 +37,7 @@ const Home = () => {
 
   const user = userList?.filter(user => user.name === username);
   let featuredList = projectList?.filter(project => project.isFeatured === true && project.currentPrice < project.targetPrice);
-  let filteredFeaturedList = featuredList?.filter(project => project.creatorId !== user[0].id);
+  let filteredFeaturedList = featuredList?.filter(project => project.creatorId !== user[0]?.id);
 
   
   return (
