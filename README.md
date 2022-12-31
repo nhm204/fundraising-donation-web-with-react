@@ -1,6 +1,12 @@
 # BetterWorld: Donation and Fundraising Platform with React
 
-This is a website for people to donate and fundraise made with React ![Main UI](./src/assets/img/MainUI.png)
+This is a website for people to donate and fundraise made with React 
+
+[Check out test production](https://betterworld-9e2l0b70s-nhm204.vercel.app/)
+
+**Note: The test production does not use data from the backend. If you want to use the backend data, git clone this** [Backend](https://github.com/nhatminhne/betterworld_doan.git)
+
+![Main UI](./src/assets/img/MainUI.png)
 
 ## Registration Page
 
