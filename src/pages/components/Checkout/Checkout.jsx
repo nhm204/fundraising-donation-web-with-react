@@ -7,14 +7,12 @@ import { useForm } from 'react-hook-form';
 import { useGlobalState } from '../../../hooks/useGlobalState';
 import PaymentCheckout from './PaymentCheckout/PaymentCheckout';
 import { projects, users } from '../../../constants/projects';
-import { HiOutlineMenu } from 'react-icons/hi';
-import { HeaderMenu } from '../../../common';
 
 
 const Checkout = () => {
   const [ username, setUsername ] = useGlobalState('username');
-  const [ projectList, setProjectList ] = useState(projects);
-  const [ userList, setUserList ] = useState(users);
+  const [ projectList, setProjectList ] = useState([]);
+  const [ userList, setUserList ] = useState([]);
   const [ donationAmount, setDonationAmount ] = useState(0);
   const [ isAmountFocus, setIsAmountFocus ] = useState(false);
   const [ isPaid, setIsPaid ] = useState(false);

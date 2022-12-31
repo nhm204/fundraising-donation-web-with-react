@@ -12,8 +12,8 @@ import { projects, users } from '../../../../constants/projects';
 
 const ProjectDetails = () => {
   const [ username, setUsername ] = useGlobalState('username');
-  const [ projectList, setProjectList ] = useState(projects);
-  const [ userList, setUserList ] = useState(users);
+  const [ projectList, setProjectList ] = useState([]);
+  const [ userList, setUserList ] = useState([]);
   const [ isProjectEditModal, setIsProjectEditModal ] = useState(false);
   const paramValue = useParams();
   const projectId = paramValue.id;
@@ -21,25 +21,25 @@ const ProjectDetails = () => {
   const navigate = useNavigate();
 
   
-  // useEffect(() => { 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setProjectList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
+  useEffect(() => { 
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
 
-  //   fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
-  //     .then(res => res.json())
-  //     .then((res) => {
-  //       setUserList(res);
-  //     })
-  //     .catch((err) => {
-  //       console.log(err.message);
-  //     });
-  // }, []);
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/users`)
+      .then(res => res.json())
+      .then((res) => {
+        setUserList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  }, []);
 
 
   const project = projectList?.find(project => project.id === +projectId);

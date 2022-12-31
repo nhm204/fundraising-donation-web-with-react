@@ -11,7 +11,7 @@ import { HiOutlineAdjustments } from 'react-icons/hi';
 
 
 const Projects = () => {
-  const [ projectList, setProjectList ] = useState(projects);
+  const [ projectList, setProjectList ] = useState([]);
   const [ searchQuery, setSearchQuery ] = useState(() => localStorage.getItem('searchValue'));
   const [ selectedCategory, setSelectedCategory ] = useState('');
   const [ selectedPrice, setSelectedPrice ] = useState(0);
@@ -25,14 +25,14 @@ const Projects = () => {
     document.title = `Discover. BetterWorld: #1 for Donation and Fundraising Platform`;
     window.scrollTo(0, 0); 
 
-    // fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
-    //   .then(res => res.json())
-    //   .then((res) => {
-    //     setProjectList(res);
-    //   })
-    //   .catch((err) => {
-    //     console.log(err.message);
-    //   });
+    fetch(`${process.env.REACT_APP_BASE_URL}/api/projects`)
+      .then(res => res.json())
+      .then((res) => {
+        setProjectList(res);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
   }, []);
 
   // console.log(process.env.REACT_APP_BASE_URL)
