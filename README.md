@@ -1,6 +1,6 @@
 # BetterWorld: Donation and Fundraising Platform with React
 
-This is a website for people to donate and fundraise made with React [Main UI](./src/assets/img/MainUI.png).
+This is a website for people to donate and fundraise made with React ![Main UI](./src/assets/img/MainUI.png)
 
 ## Registration Page
 
@@ -25,7 +25,7 @@ When you click the "Donate now" button, a random featured project will be displa
 
 ## Discover Page
 
-[Discover Page](./src/assets/img/Discover.png)
+![Discover Page](./src/assets/img/Discover.png)
 
 View all campaigns and featured projects will always come before non-featured projects
 
@@ -58,7 +58,7 @@ View all campaigns and featured projects will always come before non-featured pr
 
 ## Project Details
 
-[Project Details](./src/assets/img/ProjectDetails.png)
+![Project Details](./src/assets/img/ProjectDetails.png)
 
 - Display project details such as name, category, image, description, target price, current donated price and donations (the number of people who donated to the project)
 
@@ -88,7 +88,7 @@ View all campaigns and featured projects will always come before non-featured pr
 
 ### `Personal Profile Page`
 
-[Personal Profile Page](./src/assets/img/PersonalProfile.png)
+![Personal Profile Page](./src/assets/img/PersonalProfile.png)
 
 - You can edit your information, as well as your avatar and background cover can be cropped
 
